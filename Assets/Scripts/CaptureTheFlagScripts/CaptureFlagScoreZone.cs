@@ -31,8 +31,8 @@ public class CaptureFlagScoreZone : MonoBehaviour
         // If you get the enemy's flag into your zone, add the score
         if(other.tag == "Flag" && other.gameObject.GetComponent<CaptureFlagFlag>().flagBelongsTo != belongsTo)
         {
-            CaptureFlagScoreManager.Instance.AddScore(belongsTo, 1);
             other.gameObject.GetComponent<CaptureFlagFlag>().ResetPosition();
+            CaptureFlagScoreManager.Instance.AddScore(belongsTo, 1);
         }
     }
 }
