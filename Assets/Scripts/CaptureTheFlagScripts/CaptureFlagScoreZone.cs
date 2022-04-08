@@ -9,7 +9,7 @@ public class CaptureFlagScoreZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var cubeRenderer = gameObject.GetComponent<Renderer>();
+        var cubeRenderer = gameObject.GetComponentInChildren<Renderer>();
         if (belongsTo == Team.BLUE)
         {
             cubeRenderer.material.SetColor("_Color", Color.blue);
@@ -29,13 +29,10 @@ public class CaptureFlagScoreZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If you get the enemy's flag into your zone, add the score
-        if(other.tag == "Flag")
+        if(other.tag == "Flag" && other.gameObject.GetComponent<CaptureFlagFlag>().flagBelongsTo != belongsTo)
         {
-            var flag = other.gameObject.GetComponent<CaptureFlagFlag>();
-            if (flag.flagBelongsTo != belongsTo)
-            {
-                CaptureFlagScoreManager.Instance.AddScore(belongsTo, 1);
-            }
+            CaptureFlagScoreManager.Instance.AddScore(belongsTo, 1);
+            other.gameObject.GetComponent<CaptureFlagFlag>().ResetPosition();
         }
     }
 }

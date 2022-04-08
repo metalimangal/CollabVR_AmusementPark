@@ -5,5 +5,12 @@ using UnityEngine;
 public class CaptureFlagFlag : MonoBehaviour
 {
     public Team flagBelongsTo;
-    
+    public GameObject spawnPoint;
+
+    public void ResetPosition()
+    {
+        gameObject.transform.position = spawnPoint.transform.position;
+        gameObject.transform.rotation = spawnPoint.transform.rotation;
+    }
+
 }
