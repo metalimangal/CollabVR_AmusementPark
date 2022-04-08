@@ -685,7 +685,7 @@ Transform:
   m_GameObject: {fileID: 2142745471}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.22, z: 3.3}
-  m_LocalScale: {x: 6.412699, y: 5.501262, z: 0.46026722}
+  m_LocalScale: {x: 6.412699, y: 5.501262, z: 0.1648585}
   m_Children: []
   m_Father: {fileID: 2004181492}
   m_RootOrder: 0
@@ -765,7 +765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_DisablePixelLights: 1
-  m_TextureSize: 256
+  m_TextureSize: 512
   m_ClipPlaneOffset: 0.07
   m_framesNeededToUpdate: 0
   m_ReflectLayers:
