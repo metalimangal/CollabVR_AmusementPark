@@ -13,4 +13,9 @@ public class CaptureFlagFlag : MonoBehaviour
         gameObject.transform.rotation = spawnPoint.transform.rotation;
     }
 
+    public void CheckGrabberTeam()
+    {
+        //if grabber team == flagbelongsto
+            //ResetPosition()
+    }
 }

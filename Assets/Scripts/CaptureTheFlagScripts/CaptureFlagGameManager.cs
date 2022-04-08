@@ -65,8 +65,13 @@ public class CaptureFlagGameManager : MonoBehaviour
         
     }
 
-    public enum GameState
+    
+}
+public enum GameState
 {
     Pregame, Waiting, Playing, End
 }
+public enum Team
+{
+    BLUE, RED
 }

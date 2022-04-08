@@ -64,9 +64,9 @@ public class CaptureFlagScoreManager : MonoBehaviour
         else Debug.Log("Invalid team");
     }
 
-
-}
-public enum Team
-{
-    BLUE, RED
+    public void ResetScore() 
+    {
+        scoreBlue = 0;
+        scoreRed = 0;
+    }
 }
