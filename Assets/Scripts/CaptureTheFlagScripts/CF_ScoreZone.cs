@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CaptureFlagScoreZone : MonoBehaviour
+public class CF_ScoreZone : MonoBehaviour
 {
     [SerializeField]
     private Team belongsTo;
@@ -29,10 +29,10 @@ public class CaptureFlagScoreZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If you get the enemy's flag into your zone, add the score
-        if(other.tag == "Flag" && other.gameObject.GetComponent<CaptureFlagFlag>().flagBelongsTo != belongsTo)
+        if(other.tag == "Flag" && other.gameObject.GetComponent<CF_Flag>().flagBelongsTo != belongsTo)
         {
-            other.gameObject.GetComponent<CaptureFlagFlag>().ResetPosition();
-            CaptureFlagScoreManager.Instance.AddScore(belongsTo, 1);
+            other.gameObject.GetComponent<CF_Flag>().ResetPosition();
+            CF_ScoreManager.Instance.AddScore(belongsTo, 1);
         }
     }
 }

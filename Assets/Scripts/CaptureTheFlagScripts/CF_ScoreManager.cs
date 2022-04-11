@@ -2,13 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Photon.Pun;
 
-public class CaptureFlagScoreManager : MonoBehaviour
+public class CF_ScoreManager : MonoBehaviourPun
 {
-    public static CaptureFlagScoreManager Instance { get; private set; }
+    public static CF_ScoreManager Instance { get; private set; }
 
-    private int scoreBlue = 0;
-    private int scoreRed = 0;
+    public static int scoreBlue = 0;
+    public static int scoreRed = 0;
 
     public TextMeshProUGUI scoreBlueText;
     public TextMeshProUGUI scoreRedText;
@@ -53,18 +54,36 @@ public class CaptureFlagScoreManager : MonoBehaviour
     {
         if (team == Team.BLUE)
         {
-            scoreBlue += score;
+            this.photonView.RPC("AddScoreBlue", RpcTarget.All, score);
             Debug.Log("Blue Scored!");
         }
         else if (team == Team.RED)
         {
-            scoreRed += score;
+            this.photonView.RPC("AddScoreRed", RpcTarget.All, score);
             Debug.Log("Red Scored!");
         }
         else Debug.Log("Invalid team");
     }
 
     public void ResetScore() 
+    {
+        this.photonView.RPC("PunResetScore", RpcTarget.All);
+    }
+
+    [PunRPC]
+    void AddScoreBlue(int score)
+    {
+        scoreBlue += score;
+    }
+
+    [PunRPC]
+    void AddScoreRed(int score)
+    {
+        scoreRed += score;
+    }
+
+    [PunRPC]
+    void PunResetScore()
     {
         scoreBlue = 0;
         scoreRed = 0;

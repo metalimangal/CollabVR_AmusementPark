@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7310301712719502977}
   - component: {fileID: 8354700868832053160}
   - component: {fileID: 3254391042573061915}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flag Sheet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5711824846144265467}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Grab Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 4086754722555103906}
   - component: {fileID: 2834560791063213475}
   - component: {fileID: 8673140822641017289}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flag
   m_TagString: Flag
   m_Icon: {fileID: 0}
@@ -332,7 +332,7 @@ GameObject:
   - component: {fileID: 7939815388402091389}
   - component: {fileID: 2416826498002035728}
   - component: {fileID: 3474373105587605624}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Flag Pole
   m_TagString: Untagged
   m_Icon: {fileID: 0}

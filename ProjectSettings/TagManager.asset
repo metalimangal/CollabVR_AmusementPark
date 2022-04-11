@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Ground
   - Flag
+  - BlueSpawn
+  - RedSpawn
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - Grabbable
+  - LocalPlayer
+  - NetworkPlayer
   - 
   - 
   - 

@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
 
-public class CaptureFlagFlag : MonoBehaviour
+public class CF_Flag : MonoBehaviour
 {
     public Team flagBelongsTo;
     public GameObject spawnPoint;

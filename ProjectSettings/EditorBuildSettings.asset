@@ -4,7 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/CaptureTheFlag.unity
+    guid: beb32b4319a084bb293aadacca91bc5b
   m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 59efb6ddd9d11184d95ad5e358208c32, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: 0204fc75bf77f664490713930e5b3cd9, type: 2}
     com.unity.xr.openxr.settings4: {fileID: 11400000, guid: 707422daab99ee04aa70d6e3b1dec7be, type: 2}
