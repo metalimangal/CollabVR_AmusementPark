@@ -81,6 +81,7 @@ public class CF_GameManager : MonoBehaviourPun
                 break;
         }
         currentState = newState;
+        Debug.Log("Updating Gamestate to: " + newState);
         OnGameStateChanged?.Invoke(newState);
     }
 
@@ -101,6 +102,8 @@ public class CF_GameManager : MonoBehaviourPun
 
         // Reset Score
         CF_ScoreManager.Instance.ResetScore();
+        StartCoroutine(Delay(5));
+        UpdateGameState(GameState.Playing);
     }
     private void HandlePlaying()
     {
@@ -123,9 +126,14 @@ public class CF_GameManager : MonoBehaviourPun
 
     public void StartGame()
     {
-        UpdateGameState(GameState.Playing);
+        UpdateGameState(GameState.GameStart);
     }
 
+    IEnumerator Delay(int seconds)
+    {
+        yield return new WaitForSeconds(seconds);
+    }
+    
 }
 public enum GameState
 {
