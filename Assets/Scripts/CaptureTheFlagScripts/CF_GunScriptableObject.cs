@@ -10,6 +10,7 @@ public class CF_GunScriptableObject : ScriptableObject
     [Tooltip("Reload time (s)")]
     public float reloadTime;
     public AudioClip shootAudio;
+    public AudioClip emptyAudio;
     public AudioClip reloadAudio;
 
 }

@@ -26,6 +26,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     // Audio
     private AudioSource audioSource;
     private AudioClip shootAudio;
+    private AudioClip emptyAudio;
     private AudioClip reloadAudio;
 
 
@@ -130,8 +131,11 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
             else if (currentAmmo == 0)
             {
                 args.interactorObject.transform.GetComponent<ActionBasedController>().SendHapticImpulse(reloadHapticAmplitude, reloadHapticDuration);
+                
                 ammoText.text = "Reload";
                 ammoText.color = Color.red;
+
+                audioSource.PlayOneShot(emptyAudio);
             }
         }
         base.OnActivated(args);
