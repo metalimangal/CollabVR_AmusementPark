@@ -23,6 +23,12 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     private float fireRate;
     private float reloadTime;
 
+    // Audio
+    private AudioSource audioSource;
+    private AudioClip shootAudio;
+    private AudioClip reloadAudio;
+
+
     // Gun Parameters
     public int currentAmmo;
     public TextMeshProUGUI ammoText;
@@ -35,15 +41,19 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     private void Start()
     {
         view = GetComponent<PhotonView>();
+
         ammoCount = gunData.ammoCount;
         fireRate = gunData.fireRate;
         reloadTime = gunData.reloadTime;
+        shootAudio = gunData.shootAudio;
+        reloadAudio = gunData.reloadAudio;
+
         currentAmmo = ammoCount;
         ammoText.text = currentAmmo.ToString();
         reloadReference.action.performed += OnReload;
+        
+        audioSource = gameObject.GetComponent<AudioSource>();
     }
-
-    
 
     [PunRPC]
     void Shoot()
@@ -53,7 +63,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         ammoText.text = currentAmmo.ToString();
 
         ps.Play();
-
+        audioSource.PlayOneShot(shootAudio);
         // Shooting Logic
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
@@ -74,6 +84,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     [PunRPC]
     void Reload()
     {
+        audioSource.PlayOneShot(reloadAudio);
         StartCoroutine(ReloadDelay()); 
     }
 
