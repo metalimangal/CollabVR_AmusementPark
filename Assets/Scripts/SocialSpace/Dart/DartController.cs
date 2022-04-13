@@ -14,6 +14,13 @@ public class DartController : MonoBehaviour
     {
         dart = Resources.Load<GameObject>("Prefabs/Dart/Tip Dart");
         dartPosition = currentDart.transform.position;
+        spawnDart();
+    }
+
+    void spawnDart()
+    {
+        currentDart = GameObject.Instantiate(dart, dartPosition, Quaternion.identity) as GameObject;
+        //currentDart.transform.Rotate(0, 180, 0);
     }
 
     // Update is called once per frame
@@ -21,8 +28,7 @@ public class DartController : MonoBehaviour
     {
         if (Vector3.Distance(currentDart.transform.position, dartPosition) > 0.5)
         {
-            currentDart = GameObject.Instantiate(dart, dartPosition, Quaternion.identity) as GameObject;
-            currentDart.transform.Rotate(0, 180, 0);
+            spawnDart();
         }
     }
 }
