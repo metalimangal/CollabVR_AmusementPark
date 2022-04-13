@@ -48,11 +48,6 @@ namespace Photon.Pun
 
         private static object DeserializePhotonPlayer(StreamBuffer inStream, short length)
         {
-            if (length != 4)
-            {
-                return null;
-            }
-
             int ID;
             lock (memPlayer)
             {
