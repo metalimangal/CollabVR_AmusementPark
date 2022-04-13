@@ -15,3 +15,6 @@ MonoBehaviour:
   ammoCount: 10
   fireRate: 1.6
   reloadTime: 2
+  shootAudio: {fileID: 8300000, guid: d7d6200082a98498dbb7fe700caa8849, type: 3}
+  emptyAudio: {fileID: 8300000, guid: dd49bf54fe4674cb4abf913847709d4c, type: 3}
+  reloadAudio: {fileID: 8300000, guid: 1d9c9e36017a74c95b5fbf63e5b35624, type: 3}
