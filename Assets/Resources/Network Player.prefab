@@ -669,8 +669,6 @@ MonoBehaviour:
   team: 2
   blueTeamColor: {r: 0, g: 0.23965812, b: 1, a: 1}
   redTeamColor: {r: 1, g: 0.13679248, b: 0.13679248, a: 1}
-  headObject: {fileID: 7269991602002159324}
-  bodyObject: {fileID: 5245233895983718854}
   playerName: 
   nameText: {fileID: 6668355167619691765}
   maxHealth: 100

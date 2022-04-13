@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f40d95d379111843b3b08c2585a94a3, type: 3}
   m_Name: CF_PistolData
   m_EditorClassIdentifier: 
-  ammoCount: 10
-  fireRate: 1.6
+  ammoCount: 12
+  fireRate: 1.4
   reloadTime: 2
   shootAudio: {fileID: 8300000, guid: d7d6200082a98498dbb7fe700caa8849, type: 3}
   emptyAudio: {fileID: 8300000, guid: dd49bf54fe4674cb4abf913847709d4c, type: 3}

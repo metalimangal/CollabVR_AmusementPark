@@ -11,7 +11,7 @@ public class CF_Flag : MonoBehaviour
 
     private CF_NetworkGrab networkGrab;
 
-    private void Start()
+    private void Awake()
     {
         networkGrab = GetComponent<CF_NetworkGrab>();
     }
@@ -28,7 +28,7 @@ public class CF_Flag : MonoBehaviour
 
     public void CheckGrabberTeam()
     {
-        if (flagBelongsTo != GrabberTeam() && !CheckIfScoreZone())
+        if (flagBelongsTo == GrabberTeam())   // && !CheckIfScoreZone()
         {
             ResetPosition();
         }
@@ -36,6 +36,7 @@ public class CF_Flag : MonoBehaviour
 
     private Team GrabberTeam()
     {
+        
         Team grabberTeam = networkGrab.firstInteractorSelecting.transform.parent.parent.GetComponent<CF_PlayerMovement>().team;
 
         return grabberTeam;
@@ -43,7 +44,7 @@ public class CF_Flag : MonoBehaviour
 
     private bool CheckIfScoreZone()
     {
-        if (networkGrab.firstInteractorSelecting.transform.TryGetComponent(out CF_ScoreZone zone))
+        if (networkGrab.firstInteractorSelecting.transform.TryGetComponent(out XRSocketInteractor component))
         {
             return true;
         }

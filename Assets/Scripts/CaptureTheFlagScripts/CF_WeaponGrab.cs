@@ -44,9 +44,11 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     [Header("Gun Parameters")]
     public int currentAmmo;
     public TextMeshProUGUI ammoText;
-    private bool allowShoot = true;
     public InputActionReference reloadReference;
     [SerializeField] private float reloadHapticAmplitude, reloadHapticDuration;
+
+    private bool allowShoot = true;
+    private bool isReloading = false;
 
     private PhotonView view;
 
@@ -99,6 +101,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     void Reload()
     {
         allowShoot = false;
+        isReloading = true;
 
         audioSource.PlayOneShot(reloadAudio);
         StartCoroutine(ReloadDelay());
@@ -121,6 +124,9 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     IEnumerator ReloadDelay()
     {
+        allowShoot = false;
+        isReloading = true;
+
         ammoText.text = "Reloading";
         ammoText.color = Color.yellow;
         ammoText.fontSize -= 1;
@@ -132,24 +138,26 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         ammoText.color = Color.white;
         ammoText.fontSize += 1;
         allowShoot = true;
+        isReloading = false;
     }
 
     protected override void OnActivated(ActivateEventArgs args)
     {
         if (view.IsMine)
         {
-            if (allowShoot && currentAmmo > 0)
+            if (allowShoot && currentAmmo > 0 && !isReloading)
             {
                 view.RPC("Shoot", RpcTarget.All);
             }
             else if (currentAmmo == 0)
             {
                 args.interactorObject.transform.GetComponent<ActionBasedController>().SendHapticImpulse(reloadHapticAmplitude, reloadHapticDuration);
-                
-                ammoText.text = "Reload";
-                ammoText.color = Color.red;
-
                 audioSource.PlayOneShot(emptyAudio);
+                if (!isReloading)
+                {
+                    ammoText.text = "Reload";
+                    ammoText.color = Color.red;
+                }
             }
         }
         base.OnActivated(args);
