@@ -8,14 +8,22 @@ using TMPro;
 public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 {
     public Team team;
+
+    [Header("Color Changing Stuff")]
+    public Color blueTeamColor = Color.blue;
+    public Color redTeamColor = Color.red;
+
+    [Header("Player Name")]
+    public string playerName = "";
     public TextMeshProUGUI nameText;
 
+    [Header("Player Health")]
     public int maxHealth = 100;
     public int health = 100;
-    private GameObject XROrigin;
 
     public static GameObject localPlayerInstance;
     public static event Action OnRespawn;
+
 
     private void Awake()
     {
@@ -26,12 +34,12 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-        XROrigin = GameObject.FindGameObjectWithTag("Player");
 
         if (photonView.IsMine)
         {
             localPlayerInstance = gameObject;
-            nameText.text = PhotonNetwork.LocalPlayer.CustomProperties["Name"].ToString();
+            playerName = "Player " + photonView.ViewID;
+            nameText.text = playerName;
         }
         DontDestroyOnLoad(gameObject);
     }
@@ -68,12 +76,19 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
             if (teamProp.ToString() == "BLUE")
             {
                 team = Team.BLUE;
+                ChangeColor(blueTeamColor);
             }
             else if (teamProp.ToString() == "RED")
             {
                 team = Team.RED;
+                ChangeColor(redTeamColor);
             }
-            else team = Team.NONE;
+            else 
+            { 
+                team = Team.NONE;
+                ChangeColor(Color.gray);
+            }
+
             Debug.Log("Network Player assigned to team: " + team.ToString());
         }
         
@@ -97,4 +112,12 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
             health = (int)stream.ReceiveNext();
         }
     }
+
+    private void ChangeColor(Color color)
+    {
+        foreach (var item in GetComponentsInChildren<Renderer>())
+        {
+            item.material.color = color;
+        }
+    } 
 }

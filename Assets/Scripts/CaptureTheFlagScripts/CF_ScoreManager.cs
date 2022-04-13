@@ -4,7 +4,7 @@ using UnityEngine;
 using TMPro;
 using Photon.Pun;
 
-public class CF_ScoreManager : MonoBehaviourPun
+public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
 {
     public static CF_ScoreManager Instance { get; private set; }
 
@@ -21,15 +21,8 @@ public class CF_ScoreManager : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
         scoreBlueText.text = scoreBlue.ToString();
         scoreRedText.text = scoreRed.ToString();
-
     }
 
     public int GetScore(Team team)
@@ -54,38 +47,37 @@ public class CF_ScoreManager : MonoBehaviourPun
     {
         if (team == Team.BLUE)
         {
-            this.photonView.RPC("AddScoreBlue", RpcTarget.All, score);
+            scoreBlue += score;
             Debug.Log("Blue Scored!");
         }
         else if (team == Team.RED)
         {
-            this.photonView.RPC("AddScoreRed", RpcTarget.All, score);
+            scoreRed += score;
             Debug.Log("Red Scored!");
         }
         else Debug.Log("Invalid team");
+
+        scoreBlueText.text = scoreBlue.ToString();
+        scoreRedText.text = scoreRed.ToString();
     }
 
     public void ResetScore() 
     {
-        this.photonView.RPC("PunResetScore", RpcTarget.All);
-    }
-
-    [PunRPC]
-    void AddScoreBlue(int score)
-    {
-        scoreBlue += score;
-    }
-
-    [PunRPC]
-    void AddScoreRed(int score)
-    {
-        scoreRed += score;
-    }
-
-    [PunRPC]
-    void PunResetScore()
-    {
         scoreBlue = 0;
         scoreRed = 0;
+    }
+
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting)
+        {
+            stream.SendNext(scoreBlue);
+            stream.SendNext(scoreRed);
+        }
+        else
+        {
+            scoreBlue = (int)stream.ReceiveNext();
+            scoreRed = (int)stream.ReceiveNext();
+        }
     }
 }

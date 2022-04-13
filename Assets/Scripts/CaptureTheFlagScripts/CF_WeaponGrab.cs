@@ -1,3 +1,12 @@
+/*
+ * 
+ * 
+ * This script inherits from xr grab interactable and contains
+ * all of the gun functionalities (bad coding, sorry)
+ * 
+ * 
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +19,7 @@ using System;
 
 public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 {
+    [Header("Gun Related Stuff")]
     public Team belongsTo = Team.NONE;
     public Transform shootTransform;
     public ParticleSystem ps;
@@ -31,6 +41,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
 
     // Gun Parameters
+    [Header("Gun Parameters")]
     public int currentAmmo;
     public TextMeshProUGUI ammoText;
     private bool allowShoot = true;
@@ -43,10 +54,12 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         view = GetComponent<PhotonView>();
 
+        // Setting Gun parameters equals to value from scriptable object
         ammoCount = gunData.ammoCount;
         fireRate = gunData.fireRate;
         reloadTime = gunData.reloadTime;
         shootAudio = gunData.shootAudio;
+        emptyAudio = gunData.emptyAudio;
         reloadAudio = gunData.reloadAudio;
 
         currentAmmo = ammoCount;
@@ -69,24 +82,26 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            Debug.Log("Hit! " + hit.transform.name);
-
             if (TryGetComponent(out CF_Player enemyPlayer))
             {
+                Debug.Log(enemyPlayer.playerName);
+
                 // if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(30); }
                 enemyPlayer.TakeDamage(30);
-                
             }
         }
         
         // Delay
         StartCoroutine(FireDelay());
     }
+
     [PunRPC]
     void Reload()
     {
+        allowShoot = false;
+
         audioSource.PlayOneShot(reloadAudio);
-        StartCoroutine(ReloadDelay()); 
+        StartCoroutine(ReloadDelay());
     }
 
     private void OnReload(InputAction.CallbackContext obj)
@@ -106,7 +121,6 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     IEnumerator ReloadDelay()
     {
-        allowShoot = false;
         ammoText.text = "Reloading";
         ammoText.color = Color.yellow;
         ammoText.fontSize -= 1;

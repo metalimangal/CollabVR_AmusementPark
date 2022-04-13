@@ -13,7 +13,7 @@ public class CF_GameManager : MonoBehaviourPun
 
     private bool readyTog = false; // Used for toggling whether the teams are ready
 
-    private GameState currentState;
+    public GameState currentState;
 
     [Header("Time Stuff")]
     public float totalMatchTime = 90; // Total Time for match
@@ -27,7 +27,7 @@ public class CF_GameManager : MonoBehaviourPun
     // Start is called before the first frame update
     void Start()
     {
-        UpdateGameState(GameState.Pregame);
+        
     }
 
     // Update is called once per frame
@@ -54,7 +54,7 @@ public class CF_GameManager : MonoBehaviourPun
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    void UpdateGameState(GameState newState)
+    public void UpdateGameState(GameState newState)
     {
         this.photonView.RPC("PunUpdateGameState", RpcTarget.All, newState);
     }
@@ -81,7 +81,6 @@ public class CF_GameManager : MonoBehaviourPun
                 break;
         }
         currentState = newState;
-        Debug.Log("Updating Gamestate to: " + newState);
         OnGameStateChanged?.Invoke(newState);
     }
 
@@ -98,12 +97,12 @@ public class CF_GameManager : MonoBehaviourPun
     private void HandleGameStart()
     {
         // Teleport player to spawn points, player can not move, count down until the game begins
-        //          (done in CF_Player)
+        //          (done in CF_PlayerMovement)
 
         // Reset Score
         CF_ScoreManager.Instance.ResetScore();
-        StartCoroutine(Delay(5));
-        UpdateGameState(GameState.Playing);
+        StartCoroutine(StartPlayInSeconds(5));
+        
     }
     private void HandlePlaying()
     {
@@ -129,9 +128,10 @@ public class CF_GameManager : MonoBehaviourPun
         UpdateGameState(GameState.GameStart);
     }
 
-    IEnumerator Delay(int seconds)
+    IEnumerator StartPlayInSeconds(int seconds)
     {
         yield return new WaitForSeconds(seconds);
+        UpdateGameState(GameState.Playing);
     }
     
 }

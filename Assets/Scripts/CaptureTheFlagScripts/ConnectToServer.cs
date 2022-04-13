@@ -64,7 +64,10 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             PhotonNetwork.SetPlayerCustomProperties(playerProps);
         }
 
-
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CF_GameManager.Instance.UpdateGameState(GameState.Pregame);
+        }
     }
 
     public override void OnPlayerEnteredRoom(Player newPlayer)

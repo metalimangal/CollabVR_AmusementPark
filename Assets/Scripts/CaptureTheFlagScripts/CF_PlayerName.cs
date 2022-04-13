@@ -7,7 +7,7 @@ public class CF_PlayerName : MonoBehaviour
 {
     public string playerName = "";
 
-    private void Start()
+    private void Awake()
     {
         PhotonNetwork.LocalPlayer.CustomProperties["Name"] = playerName;
     }

@@ -5,6 +5,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 using Photon.Pun;
 using Photon.Realtime;
 
+[RequireComponent(typeof(PhotonView), typeof(PhotonTransformView))]
 public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 {
     private PhotonView view;

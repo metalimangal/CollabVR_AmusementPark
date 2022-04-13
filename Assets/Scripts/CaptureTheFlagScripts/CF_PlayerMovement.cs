@@ -12,6 +12,8 @@ public class CF_PlayerMovement : MonoBehaviour
     XROrigin _xrOrigin;
     CapsuleCollider _collider;
 
+    ActionBasedContinuousMoveProvider movement;
+
     [Header("Jumping Stuff")]
     [SerializeField] private InputActionReference jumpActionRef;
     [SerializeField] private float jumpForce = 500.0f;
@@ -22,6 +24,8 @@ public class CF_PlayerMovement : MonoBehaviour
     //Team stuff
     [Header("Team")]
     public Team team;
+    public Color blueTeamColor = Color.blue;
+    public Color redTeamColor = Color.red;
 
     private void Awake()
     {
@@ -35,6 +39,9 @@ public class CF_PlayerMovement : MonoBehaviour
         _xrOrigin = GetComponent<XROrigin>();
         _collider = GetComponentInChildren<CapsuleCollider>();
         _body = GetComponent<Rigidbody>();
+        
+        movement = GameObject.Find("Locomotion System").GetComponent<ActionBasedContinuousMoveProvider>();
+
         jumpActionRef.action.performed += OnJump;
     }
 
@@ -56,6 +63,7 @@ public class CF_PlayerMovement : MonoBehaviour
             center.x,
             _collider.height / 2,
             center.z);
+
     }
 
     private void OnOnRespawn()
@@ -69,8 +77,7 @@ public class CF_PlayerMovement : MonoBehaviour
 
         // Disabling Collision and Movement
         _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = false;
-        var locomotion = GameObject.Find("Locomotion System");
-        locomotion.GetComponent<ActionBasedContinuousMoveProvider>().enabled = false;
+        movement.enabled = false;
 
         // Teleporting Logic
         Transform spawnPoint = CF_SpawnManager.Instance.GetSpawn(team);
@@ -84,11 +91,12 @@ public class CF_PlayerMovement : MonoBehaviour
         // Enabling Collision and Movement
         _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = true;
         yield return new WaitForSeconds(seconds);
-        locomotion.GetComponent<ActionBasedContinuousMoveProvider>().enabled = true;
+        movement.enabled = true;
 
         Debug.Log("Player Respawned");
     }
 
+    // Activates when team assignment is finalized
     private void GameStateChanged(GameState obj)
     {
         if (obj == GameState.TeamSelected)
@@ -97,13 +105,35 @@ public class CF_PlayerMovement : MonoBehaviour
             if (teamProp.ToString() == "BLUE")
             {
                 team = Team.BLUE;
+                ChangeColor(blueTeamColor);
             }
             else if (teamProp.ToString() == "RED")
             {
                 team = Team.RED;
+                ChangeColor(redTeamColor);
             }
-            else team = Team.NONE;
+            else
+            {
+                team = Team.NONE;
+                ChangeColor(Color.gray);
+            }
             Debug.Log("Local Player assigned to team: " + team.ToString());
+        }
+
+        // Disable movement on gamestart
+        if (obj == GameState.GameStart)
+        {
+            movement.enabled = false;
+        }
+
+        else movement.enabled = true;
+    }
+
+    private void ChangeColor(Color color)
+    {
+        foreach (var item in GetComponentsInChildren<Renderer>())
+        {
+            item.material.color = color;
         }
     }
 }
