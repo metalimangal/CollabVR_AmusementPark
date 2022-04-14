@@ -60,7 +60,8 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeDamage(int damage)
     {
-        photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
+        health -= damage;
+        // photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
     }
 
 
