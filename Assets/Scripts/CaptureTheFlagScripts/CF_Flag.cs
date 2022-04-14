@@ -36,6 +36,10 @@ public class CF_Flag : MonoBehaviour
 
     private Team GrabberTeam()
     {
+        if (!networkGrab.firstInteractorSelecting.transform.TryGetComponent(out ActionBasedController controller))
+        {
+            return Team.NONE;
+        }
 
         if (networkGrab.firstInteractorSelecting.transform.parent.parent.TryGetComponent(out CF_PlayerMovement player))
         {
