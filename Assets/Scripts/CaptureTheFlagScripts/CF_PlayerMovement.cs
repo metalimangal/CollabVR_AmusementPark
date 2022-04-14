@@ -79,6 +79,12 @@ public class CF_PlayerMovement : MonoBehaviour
         _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = false;
         movement.enabled = false;
 
+        // Disabling Controllers
+        foreach (var controller in GetComponentsInChildren<ActionBasedController>())
+        {
+            controller.enabled = false;
+        }
+
         // Teleporting Logic
         Transform spawnPoint = CF_SpawnManager.Instance.GetSpawn(team);
         
@@ -92,6 +98,12 @@ public class CF_PlayerMovement : MonoBehaviour
         _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = true;
         yield return new WaitForSeconds(seconds);
         movement.enabled = true;
+
+        // Enabling Controllers
+        foreach (var controller in GetComponentsInChildren<ActionBasedController>())
+        {
+            controller.enabled = true;
+        }
 
         Debug.Log("Player Respawned");
     }
