@@ -100,7 +100,10 @@ namespace Com.MyCompany.MyGame
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
                     if (pp.type == 0)
                     {
-                        GameObject player = PhotonNetwork.Instantiate(vrPrefab.name, vrPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), vrPrefab.transform.rotation, 0);
+                        GameObject player = PhotonNetwork.Instantiate(avatar.name, xrRig.transform.GetChild(0).GetChild(0).position, avatar.transform.rotation, 0);
+                        player.transform.parent = xrRig.transform.GetChild(0).GetChild(0);
+
+                        // GameObject player = PhotonNetwork.Instantiate(vrPrefab.name, vrPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), vrPrefab.transform.rotation, 0);
                         // GameObject player = Instantiate(vrPrefab);
                         // GameObject tmp = PhotonNetwork.Instantiate(this.avatarGrab.name, this.avatarGrab.transform.position, Quaternion.identity, 0);
                         // tmp.transform.name = PhotonNetwork.NickName;
@@ -131,8 +134,8 @@ namespace Com.MyCompany.MyGame
         // public GameObject vrCanvas;
         // public GameObject pcCanvas;
         
-        // public GameObject avatarGrab;
-        // public GameObject avatar;
+        public GameObject xrRig;
+        public GameObject avatar;
 
         public void LeaveRoom()
         {

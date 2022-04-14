@@ -5,13 +5,14 @@ using TMPro;
 
 public class PlayerProperty : MonoBehaviour
 {
-    public TMP_Dropdown td;
+    // public TMP_Dropdown td;
     public int type;
 
     // Start is called before the first frame update
     void Start()
     {
         type = 0;
+        DontDestroyOnLoad(this);
     }
 
     // Update is called once per frame
@@ -22,7 +23,7 @@ public class PlayerProperty : MonoBehaviour
 
     public void setPlayerProperty()
     {
-        type = td.value;
+        // type = td.value;
     }
 
     public void keepPlayerProperty()
