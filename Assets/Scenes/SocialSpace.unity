@@ -584,7 +584,6 @@ GameObject:
   - component: {fileID: 973747616}
   - component: {fileID: 973747614}
   - component: {fileID: 973747615}
-  - component: {fileID: 973747618}
   m_Layer: 0
   m_Name: Locomotion System
   m_TagString: Untagged
@@ -703,18 +702,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &973747618
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 973747613}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e980a5c578a0ab4ea55ac0ef00feaee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1043211523
 GameObject:
   m_ObjectHideFlags: 0
