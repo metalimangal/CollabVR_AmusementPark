@@ -36,10 +36,13 @@ public class CF_Flag : MonoBehaviour
 
     private Team GrabberTeam()
     {
-        
-        Team grabberTeam = networkGrab.firstInteractorSelecting.transform.parent.parent.GetComponent<CF_PlayerMovement>().team;
 
-        return grabberTeam;
+        if (networkGrab.firstInteractorSelecting.transform.parent.parent.TryGetComponent(out CF_PlayerMovement player))
+        {
+            return player.team;
+        }
+
+        return Team.NONE;
     }
 
     private bool CheckIfScoreZone()

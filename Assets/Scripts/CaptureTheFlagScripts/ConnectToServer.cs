@@ -72,13 +72,13 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        ReloadLevel();
+        //ReloadLevel();
         base.OnPlayerEnteredRoom(newPlayer);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        ReloadLevel();
+        //ReloadLevel();
         base.OnPlayerLeftRoom(otherPlayer);
     }
 
