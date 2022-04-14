@@ -59,7 +59,6 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
             ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable
             {
                 { "Team", "none" },
-                { "Name", "" }
             };
             PhotonNetwork.SetPlayerCustomProperties(playerProps);
         }

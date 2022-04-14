@@ -19,7 +19,7 @@ public class CF_PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce = 500.0f;
     private Rigidbody _body;
     public LayerMask GroundLayer;
-    private bool isGrounded => Physics.Raycast(new Vector2(transform.position.x, transform.position.y + 2.0f), Vector3.down, 2.0f, GroundLayer);
+    private bool isGrounded => Physics.Raycast(new Vector2(transform.position.x, transform.position.y + 2.0f), Vector3.down, 2.1f, GroundLayer);
 
     //Team stuff
     [Header("Team")]
@@ -117,7 +117,6 @@ public class CF_PlayerMovement : MonoBehaviour
                 team = Team.NONE;
                 ChangeColor(Color.gray);
             }
-            Debug.Log("Local Player assigned to team: " + team.ToString());
         }
 
         // Disable movement on gamestart

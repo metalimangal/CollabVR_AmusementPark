@@ -9,28 +9,34 @@ using Photon.Realtime;
 public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 {
     private PhotonView view;
-    // Start is called before the first frame update
-    void Start()
+
+    protected override void Awake()
     {
+        base.Awake();
         view = GetComponent<PhotonView>();
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        view.RequestOwnership();
+        if (PhotonNetwork.InRoom)
+        {
+            view.RequestOwnership();
+        }
         base.OnSelectEntered(args);
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
-        if (!isSelected)
+        if (!IsSelectedBySocket() && targetView == view)
         {
-            targetView.TransferOwnership(requestingPlayer);
+            view.TransferOwnership(requestingPlayer);
         }
     }
 
@@ -42,5 +48,14 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
     {
         
+    }
+
+    private bool IsSelectedBySocket()
+    {
+        if (isSelected && firstInteractorSelecting.transform.TryGetComponent(out XRSocketInteractor socket))
+        {
+            return true;
+        }
+        return false;
     }
 }

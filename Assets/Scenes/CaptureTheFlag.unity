@@ -5665,7 +5665,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: 0
-  totalMatchTime: 180
+  totalMatchTime: 600
   timeText: {fileID: 1018919430}
 --- !u!4 &1221412826
 Transform:

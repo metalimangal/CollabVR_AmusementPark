@@ -27,11 +27,13 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     [Header("Gun Scriptable")]
     // public scriptable object reference
     public CF_GunScriptableObject gunData;
+    [SerializeField] private bool FriendlyFire = false;
 
     // Gun Given Parameters
     private int ammoCount;
     private float fireRate;
     private float reloadTime;
+    private int gunDamage;
 
     // Audio
     private AudioSource audioSource;
@@ -52,14 +54,29 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     private PhotonView view;
 
+    protected override void Awake()
+    {
+        base.Awake();
+        view = GetComponent<PhotonView>();
+        PhotonNetwork.AddCallbackTarget(this);
+    }
+    protected override void OnDestroy()
+    {
+        base.OnDestroy();
+        PhotonNetwork.RemoveCallbackTarget(this);
+    }
+
+
     private void Start()
     {
         view = GetComponent<PhotonView>();
+        PhotonNetwork.AddCallbackTarget(this);
 
         // Setting Gun parameters equals to value from scriptable object
         ammoCount = gunData.ammoCount;
         fireRate = gunData.fireRate;
         reloadTime = gunData.reloadTime;
+        gunDamage = gunData.damage;
         shootAudio = gunData.shootAudio;
         emptyAudio = gunData.emptyAudio;
         reloadAudio = gunData.reloadAudio;
@@ -78,18 +95,30 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         if (currentAmmo > 0) { currentAmmo -= 1; }
         ammoText.text = currentAmmo.ToString();
 
+        // Audio
         ps.Play();
         audioSource.PlayOneShot(shootAudio);
+
         // Shooting Logic
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-            if (TryGetComponent(out CF_Player enemyPlayer))
-            {
-                Debug.Log(enemyPlayer.playerName);
 
-                // if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(30); }
-                enemyPlayer.TakeDamage(30);
+            if (hit.rigidbody != null)
+            {
+                if (hit.rigidbody.transform.TryGetComponent(out CF_Player enemyPlayer))
+                {
+                    Debug.Log(enemyPlayer.playerName);
+
+                    if (!FriendlyFire)
+                    {
+                        if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(gunDamage); }
+                    }
+                    else
+                    {
+                        enemyPlayer.TakeDamage(gunDamage);
+                    }
+                }
             }
         }
         
@@ -167,14 +196,16 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     protected override void OnHoverEntered(HoverEnterEventArgs args)
     {
-        view.RequestOwnership();
+        if (PhotonNetwork.InRoom)
+        {
+            view.RequestOwnership();
+        }
         base.OnHoverEntered(args);
     }
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         belongsTo = args.interactorObject.transform.parent.gameObject.GetComponentInParent<CF_PlayerMovement>().team;
-        
         base.OnSelectEntered(args);
     }
 
@@ -186,7 +217,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
-        if (!isSelected)
+        if (!isSelected && targetView == view)
         {
             targetView.TransferOwnership(requestingPlayer);
         }

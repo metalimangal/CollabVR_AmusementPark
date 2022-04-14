@@ -18,12 +18,6 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
     {
         if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        scoreBlueText.text = scoreBlue.ToString();
-        scoreRedText.text = scoreRed.ToString();
-    }
 
     public int GetScore(Team team)
     {
@@ -57,8 +51,7 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
         }
         else Debug.Log("Invalid team");
 
-        scoreBlueText.text = scoreBlue.ToString();
-        scoreRedText.text = scoreRed.ToString();
+        photonView.RPC("SetScoreText", RpcTarget.All, scoreBlue, scoreRed);
     }
 
     public void ResetScore() 
@@ -79,5 +72,12 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
             scoreBlue = (int)stream.ReceiveNext();
             scoreRed = (int)stream.ReceiveNext();
         }
+    }
+
+    [PunRPC]
+    private void SetScoreText(string blue, string red)
+    {
+        scoreBlueText.text = blue.ToString();
+        scoreRedText.text = red.ToString();
     }
 }

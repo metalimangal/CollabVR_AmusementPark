@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7310301712719502977}
   - component: {fileID: 8354700868832053160}
   - component: {fileID: 3254391042573061915}
+  - component: {fileID: 4460093017162886542}
   m_Layer: 8
   m_Name: Flag Sheet
   m_TagString: Untagged
@@ -95,6 +96,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &4460093017162886542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294670251867753662}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &2384467612335274573
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,6 +121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5711824846144265467}
+  - component: {fileID: 7306604786232574456}
   m_Layer: 8
   m_Name: Grab Point
   m_TagString: Untagged
@@ -125,6 +143,22 @@ Transform:
   m_Father: {fileID: 793420919885400490}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7306604786232574456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2384467612335274573}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &5440230308099738429
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,6 +174,7 @@ GameObject:
   - component: {fileID: 283959005948993851}
   - component: {fileID: 191390064234679556}
   - component: {fileID: 6760848992638155758}
+  - component: {fileID: 8088028097691751909}
   m_Layer: 8
   m_Name: Flag
   m_TagString: Flag
@@ -227,6 +262,10 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 191390064234679556}
+  - {fileID: 8088028097691751909}
+  - {fileID: 523162325806402356}
+  - {fileID: 4460093017162886542}
+  - {fileID: 7306604786232574456}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -373,6 +412,22 @@ MonoBehaviour:
   m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
+--- !u!114 &8088028097691751909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5440230308099738429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64179f3720bbfe947b7724caa67b7c1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizeVelocity: 1
+  m_SynchronizeAngularVelocity: 1
+  m_TeleportEnabled: 0
+  m_TeleportIfDistanceGreaterThan: 3
 --- !u!1 &6194786923508162990
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,6 +440,7 @@ GameObject:
   - component: {fileID: 7939815388402091389}
   - component: {fileID: 2416826498002035728}
   - component: {fileID: 3474373105587605624}
+  - component: {fileID: 523162325806402356}
   m_Layer: 8
   m_Name: Flag Pole
   m_TagString: Untagged
@@ -468,3 +524,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &523162325806402356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6194786923508162990}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1

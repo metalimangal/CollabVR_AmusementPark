@@ -17,6 +17,8 @@ using Photon.Pun;
 
 public class CF_NetworkPlayer : MonoBehaviour
 {
+    public bool EnableNetworkAvatar = false;
+
     public Transform head;
     public Transform leftHand;
     public Transform rightHand;
@@ -42,10 +44,9 @@ public class CF_NetworkPlayer : MonoBehaviour
         //Disable Renderer for your own "networked" avatar
         if (view.IsMine)
         {
-            Debug.Log("Disabling Renderer for networked avatar");
             foreach (var item in GetComponentsInChildren<Renderer>())
             {
-                item.enabled = false;
+                item.enabled = EnableNetworkAvatar;
             }
         }
     }

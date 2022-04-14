@@ -20,7 +20,6 @@ public class CF_TeamManager : MonoBehaviour
     public void SetTeam(Team team)
     {
         PhotonNetwork.LocalPlayer.CustomProperties["Team"] = team.ToString();
-        Debug.Log("Assigned Team Custom Property");
     }
 
     public void SetTeamInt(int teamInt)

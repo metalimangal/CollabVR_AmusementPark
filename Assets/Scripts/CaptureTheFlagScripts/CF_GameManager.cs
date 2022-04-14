@@ -112,6 +112,7 @@ public class CF_GameManager : MonoBehaviourPun
     private void HandleEnd()
     {
         // Game ended
+        timeText.text = "Game Over!";
     }
 
     public void ToggleReady()

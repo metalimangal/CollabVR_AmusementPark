@@ -37,11 +37,9 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 
         if (photonView.IsMine)
         {
-            localPlayerInstance = gameObject;
             playerName = "Player " + photonView.ViewID;
-            nameText.text = playerName;
+            photonView.RPC("ChangeName", RpcTarget.All, playerName);
         }
-        DontDestroyOnLoad(gameObject);
     }
 
     // Update is called once per frame
@@ -62,8 +60,7 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeDamage(int damage)
     {
-        health -= damage;
-        Debug.Log("Damage taken: " + damage);
+        photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
     }
 
 
@@ -72,33 +69,29 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (obj == GameState.TeamSelected && photonView.IsMine)
         {
+            photonView.RPC("ChangeName", RpcTarget.All, playerName);
+
             var teamProp = PhotonNetwork.LocalPlayer.CustomProperties["Team"];
             if (teamProp.ToString() == "BLUE")
             {
                 team = Team.BLUE;
-                photonView.RPC("ChangeColor", RpcTarget.All, blueTeamColor);
-                ChangeColor(blueTeamColor);
+                photonView.RPC("ChangeColor", RpcTarget.All, "blue");
             }
             else if (teamProp.ToString() == "RED")
             {
                 team = Team.RED;
-                photonView.RPC("ChangeColor", RpcTarget.All, redTeamColor);
-                ChangeColor(redTeamColor);
+                photonView.RPC("ChangeColor", RpcTarget.All, "red");
             }
             else 
             { 
                 team = Team.NONE;
                 photonView.RPC("ChangeColor", RpcTarget.All, Color.gray);
-                ChangeColor(Color.gray);
             }
-
-            Debug.Log("Network Player assigned to team: " + team.ToString());
         }
         
         if (obj == GameState.GameStart && photonView.IsMine)
         {
             // Trigger Respawn Event
-            Debug.Log("Invoking Respawn");
             health = maxHealth;
             OnRespawn?.Invoke();
         }
@@ -117,11 +110,34 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     [PunRPC]
-    private void ChangeColor(Color color)
+    private void ChangeColor(string team)
     {
+        var color = Color.gray;
+        if (team == "blue")
+        {
+            color = blueTeamColor;
+        }
+        else if (team == "red")
+        {
+            color = redTeamColor;
+        }
+
         foreach (var item in GetComponentsInChildren<Renderer>())
         {
             item.material.color = color;
         }
     } 
+
+    [PunRPC]
+    private void ChangeName(string name)
+    {
+        nameText.text = name;
+    }
+
+    [PunRPC]
+    private void RPCTakeDamage(string damage)
+    {
+        health -= int.Parse(damage);
+        Debug.Log("Damage taken: " + damage);
+    }
 }
