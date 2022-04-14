@@ -188,7 +188,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         if (!isSelected)
         {
-            view.TransferOwnership(requestingPlayer);
+            targetView.TransferOwnership(requestingPlayer);
         }
     }
 

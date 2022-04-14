@@ -49,14 +49,4 @@ public class CF_Flag : MonoBehaviour
         return Team.NONE;
     }
 
-    private bool CheckIfScoreZone()
-    {
-        if (networkGrab.firstInteractorSelecting.transform.TryGetComponent(out XRSocketInteractor component))
-        {
-            return true;
-        }
-        else return false;
-    }
-
-    
 }

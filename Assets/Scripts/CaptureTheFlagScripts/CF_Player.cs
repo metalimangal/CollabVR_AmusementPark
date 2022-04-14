@@ -76,16 +76,19 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
             if (teamProp.ToString() == "BLUE")
             {
                 team = Team.BLUE;
+                photonView.RPC("ChangeColor", RpcTarget.All, blueTeamColor);
                 ChangeColor(blueTeamColor);
             }
             else if (teamProp.ToString() == "RED")
             {
                 team = Team.RED;
+                photonView.RPC("ChangeColor", RpcTarget.All, redTeamColor);
                 ChangeColor(redTeamColor);
             }
             else 
             { 
                 team = Team.NONE;
+                photonView.RPC("ChangeColor", RpcTarget.All, Color.gray);
                 ChangeColor(Color.gray);
             }
 
@@ -113,6 +116,7 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
+    [PunRPC]
     private void ChangeColor(Color color)
     {
         foreach (var item in GetComponentsInChildren<Renderer>())

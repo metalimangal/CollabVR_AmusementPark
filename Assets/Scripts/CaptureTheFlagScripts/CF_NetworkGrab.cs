@@ -30,7 +30,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         if (!isSelected)
         {
-            view.TransferOwnership(requestingPlayer);
+            targetView.TransferOwnership(requestingPlayer);
         }
     }
 
