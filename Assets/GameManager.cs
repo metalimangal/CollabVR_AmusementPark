@@ -104,6 +104,7 @@ namespace Com.MyCompany.MyGame
                         player.transform.parent = xrRig.transform.GetChild(0).GetChild(0);
 
                         // GameObject player = PhotonNetwork.Instantiate(vrPrefab.name, vrPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), vrPrefab.transform.rotation, 0);
+                        // player.transform.name = "XR Origin";
                         // GameObject player = Instantiate(vrPrefab);
                         // GameObject tmp = PhotonNetwork.Instantiate(this.avatarGrab.name, this.avatarGrab.transform.position, Quaternion.identity, 0);
                         // tmp.transform.name = PhotonNetwork.NickName;
