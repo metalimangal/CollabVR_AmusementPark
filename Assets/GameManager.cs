@@ -98,10 +98,10 @@ namespace Com.MyCompany.MyGame
                 {
                     Debug.LogFormat("We are Instantiating LocalPlayer from {0}", SceneManagerHelper.ActiveSceneName);
                     // we're in a room. spawn a character for the local player. it gets synced by using PhotonNetwork.Instantiate
-                    if (pp.type == 0)
+                    if (pp.type == 0 && pv.IsMine)
                     {
-                        GameObject player = PhotonNetwork.Instantiate(avatar.name, xrRig.transform.GetChild(0).GetChild(0).position, avatar.transform.rotation, 0);
-                        player.transform.parent = xrRig.transform.GetChild(0);
+                        GameObject player = PhotonNetwork.Instantiate(avatar.name, xrRig.transform.position, avatar.transform.rotation, 0);
+                        // player.transform.parent = xrRig.transform.GetChild(0);
 
                         // GameObject player = PhotonNetwork.Instantiate(vrPrefab.name, vrPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), vrPrefab.transform.rotation, 0);
                         // player.transform.name = "XR Origin";
@@ -109,15 +109,6 @@ namespace Com.MyCompany.MyGame
                         // GameObject tmp = PhotonNetwork.Instantiate(this.avatarGrab.name, this.avatarGrab.transform.position, Quaternion.identity, 0);
                         // tmp.transform.name = PhotonNetwork.NickName;
                         // player.transform.parent = tmp.transform;
-                    }
-                    else
-                    {
-                        GameObject player = PhotonNetwork.Instantiate(pcPrefab.name, pcPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), pcPrefab.transform.rotation, 0);
-                        // GameObject player = Instantiate(pcPrefab);
-                        // GameObject tmp = PhotonNetwork.Instantiate(this.avatar.name, player.transform.position, Quaternion.identity, 0);;
-                        // tmp.transform.name = PhotonNetwork.NickName;
-                        // tmp.transform.parent = player.transform;
-                        // tmp.GetComponent<InputSync>().enabled = false;
                     }
                 }
             }
@@ -131,9 +122,6 @@ namespace Com.MyCompany.MyGame
         [Tooltip("The prefab to use for representing the player")]
         public GameObject vrPrefab;
         public GameObject pcPrefab;
-
-        // public GameObject vrCanvas;
-        // public GameObject pcCanvas;
         
         public GameObject xrRig;
         public GameObject avatar;

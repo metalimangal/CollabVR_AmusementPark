@@ -10,14 +10,16 @@ public class SetLocomotion : MonoBehaviour
 {
     private Transform head;
     private Transform rig;
-    private PhotonView pv;
+    public PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
-        head = transform.parent.GetChild(0);
-        rig = transform.parent.parent;
-        pv = this.GetComponent<PhotonView>();
+        // head = transform.parent.GetChild(0);
+        // rig = transform.parent.parent;
+
+        rig = GameObject.Find("XR Origin").transform;
+        head = rig.GetChild(0).GetChild(0);
     }
 
     // Update is called once per frame
@@ -25,7 +27,7 @@ public class SetLocomotion : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            transform.position = rig.position;
+            transform.position = head.position;
             transform.rotation = head.rotation;
         }
     }
