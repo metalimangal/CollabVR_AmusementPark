@@ -8,13 +8,15 @@ using Photon.Pun;
 
 public class SetLocomotion : MonoBehaviour
 {
-    private Transform target;
+    private Transform head;
+    private Transform rig;
     private PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
-        target = transform.parent.GetChild(0);
+        head = transform.parent.GetChild(0);
+        rig = transform.parent.parent;
         pv = this.GetComponent<PhotonView>();
     }
 
@@ -23,8 +25,8 @@ public class SetLocomotion : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            transform.position = target.position;
-            transform.rotation = target.rotation;
+            transform.position = rig.position;
+            transform.rotation = head.rotation;
         }
     }
 }
