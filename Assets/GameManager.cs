@@ -101,7 +101,7 @@ namespace Com.MyCompany.MyGame
                     if (pp.type == 0 && pv.IsMine)
                     {
                         GameObject player = PhotonNetwork.Instantiate(avatar.name, xrRig.transform.position, avatar.transform.rotation, 0);
-                        // player.transform.parent = xrRig.transform.GetChild(0);
+                        //  player.transform.parent = xrRig.transform.GetChild(0);
 
                         // GameObject player = PhotonNetwork.Instantiate(vrPrefab.name, vrPrefab.transform.position + new Vector3(0.0f, 0.0f, -5.0f), vrPrefab.transform.rotation, 0);
                         // player.transform.name = "XR Origin";
