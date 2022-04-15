@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 2354187215378556950}
   - component: {fileID: 2822054343004984080}
   - component: {fileID: 5725273223445229922}
+  - component: {fileID: 2516561607398816935}
   m_Layer: 0
   m_Name: Avatar
   m_TagString: Untagged
@@ -121,6 +122,18 @@ MonoBehaviour:
   AutoCreateRecorderIfNotFound: 0
   UsePrimaryRecorder: 1
   SetupDebugSpeaker: 0
+--- !u!114 &2516561607398816935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3356402213901641473}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e980a5c578a0ab4ea55ac0ef00feaee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3356402214492216184
 GameObject:
   m_ObjectHideFlags: 0
@@ -135,7 +148,6 @@ GameObject:
   - component: {fileID: 3356402214492216182}
   - component: {fileID: 1912413733206008981}
   - component: {fileID: 1852083253029559090}
-  - component: {fileID: 1783738017085113541}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -259,18 +271,6 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
---- !u!114 &1783738017085113541
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3356402214492216184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e980a5c578a0ab4ea55ac0ef00feaee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5616697160182386852
 GameObject:
   m_ObjectHideFlags: 0
