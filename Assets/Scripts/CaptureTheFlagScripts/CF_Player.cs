@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using System;
 using TMPro;
+using Photon.Realtime;
 
 public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -34,7 +35,6 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     // Start is called before the first frame update
     void Start()
     {
-
         if (photonView.IsMine)
         {
             playerName = "Player " + photonView.ViewID;
@@ -58,38 +58,49 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    public void TakeDamage(int damage)
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        if (photonView.IsMine)
+        {
+            playerName = "Player " + photonView.ViewID;
+            photonView.RPC("ChangeName", RpcTarget.All, playerName);
+        }
+    }
+
+    public void TakeDamage(int damage, string attacker)
     {
         health -= damage;
+        Debug.Log(damage + " damage taken from: " + attacker);
         // photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
     }
 
-
-    // Confirm Team Assignment when team is selected
-    private void GameManagerOnOnGameStateChanged(GameState obj)
+    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
-        if (obj == GameState.TeamSelected && photonView.IsMine)
+        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+        if (changedProps.ContainsKey("Team")) 
         {
-            photonView.RPC("ChangeName", RpcTarget.All, playerName);
-
-            var teamProp = PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+            var teamProp = changedProps["Team"];
             if (teamProp.ToString() == "BLUE")
             {
                 team = Team.BLUE;
-                photonView.RPC("ChangeColor", RpcTarget.All, "blue");
+                photonView.RPC("ChangeColor", RpcTarget.All, "BLUE");
             }
             else if (teamProp.ToString() == "RED")
             {
                 team = Team.RED;
-                photonView.RPC("ChangeColor", RpcTarget.All, "red");
+                photonView.RPC("ChangeColor", RpcTarget.All, "RED");
             }
             else 
             { 
                 team = Team.NONE;
-                photonView.RPC("ChangeColor", RpcTarget.All, Color.gray);
+                photonView.RPC("ChangeColor", RpcTarget.All, "GREY");
             }
         }
-        
+    }
+    // Confirm Team Assignment when team is selected
+    private void GameManagerOnOnGameStateChanged(GameState obj)
+    {
         if (obj == GameState.GameStart && photonView.IsMine)
         {
             // Trigger Respawn Event
@@ -114,11 +125,11 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     private void ChangeColor(string team)
     {
         var color = Color.gray;
-        if (team == "blue")
+        if (team == "BLUE")
         {
             color = blueTeamColor;
         }
-        else if (team == "red")
+        else if (team == "RED")
         {
             color = redTeamColor;
         }

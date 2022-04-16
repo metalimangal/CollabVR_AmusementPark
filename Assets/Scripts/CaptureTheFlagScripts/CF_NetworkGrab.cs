@@ -28,15 +28,18 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
         if (PhotonNetwork.InRoom)
         {
             view.RequestOwnership();
+            Debug.Log("Ownership Requested");
         }
         base.OnSelectEntered(args);
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
+        Debug.Log("Ownership Request Received");
         if (!IsSelectedBySocket() && targetView == view)
         {
-            view.TransferOwnership(requestingPlayer);
+            targetView.TransferOwnership(requestingPlayer);
+            Debug.Log("Ownership Request Transfered");
         }
     }
 
@@ -54,6 +57,9 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         if (isSelected && firstInteractorSelecting.transform.TryGetComponent(out XRSocketInteractor socket))
         {
+            if (interactorsSelecting[1].transform != null) {
+                return false;
+            }
             return true;
         }
         return false;

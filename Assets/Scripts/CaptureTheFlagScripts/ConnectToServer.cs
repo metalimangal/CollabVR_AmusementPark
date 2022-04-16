@@ -18,6 +18,7 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
 {
     public GameObject networkPlayerPrefab;
     private GameObject spawnedPlayer;
+    private ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable();
 
     // Start is called before the first frame update
     void Start()
@@ -50,18 +51,15 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
         spawnedPlayer = PhotonNetwork.Instantiate(networkPlayerPrefab.name, transform.position, transform.rotation);
 
         //Setting "Team" property when player joins room
-        if (PhotonNetwork.LocalPlayer.CustomProperties.ContainsKey("Team"))
+        if (playerProps.ContainsKey("Team"))
         {
-            PhotonNetwork.LocalPlayer.CustomProperties["Team"] = "none";
+            playerProps["Team"] = "NONE";
         }
         else
         {
-            ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable
-            {
-                { "Team", "none" },
-            };
-            PhotonNetwork.SetPlayerCustomProperties(playerProps);
+            playerProps.Add("Team", "NONE");
         }
+        PhotonNetwork.SetPlayerCustomProperties(playerProps);
 
         if (PhotonNetwork.IsMasterClient)
         {

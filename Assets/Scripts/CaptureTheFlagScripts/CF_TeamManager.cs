@@ -5,21 +5,16 @@ using Photon.Pun;
 
 public class CF_TeamManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    ExitGames.Client.Photon.Hashtable playerProps = new ExitGames.Client.Photon.Hashtable();
 
     public void SetTeam(Team team)
     {
-        PhotonNetwork.LocalPlayer.CustomProperties["Team"] = team.ToString();
+        if (!playerProps.ContainsKey("Team"))
+        {
+            playerProps.Add("Team", team.ToString());
+        }
+        playerProps["Team"] = team.ToString();
+        PhotonNetwork.SetPlayerCustomProperties(playerProps);
     }
 
     public void SetTeamInt(int teamInt)
