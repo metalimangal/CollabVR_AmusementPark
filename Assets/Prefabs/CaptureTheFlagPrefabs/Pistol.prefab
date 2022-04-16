@@ -5250,11 +5250,6 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 6462681694765118346}
   - {fileID: 1944818787435443473}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -5370,7 +5365,7 @@ MonoBehaviour:
       m_Calls: []
   m_AttachTransform: {fileID: 6462681695115553570}
   m_AttachEaseInTime: 0.15
-  m_MovementType: 2
+  m_MovementType: 1
   m_VelocityDamping: 1
   m_VelocityScale: 1
   m_AngularVelocityDamping: 1
@@ -5406,6 +5401,7 @@ MonoBehaviour:
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   belongsTo: 2
+  ownerName: 
   shootTransform: {fileID: 6462681694950182717}
   ps: {fileID: 3003700734922627629}
   gunData: {fileID: 11400000, guid: 0e88b58167d415a48a4e8aaac6444c09, type: 2}

@@ -41,7 +41,7 @@ public class CF_Flag : MonoBehaviour
             return Team.NONE;
         }
 
-        if (networkGrab.firstInteractorSelecting.transform.parent.parent.TryGetComponent(out CF_PlayerMovement player))
+        if (networkGrab.firstInteractorSelecting.transform.root.TryGetComponent(out CF_PlayerMovement player))
         {
             return player.team;
         }

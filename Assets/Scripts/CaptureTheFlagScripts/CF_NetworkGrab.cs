@@ -13,8 +13,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     protected override void Awake()
     {
         base.Awake();
-        view = GetComponent<PhotonView>();
-        PhotonNetwork.AddCallbackTarget(this);
+        
     }
     protected override void OnDestroy()
     {
@@ -22,6 +21,10 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
+    private void Start() {
+        view = GetComponent<PhotonView>();
+        PhotonNetwork.AddCallbackTarget(this);
+    }
     
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
@@ -36,16 +39,20 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
         Debug.Log("Ownership Request Received");
-        if (!IsSelectedBySocket() && targetView == view)
+
+        if (targetView.gameObject != this.gameObject) {
+            return;
+        }
+
+        if (!IsSelectedBySocket() && targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
-            Debug.Log("Ownership Request Transfered");
         }
     }
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-        
+        Debug.Log("Ownership Request Transfered");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
@@ -57,7 +64,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         if (isSelected && firstInteractorSelecting.transform.TryGetComponent(out XRSocketInteractor socket))
         {
-            if (interactorsSelecting[1].transform != null) {
+            if (interactorsSelecting.Count > 1) {
                 return false;
             }
             return true;

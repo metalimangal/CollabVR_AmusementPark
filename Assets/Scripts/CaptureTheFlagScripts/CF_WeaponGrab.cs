@@ -103,22 +103,21 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
-
-            if (hit.rigidbody != null)
+            if (hit.transform.root.TryGetComponent(out CF_Player enemyPlayer))
             {
-                if (hit.rigidbody.transform.TryGetComponent(out CF_Player enemyPlayer))
-                {
-                    Debug.Log(enemyPlayer.playerName);
+                Debug.Log("Shot hit: " + enemyPlayer.playerName);
 
-                    if (!FriendlyFire)
-                    {
-                        if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(gunDamage, ownerName); }
-                    }
-                    else
-                    {
-                        enemyPlayer.TakeDamage(gunDamage, ownerName);
-                    }
+                if (!FriendlyFire)
+                {
+                    if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(gunDamage, ownerName); }
                 }
+                else
+                {
+                    enemyPlayer.TakeDamage(gunDamage, ownerName);
+                }
+            }
+            else {
+                Debug.Log("Shot Missed");
             }
         }
 
@@ -170,11 +169,14 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         isReloading = false;
     }
 
+    private void SetOwnerName()
+    {
+        ownerName = PhotonNetwork.LocalPlayer.CustomProperties["Name"].ToString();
+    }
     protected override void OnActivated(ActivateEventArgs args)
     {
         if (view.IsMine)
         {
-            ownerName = PhotonNetwork.LocalPlayer.CustomProperties["Name"].ToString();
             if (allowShoot && currentAmmo > 0 && !isReloading)
             {
                 view.RPC("Shoot", RpcTarget.All);
@@ -193,8 +195,6 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         base.OnActivated(args);
     }
 
-
-
     protected override void OnHoverEntered(HoverEnterEventArgs args)
     {
         if (PhotonNetwork.InRoom)
@@ -207,33 +207,42 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        belongsTo = args.interactorObject.transform.parent.gameObject.GetComponentInParent<CF_PlayerMovement>().team;
+        if (view.IsMine)
+        {
+            belongsTo = args.interactorObject.transform.root.GetComponent<CF_PlayerMovement>().team;
+            SetOwnerName();
+        }
         base.OnSelectEntered(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         belongsTo = Team.NONE;
+        ownerName = "";
         base.OnSelectExited(args);
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
         Debug.Log("Gun Ownership Request Received");
-        if (!isSelected && targetView == view)
+
+        if (targetView.gameObject != this.gameObject) {
+            return;
+        }
+
+        if (!isSelected && targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
-            Debug.Log("Gun Ownership Transfered");
         }
     }
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-
+        Debug.Log("Gun Ownership Transfered");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
     {
-
+        Debug.Log("Gun Ownership Transfered Failed!");
     }
 }
