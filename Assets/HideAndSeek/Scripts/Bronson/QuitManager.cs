@@ -15,7 +15,7 @@ public class QuitManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("QuitButton") && enableQuitButton)
+        if (Input.GetButtonDown("QuitButton") && enableQuitting)
         {
             Quit();
         }
