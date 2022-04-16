@@ -11,8 +11,6 @@ public class CF_GameManager : MonoBehaviourPun
 
     public static event Action<GameState> OnGameStateChanged;
 
-    private bool readyTog = false; // Used for toggling whether the teams are ready
-
     public GameState currentState;
 
     [Header("Time Stuff")]
@@ -67,9 +65,6 @@ public class CF_GameManager : MonoBehaviourPun
             case GameState.Pregame:
                 HandlePregame();
                 break;
-            case GameState.TeamSelected:
-                HandleTeamSelected();
-                break;
             case GameState.GameStart:
                 HandleGameStart();
                 break;
@@ -87,11 +82,6 @@ public class CF_GameManager : MonoBehaviourPun
     private void HandlePregame()
     {
         // Player can wander around to select team
-    }
-    private void HandleTeamSelected()
-    {
-        // Player selected teams but have not spawned into the game map
-        //      Assign players to teams (done in CF_TeamManager)
     }
 
     private void HandleGameStart()
@@ -115,15 +105,6 @@ public class CF_GameManager : MonoBehaviourPun
         timeText.text = "Game Over!";
     }
 
-    public void ToggleReady()
-    {
-        readyTog = !readyTog;
-        if (readyTog)
-            UpdateGameState(GameState.TeamSelected);
-        else UpdateGameState(GameState.Pregame);
-        
-    }
-
     public void StartGame()
     {
         UpdateGameState(GameState.GameStart);
@@ -138,7 +119,7 @@ public class CF_GameManager : MonoBehaviourPun
 }
 public enum GameState
 {
-    Pregame, TeamSelected, GameStart, Playing, End
+    Pregame, GameStart, Playing, End
 }
 public enum Team
 {

@@ -31,6 +31,7 @@ public class CF_PlayerMovement : MonoBehaviour
     {
         CF_GameManager.OnGameStateChanged += GameStateChanged;
         CF_Player.OnRespawn += OnOnRespawn;
+        CF_TeamManager.OnSetTeam += OnOnSetTeam;
     }
 
     // Start is called before the first frame update
@@ -43,6 +44,8 @@ public class CF_PlayerMovement : MonoBehaviour
         movement = GameObject.Find("Locomotion System").GetComponent<ActionBasedContinuousMoveProvider>();
 
         jumpActionRef.action.performed += OnJump;
+
+        ChangeColor(Color.gray);
     }
 
     private void OnJump(InputAction.CallbackContext obj)
@@ -63,7 +66,6 @@ public class CF_PlayerMovement : MonoBehaviour
             center.x,
             _collider.height / 2,
             center.z);
-
     }
 
     private void OnOnRespawn()
@@ -82,7 +84,7 @@ public class CF_PlayerMovement : MonoBehaviour
         // Disabling Controllers
         foreach (var controller in GetComponentsInChildren<ActionBasedController>())
         {
-            controller.enabled = false;
+            controller.enableInputActions = false;
         }
 
         // Teleporting Logic
@@ -108,29 +110,8 @@ public class CF_PlayerMovement : MonoBehaviour
         Debug.Log("Player Respawned");
     }
 
-    // Activates when team assignment is finalized
     private void GameStateChanged(GameState obj)
     {
-        if (obj == GameState.TeamSelected)
-        {
-            var teamProp = PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-            if (teamProp.ToString() == "BLUE")
-            {
-                team = Team.BLUE;
-                ChangeColor(blueTeamColor);
-            }
-            else if (teamProp.ToString() == "RED")
-            {
-                team = Team.RED;
-                ChangeColor(redTeamColor);
-            }
-            else
-            {
-                team = Team.NONE;
-                ChangeColor(Color.gray);
-            }
-        }
-
         // Disable movement on gamestart
         if (obj == GameState.GameStart)
         {
@@ -138,6 +119,26 @@ public class CF_PlayerMovement : MonoBehaviour
         }
 
         else movement.enabled = true;
+    }
+
+    private void OnOnSetTeam()
+    {
+        var teamProp = PhotonNetwork.LocalPlayer.CustomProperties["Team"];
+        if (teamProp.ToString() == "BLUE")
+        {
+            team = Team.BLUE;
+            ChangeColor(blueTeamColor);
+        }
+        else if (teamProp.ToString() == "RED")
+        {
+            team = Team.RED;
+            ChangeColor(redTeamColor);
+        }
+        else
+        {
+            team = Team.NONE;
+            ChangeColor(Color.gray);
+        }
     }
 
     private void ChangeColor(Color color)

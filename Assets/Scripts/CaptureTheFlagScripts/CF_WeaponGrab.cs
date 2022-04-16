@@ -91,6 +91,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     [PunRPC]
     void Shoot()
     {
+        bool enemyKilled = false;
         // Ammo Stuff
         if (currentAmmo > 0) { currentAmmo -= 1; }
         ammoText.text = currentAmmo.ToString();
@@ -109,11 +110,16 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
                 if (!FriendlyFire)
                 {
-                    if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(gunDamage, ownerName); }
+                    if (enemyPlayer.team != belongsTo) { enemyPlayer.TakeDamage(gunDamage, ownerName, out enemyKilled); }
                 }
                 else
                 {
-                    enemyPlayer.TakeDamage(gunDamage, ownerName);
+                    enemyPlayer.TakeDamage(gunDamage, ownerName, out enemyKilled);
+                }
+
+                if (enemyKilled)
+                {
+                    Debug.Log("You killed " + enemyPlayer.playerName);
                 }
             }
             else {

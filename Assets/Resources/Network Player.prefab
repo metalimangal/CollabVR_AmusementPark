@@ -581,8 +581,9 @@ GameObject:
   - component: {fileID: 3380016436752777160}
   - component: {fileID: 6273980845151379447}
   - component: {fileID: 1764109644875279847}
-  - component: {fileID: 2278325454394819291}
+  - component: {fileID: 4205172144073071559}
   - component: {fileID: 912082680052449180}
+  - component: {fileID: 2278325454394819291}
   m_Layer: 0
   m_Name: Network Player
   m_TagString: Untagged
@@ -649,14 +650,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ad5dc0d14c2fa4a88f14636a5795d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnableNetworkAvatar: 1
+  EnableNetworkAvatar: 0
   head: {fileID: 4655736848464916220}
   leftHand: {fileID: 831624437226878392}
   rightHand: {fileID: 1101380888614597911}
   body: {fileID: 6161489102219352839}
   leftHandAni: {fileID: 2666486302579707220}
   rightHandAni: {fileID: 157760701801258997}
---- !u!114 &2278325454394819291
+--- !u!114 &4205172144073071559
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -665,16 +666,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7338424963910079804}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca28e716d2ec124d99e9262ddf4e13a, type: 3}
+  m_Script: {fileID: 11500000, guid: 08c006ceaca440b4aaf19ec57d6bc78a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 2
-  blueTeamColor: {r: 0, g: 0.23965812, b: 1, a: 1}
-  redTeamColor: {r: 1, g: 0.13679248, b: 0.13679248, a: 1}
-  playerName: 
+  blueTeamColor: {r: 0, g: 0.28014588, b: 1, a: 1}
+  redTeamColor: {r: 1, g: 0, b: 0, a: 1}
   nameText: {fileID: 6668355167619691765}
-  maxHealth: 100
-  health: 100
 --- !u!54 &912082680052449180
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -691,6 +688,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 3
+--- !u!114 &2278325454394819291
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7338424963910079804}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca28e716d2ec124d99e9262ddf4e13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  team: 2
+  playerName: 
+  maxHealth: 100
+  health: 100
 --- !u!1 &9044674016465871534
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,9 +809,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
---- !u!4 &2666486302570160770 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 109434732395451517, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
+--- !u!95 &2666486302579707220 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 109434732388006827, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
   m_PrefabInstance: {fileID: 2631660624985650943}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &2666486302570200802 stripped
@@ -806,9 +819,9 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 109434732395284509, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
   m_PrefabInstance: {fileID: 2631660624985650943}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &2666486302579707220 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 109434732388006827, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
+--- !u!4 &2666486302570160770 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 109434732395451517, guid: 65847589f926b734d9eaed6e25f0046b, type: 3}
   m_PrefabInstance: {fileID: 2631660624985650943}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &7838902856118013371
@@ -897,14 +910,14 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 5686134208185362930, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
   m_PrefabInstance: {fileID: 5537543434654827953}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &157760701811109923 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
-  m_PrefabInstance: {fileID: 5537543434654827953}
-  m_PrefabAsset: {fileID: 0}
 --- !u!95 &157760701801258997 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 5686134208192617028, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
+  m_PrefabInstance: {fileID: 5537543434654827953}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &157760701811109923 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5686134208185136530, guid: 1fd3a7c43c8190f4d8c167ebde694364, type: 3}
   m_PrefabInstance: {fileID: 5537543434654827953}
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &4526524298199934121
