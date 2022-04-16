@@ -7,7 +7,7 @@ using Photon.Realtime;
 
 public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
 {
-    [System.NonSerialized] GameObject localPlayer;  //Stores the local player publically for easy access by other scripts
+    [System.NonSerialized] public GameObject localPlayer;  //Stores the local player publically for easy access by other scripts
 
     public List<TeamList> teams = new List<TeamList>();
 

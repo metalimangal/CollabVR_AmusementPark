@@ -9,6 +9,7 @@ public class JoinTeamButton : MonoBehaviour
     public string teamToJoin;
 
     [System.NonSerialized] public string localPlayer;
+    [System.NonSerialized] public bool canChangeTeams = true;
 
     private Button button;
     private TeamManager teamManager;
@@ -34,6 +35,9 @@ public class JoinTeamButton : MonoBehaviour
 
     public void ChangeTeam()
     {
-        teamManager.ChangeTeam(teamToJoin, localPlayer);
+        if (canChangeTeams)
+        {
+            teamManager.ChangeTeam(teamToJoin, localPlayer);
+        }
     }
 }

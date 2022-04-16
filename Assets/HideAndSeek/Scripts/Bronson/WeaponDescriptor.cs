@@ -28,7 +28,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
         var emission = bullets.emission;
-        if (canFire)
+        if (canFire && fire)
         {
             emission.enabled = fire;
         }

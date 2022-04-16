@@ -7,7 +7,7 @@ using UnityEngine;
 public class QuitManager : MonoBehaviour
 {
     [SerializeField]
-    private bool enableQuitButton = false;
+    private bool enableQuitting = false;
     public void QuitGame()
     {
         Quit();
