@@ -58,6 +58,25 @@ public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
         }
     }
 
+    public void TakeDamage() {
+        photonView.RPC("OnTakeDamage", RpcTarget.All);
+    }
+
+    IEnumerator TakeDmgCoroutine() {
+        foreach (var item in GetComponentsInChildren<Renderer>())
+        {
+            item.material.color = Color.red;
+        }
+
+        yield return new WaitForSeconds(0.1f);
+        ChangeColor();
+    }
+
+    [PunRPC]
+    private void OnTakeDamage() {
+        StartCoroutine(TakeDmgCoroutine());
+    }
+
     [PunRPC]
     private void ChangeColor()
     {

@@ -57,12 +57,6 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
             killedPlayer = true;
         }
     }
-
-    public void myfunct(int a, int b, out int c)
-    {
-        c = a + b;
-    }
-
     private void GameManagerOnOnGameStateChanged(GameState obj)
     {
         if (obj == GameState.GameStart && photonView.IsMine)
@@ -90,5 +84,6 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         health -= int.Parse(damage);
         Debug.Log("Damage taken: " + damage);
+        GetComponent<CF_PlayerAppearance>().TakeDamage();
     }
 }
