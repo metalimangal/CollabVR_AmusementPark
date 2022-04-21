@@ -27,17 +27,25 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(health);
+            stream.SendNext(isHider);
+            stream.SendNext(isSeeker);
         }
         else
         {
             health = (int)stream.ReceiveNext();
+            isHider = (bool)stream.ReceiveNext();
+            isSeeker = (bool)stream.ReceiveNext();
         }
     }
 
     void Start()
     {
         //Find if the player is local
-        //Get player's name
+        if (photonView.IsMine)
+        {
+            isLocalPlayer = true;
+            //Get player's name
+        }
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         if (isLocalPlayer)
         {

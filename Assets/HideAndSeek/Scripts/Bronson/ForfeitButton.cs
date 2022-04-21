@@ -4,29 +4,26 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class JoinTeamButton : MonoBehaviour
+public class ForfeitButton : MonoBehaviour
 {
-    public string teamToJoin;
-
     [System.NonSerialized] public string localPlayer;
-    [System.NonSerialized] public bool canChangeTeams = true;
 
     private Button button;
-    private TeamManager teamManager;
+    private HideAndSeekManager hideAndSeekManager;
 
-    void Start()
+    void Awake()
     {
-        teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
+        hideAndSeekManager = FindObjectOfType<HideAndSeekManager>();
         button = this.GetComponent<Button>();
-        button.onClick.AddListener(ChangeTeam);
+        button.onClick.AddListener(Forfeit);
 
         HideAndSeekPlayer[] players = FindObjectsOfType(typeof(HideAndSeekPlayer)) as HideAndSeekPlayer[];
-        if(players.Length == 0)
+        if (players.Length == 0)
         {
             Debug.LogError("No players found.", this);
         }
         //Get local player name
-        foreach(HideAndSeekPlayer player in players)
+        foreach (HideAndSeekPlayer player in players)
         {
             if (player.isLocalPlayer)
             {
@@ -35,11 +32,8 @@ public class JoinTeamButton : MonoBehaviour
         }
     }
 
-    public void ChangeTeam()
+    void Forfeit()
     {
-        if (canChangeTeams)
-        {
-            teamManager.ChangeTeam(teamToJoin, localPlayer);
-        }
+        hideAndSeekManager.ForfeitPlayer(localPlayer);
     }
 }
