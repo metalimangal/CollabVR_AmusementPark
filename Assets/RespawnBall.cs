@@ -7,10 +7,12 @@ using Photon.Realtime;
 
 public class RespawnBall : MonoBehaviour
 {
+    private AudioSource audEffect;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        audEffect = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -23,6 +25,7 @@ public class RespawnBall : MonoBehaviour
     {
         if (other.tag == "BasketBall")
         {
+            audEffect.PlayOneShot(audEffect.clip);
             other.transform.position = transform.position + new Vector3(0.0f, -0.5f, 0.0f);
             PhotonView pv = other.gameObject.GetComponent<PhotonView>();
             Debug.Log(pv.OwnerActorNr + " : Get Score");
