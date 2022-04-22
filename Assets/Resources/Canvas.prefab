@@ -1,5 +1,40 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5043721976253941497
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8400255051771373129, guid: 1635c34eb635a9e4cbbfd6dc453cc438, type: 3}
+  m_PrefabInstance: {fileID: 1679399784644947107}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7196152155733117673}
+  m_Layer: 0
+  m_Name: 'PieceOrder (Missing Prefab with guid: 1635c34eb635a9e4cbbfd6dc453cc438)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &7196152155733117673
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 8400255051771373130, guid: 1635c34eb635a9e4cbbfd6dc453cc438, type: 3}
+  m_PrefabInstance: {fileID: 1679399784644947107}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5043721976253941497}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1881003309336208670}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6506533434511275674
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +152,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 2.2}
+  m_AnchoredPosition: {x: 0, y: 2.2000122}
   m_SizeDelta: {x: 640, y: 480}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &140320911210150530
@@ -163,7 +198,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &6953668007658197761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -315,8 +350,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1635c34eb635a9e4cbbfd6dc453cc438, type: 3}
---- !u!224 &7196152155733117673 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 8400255051771373130, guid: 1635c34eb635a9e4cbbfd6dc453cc438, type: 3}
-  m_PrefabInstance: {fileID: 1679399784644947107}
-  m_PrefabAsset: {fileID: 0}
