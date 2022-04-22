@@ -3,15 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.XR;
 
 [RequireComponent(typeof(ParticleSystem))]
 public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
 {
     public float damagePerHit = 1.0f;
+    [Tooltip("Determines which trigger to listen to, if attached to the local player.")] public bool leftHanded = false;
+    public bool hapticsEnabled = true;
     [System.NonSerialized] public bool fire = false;
 
+    private InputDevice controller;
     private ParticleSystem bullets;
     private GameObject owningPlayer;
+    private bool localControl;
     private bool canFire = true;
     private float lastFired = 0.0f;
 
@@ -19,15 +24,77 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     {
         bullets = this.GetComponent<ParticleSystem>();
         owningPlayer = GetOwningPlayer(this.gameObject);
-        if (owningPlayer.GetComponent<HideAndSeekPlayer>().isLocalPlayer)
+        localControl = owningPlayer.GetComponent<HideAndSeekPlayer>().isLocalPlayer;
+        if (localControl)
         {
-            //Enable inputs if the owning player is the local player
+            if (leftHanded)
+            {
+                var leftHandDevices = new List<UnityEngine.XR.InputDevice>();
+                UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.LeftHand, leftHandDevices);
+                if(leftHandDevices.Count == 1)
+                {
+                    controller = leftHandDevices[0];
+                }
+                else
+                {
+                    if(leftHandDevices.Count == 0)
+                    {
+                        Debug.LogError("No left hand devices found.",this);
+                    }
+                    else
+                    {
+                        Debug.LogError("More than one left hand device found.",this);
+                    }
+                }
+            }
+            else
+            {
+                var rightHandDevices = new List<UnityEngine.XR.InputDevice>();
+                UnityEngine.XR.InputDevices.GetDevicesAtXRNode(UnityEngine.XR.XRNode.RightHand, rightHandDevices);
+                if (rightHandDevices.Count == 1)
+                {
+                    controller = rightHandDevices[0];
+                }
+                else
+                {
+                    if (rightHandDevices.Count == 0)
+                    {
+                        Debug.LogError("No right hand devices found.", this);
+                    }
+                    else
+                    {
+                        Debug.LogError("right than one left hand device found.", this);
+                    }
+                }
+            }
         }
     }
 
     void Update()
     {
+        if (canFire && localControl)    //Don't bother checking if firing is disabled
+        {
+            bool triggerValue;
+            if (controller.TryGetFeatureValue(UnityEngine.XR.CommonUsages.triggerButton, out triggerValue) && triggerValue)
+            {
+                if (hapticsEnabled)
+                {
+                    controller.SendHapticImpulse(0, 0.1f); //Vibrate the controller, if enabled
+                }
+                fire = true;
+            }
+            else
+            {
+                fire = false;
+            }
+        }
+        else
+        {
+            fire = false;
+        }
+
         var emission = bullets.emission;
+
         if (canFire && fire)
         {
             emission.enabled = fire;

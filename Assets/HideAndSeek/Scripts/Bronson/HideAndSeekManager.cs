@@ -27,6 +27,8 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 
     private float clockTime = 0.0f; //The time to display on the in-game clock
     private bool gameRunning = false;
+    private bool startHiders = false;
+    private bool startSeekers = false;
     private Button startGameButton;
     private Button quitGameButton;
     private List<JoinTeamButton> teamButtons;
@@ -81,14 +83,32 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 HiderWinCheck();
                 SeekerWinCheck();
             }
-            quitGameButton.enabled = false;
-            startGameButton.enabled = false;
+            quitGameButton.interactable = false;
+            startGameButton.interactable = false;
         }
         else
         {
-            quitGameButton.enabled = true;
-            startGameButton.enabled = true;
+            quitGameButton.interactable = true;
+            startGameButton.interactable = true;
+            if (startHiders)
+            {
+                StartHiderGameNow();
+                startHiders = false;
+            }
+            if (startSeekers)
+            {
+                StartSeekerGameNow();
+                startSeekers = false;
+            }
         }
+        clockDisplay.text = clockTime.ToString();
+    }
+
+    public List<Transform> FindPlayerTransformsFromNames(List<string> names)
+    {
+        List<Transform> transforms = new List<Transform>();
+
+        return transforms;
     }
 
     public void HiderWinCheck()
@@ -168,39 +188,57 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public void StartGameAfterCountdown()
     {
         clockTime = timeToStart;
+        StartCoroutine(CountdownTimerToZero(startHiders));
     }
 
     public void StartHiderGameNow()
     {
         activeHiders = teamManager.RetrieveTeamOfName(hiderTeamName).teammates;
-        //Tell local player what team they are on
+        hiderTransforms = FindPlayerTransformsFromNames(activeHiders);
+        foreach(Transform hider in hiderTransforms)
+        {
+            hider.gameObject.SendMessage("SetHider");
+        }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
-            //Find hider player transforms
             teleportManager.objectsToTeleport = hiderTransforms;
             teleportManager.teleportLocation = hiderSpawnArea;
             teleportManager.TeleportObjectsToArea();
         }
         clockTime = hidingTime;  //Set the local clock time to be displayed
         isInitiatingManager = false;    //Reset the initiating manager status
-        //Start seeker spawn countdown
+        StartCoroutine(CountdownTimerToZero(startSeekers));
     }
 
     public void StartSeekerGameNow()
     {
         activeSeekers = teamManager.RetrieveTeamOfName(seekerTeamName).teammates;
-        //Tell local player what team they are on
+        seekerTransforms = FindPlayerTransformsFromNames(activeSeekers);
+        foreach(Transform seeker in seekerTransforms)
+        {
+            seeker.gameObject.SendMessage("SetSeeker");
+        }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
-            //Find seeker player transforms
             teleportManager.objectsToTeleport = seekerTransforms;
             teleportManager.teleportLocation = seekerSpawnArea;
             teleportManager.TeleportObjectsToArea();
         }
         clockTime = matchTime;  //Set the local clock time to be displayed
         isInitiatingManager = false;    //Reset the initiating manager status
-        //Start game end countdown
+        bool standIn = false;
+        StartCoroutine(CountdownTimerToZero(standIn));
         gameRunning = true;
+    }
+
+    IEnumerator CountdownTimerToZero(bool boolToSet)
+    {
+        while(clockTime > 0)
+        {
+            yield return new WaitForSecondsRealtime(1f);
+            clockTime--;
+        }
+        boolToSet = true;
     }
 
     public void AnnounceWin()

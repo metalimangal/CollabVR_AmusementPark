@@ -25,7 +25,6 @@ public class JoinTeamButton : MonoBehaviour
         {
             Debug.LogError("No players found.", this);
         }
-        //Get local player name
         foreach(HideAndSeekPlayer player in players)
         {
             if (player.isLocalPlayer)
