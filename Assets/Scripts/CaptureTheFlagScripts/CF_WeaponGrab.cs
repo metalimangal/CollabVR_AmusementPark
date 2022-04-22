@@ -177,7 +177,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     private void SetOwnerName()
     {
-        ownerName = PhotonNetwork.LocalPlayer.CustomProperties["Name"].ToString();
+        ownerName = firstInteractorSelecting.transform.root.GetComponent<CF_PlayerMovement>().playerName;
     }
     protected override void OnActivated(ActivateEventArgs args)
     {
@@ -203,7 +203,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     protected override void OnHoverEntered(HoverEnterEventArgs args)
     {
-        if (PhotonNetwork.InRoom)
+        if (PhotonNetwork.InRoom && !view.IsMine)
         {
             view.RequestOwnership();
             Debug.Log("Gun Ownership Requested");
@@ -226,6 +226,12 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         belongsTo = Team.NONE;
         ownerName = "";
         base.OnSelectExited(args);
+    }
+
+    public override bool IsSelectableBy(IXRSelectInteractor interactor)
+    {
+        bool isAlreadyGrabbed = interactorsSelecting.Count > 0 && !interactor.Equals(interactorsSelecting[0]);
+        return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)

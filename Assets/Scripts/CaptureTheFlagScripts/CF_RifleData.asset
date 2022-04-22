@@ -15,3 +15,7 @@ MonoBehaviour:
   ammoCount: 30
   fireRate: 0.2
   reloadTime: 4
+  damage: 18
+  shootAudio: {fileID: 0}
+  emptyAudio: {fileID: 0}
+  reloadAudio: {fileID: 0}

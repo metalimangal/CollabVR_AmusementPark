@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 using Photon.Pun;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class CF_PlayerMovement : MonoBehaviour
+public class CF_PlayerMovement : MonoBehaviourPunCallbacks
 {
     XROrigin _xrOrigin;
     CapsuleCollider _collider;
@@ -26,6 +26,9 @@ public class CF_PlayerMovement : MonoBehaviour
     public Team team;
     public Color blueTeamColor = Color.blue;
     public Color redTeamColor = Color.red;
+
+    //Player Name
+    public string playerName = "";
 
     private void Awake()
     {
@@ -146,6 +149,18 @@ public class CF_PlayerMovement : MonoBehaviour
         foreach (var item in GetComponentsInChildren<Renderer>())
         {
             item.material.color = color;
+        }
+    }
+
+    public override void OnJoinedRoom()
+    {
+        base.OnJoinedRoom();
+        foreach (var player in FindObjectsOfType<CF_Player>())
+        {
+            if (player.transform.GetComponent<PhotonView>().IsMine)
+            {
+                playerName = player.playerName;
+            }
         }
     }
 }

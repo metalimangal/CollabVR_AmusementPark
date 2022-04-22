@@ -20,7 +20,7 @@ TagManager:
   - Grabbable
   - LocalPlayer
   - NetworkPlayer
-  - 
+  - SecondHandGrab
   - 
   - 
   - 
