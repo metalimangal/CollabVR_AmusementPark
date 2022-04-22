@@ -18,14 +18,13 @@ public class CF_TwoHandGrab : CF_WeaponGrab
     {
         secondHandGrabPoint.selectEntered.AddListener(OnSecondHandGrab);
         secondHandGrabPoint.selectExited.AddListener(OnSecondHandRelease);
-        initialAttachRotation = attachTransform.rotation;
     }
 
     public override void ProcessInteractable(XRInteractionUpdateOrder.UpdatePhase updatePhase)
     {
         if (secondInteractor != null && interactorsSelecting.Count > 0)
         {
-            attachTransform.rotation = GetTwoHandRotation();
+            firstInteractorSelecting.GetAttachTransform(this).rotation = GetTwoHandRotation();
         }
         base.ProcessInteractable(updatePhase);
     }
@@ -50,21 +49,30 @@ public class CF_TwoHandGrab : CF_WeaponGrab
 
     private void OnSecondHandRelease(SelectExitEventArgs arg0)
     {
-        Debug.Log("Second Hand Release");
-        attachTransform.rotation = initialAttachRotation;
+        firstInteractorSelecting.GetAttachTransform(this).localRotation = initialAttachRotation;
         secondInteractor = null;
     }
 
     private void OnSecondHandGrab(SelectEnterEventArgs arg0)
     {
-        Debug.Log("Second Hand Grabbed");
         secondInteractor = arg0.interactorObject;
+    }
+
+    protected override void OnSelectEntered(SelectEnterEventArgs args)
+    {
+        base.OnSelectEntered(args);
+        initialAttachRotation = firstInteractorSelecting.GetAttachTransform(this).localRotation;
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         base.OnSelectExited(args);
-        attachTransform.rotation = initialAttachRotation;
         secondInteractor = null;
+    }
+
+    protected override void OnSelectExiting(SelectExitEventArgs args)
+    {
+        base.OnSelectExiting(args);
+        firstInteractorSelecting.GetAttachTransform(this).localRotation = initialAttachRotation;
     }
 }
