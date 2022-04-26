@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Sc_HorrorHouse.unity
+    path: Assets/Scenes/Sc_Mirror.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   m_configObjects:
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a2dafdf88fa4d454a808b7c6c7530640, type: 2}
