@@ -65,7 +65,7 @@ public class CF_TwoHandGrab : CF_WeaponGrab, IPunOwnershipCallbacks
 
     private void OnSecondHandRelease(SelectExitEventArgs arg0)
     {
-        firstInteractorSelecting.GetAttachTransform(this).localRotation = initialAttachRotation;
+        if (firstInteractorSelecting != null) { firstInteractorSelecting.GetAttachTransform(this).localRotation = initialAttachRotation; }
         secondInteractor = null;
     }
 

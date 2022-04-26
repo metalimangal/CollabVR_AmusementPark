@@ -5403,6 +5403,7 @@ MonoBehaviour:
   m_AttachPointCompatibilityMode: 0
   belongsTo: 2
   ownerName: 
+  view: {fileID: 0}
 --- !u!82 &6031051426744458191
 AudioSource:
   m_ObjectHideFlags: 0
@@ -5527,12 +5528,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3357b00c93eebb5409e41d5123aa5c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friendlyFire: 0
+  _friendlyFire: 1
   shootTransform: {fileID: 6462681694950182717}
   ps: {fileID: 3003700734922627629}
   ammoText: {fileID: 2794634297927363597}
   reloadReference: {fileID: 1317211890220955869, guid: c348712bda248c246b8c49b3db54643f, type: 3}
-  fireReference: {fileID: 0}
   _gunData: {fileID: 11400000, guid: 0e88b58167d415a48a4e8aaac6444c09, type: 2}
 --- !u!1 &6462681694950182718
 GameObject:
