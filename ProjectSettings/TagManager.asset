@@ -22,7 +22,7 @@ TagManager:
   - LocalPlayer
   - NetworkPlayer
   - SecondHandGrab
-  - Flag
+  - ' FlagSheet'
   - 
   - 
   - 
