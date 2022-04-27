@@ -79,9 +79,12 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
             center.z);
     }
 
-    private void OnOnRespawn()
+    private void OnOnRespawn(string ownerNumber)
     {
-        StartCoroutine(Respawn(3));
+        if (ownerNumber == networkPlayerInstance.GetPhotonView().Owner.ActorNumber.ToString())
+        {
+            StartCoroutine(Respawn(3));
+        }
     }
 
     IEnumerator Respawn(int seconds)

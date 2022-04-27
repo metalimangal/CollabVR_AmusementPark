@@ -15,7 +15,7 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     public int maxHealth = 100;
     public int health = 100;
 
-    public static event Action OnRespawn;
+    public static event Action<string> OnRespawn;
 
 
     private void Awake()
@@ -36,7 +36,7 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
             {
                 // Trigger Respawn Event
                 health = maxHealth;
-                OnRespawn?.Invoke();
+                OnRespawn?.Invoke(photonView.Owner.ActorNumber.ToString());
             }
         }
     }
@@ -63,7 +63,7 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
         {
             // Trigger Respawn Event
             health = maxHealth;
-            OnRespawn?.Invoke();
+            OnRespawn?.Invoke(photonView.Owner.ActorNumber.ToString());
         }
     }
 
