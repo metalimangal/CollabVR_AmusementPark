@@ -8,7 +8,7 @@ using ExitGames.Client;
 
 public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
 {
-    private Team team = Team.NONE;
+    public Team team = Team.NONE;
 
     [Header("Color Changing Stuff")]
     public Color blueTeamColor = Color.blue;
@@ -33,8 +33,10 @@ public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-        if (changedProps.ContainsKey("Team") && base.photonView.Owner == targetPlayer)
+        if (changedProps.ContainsKey("Team") && photonView.Owner == targetPlayer)
         {
+            Debug.Log("team property updated");
+            photonView.RPC("ChangeTeam", RpcTarget.All, changedProps["Team"].ToString());
             ChangeColorForTeam(changedProps["Team"].ToString());
         }
     }
@@ -43,62 +45,64 @@ public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
     {
         if (teamProp == "BLUE")
         {
-            team = Team.BLUE;
             photonView.RPC("ChangeColor", RpcTarget.All);
         }
         else if (teamProp == "RED")
         {
-            team = Team.RED;
             photonView.RPC("ChangeColor", RpcTarget.All);
         }
         else
         {
-            team = Team.NONE;
             photonView.RPC("ChangeColor", RpcTarget.All);
         }
-    }
-
-    public void TakeDamage() {
-        photonView.RPC("OnTakeDamage", RpcTarget.All);
-    }
-
-    IEnumerator TakeDmgCoroutine() {
-        foreach (var item in GetComponentsInChildren<Renderer>())
-        {
-            item.material.color = Color.red;
-        }
-
-        yield return new WaitForSeconds(0.1f);
-        ChangeColor();
-    }
-
-    [PunRPC]
-    private void OnTakeDamage() {
-        StartCoroutine(TakeDmgCoroutine());
     }
 
     [PunRPC]
     private void ChangeColor()
     {
-        var color = Color.gray;
-        if (team == Team.BLUE)
+        if (photonView.IsMine)
         {
-            color = blueTeamColor;
-        }
-        else if (team == Team.RED)
-        {
-            color = redTeamColor;
-        }
+            var color = Color.gray;
+            if (team == Team.BLUE)
+            {
+                color = blueTeamColor;
+            }
+            else if (team == Team.RED)
+            {
+                color = redTeamColor;
+            }
 
-        foreach (var item in GetComponentsInChildren<Renderer>())
-        {
-            item.material.color = color;
+            foreach (var item in GetComponentsInChildren<Renderer>())
+            {
+                item.material.color = color;
+            }
         }
+        
     }
 
     [PunRPC]
     private void ChangeName(string name)
     {
         nameText.text = name;
+    }
+
+    [PunRPC]
+    private void ChangeTeam(string t)
+    {
+        if (photonView.IsMine)
+        {
+            if (t == "BLUE")
+            {
+                team = Team.BLUE;
+            }
+            else if (t == "RED")
+            {
+                team = Team.RED;
+            }
+            else
+            {
+                team = Team.NONE;
+            }
+        }
     }
 }

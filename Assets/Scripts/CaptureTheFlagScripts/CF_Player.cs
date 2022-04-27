@@ -84,6 +84,5 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     {
         health -= int.Parse(damage);
         Debug.Log("Damage taken: " + damage);
-        GetComponent<CF_PlayerAppearance>().TakeDamage();
     }
 }
