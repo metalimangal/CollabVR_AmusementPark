@@ -27,6 +27,7 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
     public Team team;
     public Color blueTeamColor = Color.blue;
     public Color redTeamColor = Color.red;
+    public GameObject networkPlayerInstance;
 
     //Player Name
     public string playerName = "";
@@ -131,23 +132,20 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
         else movement.enabled = true;
     }
 
-    private void OnOnSetTeam()
+    private void OnOnSetTeam(Team t)
     {
-        var teamProp = PhotonNetwork.LocalPlayer.CustomProperties["Team"];
-        Debug.Log("Set local player team");
-        if (teamProp.ToString() == "BLUE")
+        Debug.Log("Set local player team Team: " + t);
+        team = t;
+        if (t == Team.BLUE)
         {
-            team = Team.BLUE;
             ChangeColor(blueTeamColor);
         }
-        else if (teamProp.ToString() == "RED")
+        else if (t == Team.RED)
         {
-            team = Team.RED;
             ChangeColor(redTeamColor);
         }
         else
         {
-            team = Team.NONE;
             ChangeColor(Color.gray);
         }
     }
@@ -168,6 +166,7 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
             if (player.transform.GetComponent<PhotonView>().IsMine)
             {
                 playerName = player.playerName;
+                networkPlayerInstance = player.gameObject;
             }
         }
     }
