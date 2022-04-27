@@ -24,6 +24,7 @@ public class CF_PlayerTeam : MonoBehaviourPunCallbacks
     private void ChangeTeam()
     {
         string t = photonView.Owner.CustomProperties["Team"].ToString();
+        Debug.Log(photonView.Owner.ActorNumber.ToString());
         if (t == "BLUE")
         {
             team = Team.BLUE;
