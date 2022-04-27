@@ -19,24 +19,6 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
         if (Instance == null) { Instance = this; } else { Debug.Log("Warning: multiple " + this + " in scene!"); }
     }
 
-    public int GetScore(Team team)
-    {
-        if (team == Team.BLUE)
-        {
-            return scoreBlue;
-        }
-        else if (team == Team.RED)
-        {
-            return scoreRed;
-        }
-        else 
-        {
-            Debug.Log("Invalid Team");
-            return 0;
-        }
-        
-    }
-
     public void AddScore(Team team, int score)
     {
         if (team == Team.BLUE)
@@ -51,7 +33,7 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
         }
         else Debug.Log("Invalid team");
 
-        photonView.RPC("SetScoreText", RpcTarget.All, scoreBlue, scoreRed);
+        photonView.RPC("SetScoreText", RpcTarget.All, scoreBlue.ToString(), scoreRed.ToString());
     }
 
     public void ResetScore() 

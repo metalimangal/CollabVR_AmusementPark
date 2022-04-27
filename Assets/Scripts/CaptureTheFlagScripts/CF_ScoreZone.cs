@@ -29,9 +29,9 @@ public class CF_ScoreZone : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // If you get the enemy's flag into your zone, add the score
-        if(other.tag == "Flag" && other.gameObject.GetComponent<CF_Flag>().flagBelongsTo != belongsTo)
+        if(other.tag == "Flag" && other.transform.root.GetComponent<CF_Flag>().flagBelongsTo != belongsTo)
         {
-            other.gameObject.GetComponent<CF_Flag>().ResetPosition();
+            other.transform.root.GetComponent<CF_Flag>().ResetPosition();
             CF_ScoreManager.Instance.AddScore(belongsTo, 1);
         }
     }

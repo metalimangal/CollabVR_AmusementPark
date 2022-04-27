@@ -32,6 +32,9 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
     //Player Name
     public string playerName = "";
 
+    //Reference to ray interactor
+    private XRRayInteractor[] interactors;
+
     private void Awake()
     {
         CF_GameManager.OnGameStateChanged += GameStateChanged;
@@ -57,6 +60,7 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
         jumpActionRef.action.performed += OnJump;
 
         ChangeColor(Color.gray);
+        interactors = FindObjectsOfType<XRRayInteractor>();
     }
 
     private void OnJump(InputAction.CallbackContext obj)
@@ -92,9 +96,25 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
         Debug.Log("Respawning...");
 
         // Disabling Collision and Movement
-        _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = false;
+        
         movement.enabled = false;
+        
 
+        // Force Drop
+        foreach (var interactor in interactors)
+        {
+            interactor.allowSelect = false;
+            interactor.allowActivate = false;
+        }
+
+        yield return new WaitForSeconds(seconds / 2);
+        _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = false;
+
+        foreach (var interactor in interactors)
+        {
+            interactor.allowSelect = true;
+            interactor.allowActivate = true;
+        }
         // Disabling Controllers
         foreach (var controller in GetComponentsInChildren<ActionBasedController>())
         {
@@ -112,7 +132,7 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
 
         // Enabling Collision and Movement
         _xrOrigin.GetComponentInChildren<CapsuleCollider>().enabled = true;
-        yield return new WaitForSeconds(seconds);
+        yield return new WaitForSeconds(seconds/2);
         movement.enabled = true;
 
         // Enabling Controllers
@@ -120,6 +140,8 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
         {
             controller.enableInputActions = true;
         }
+
+        
 
         Debug.Log("Player Respawned");
     }
@@ -157,7 +179,10 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
     {
         foreach (var item in GetComponentsInChildren<Renderer>())
         {
-            item.material.color = color;
+            if (item.tag != "HealthBand")
+            {
+                item.material.color = color;
+            }
         }
     }
 

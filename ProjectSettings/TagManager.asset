@@ -8,6 +8,7 @@ TagManager:
   - Flag
   - BlueSpawn
   - RedSpawn
+  - HealthBand
   layers:
   - Default
   - TransparentFX
@@ -21,7 +22,7 @@ TagManager:
   - LocalPlayer
   - NetworkPlayer
   - SecondHandGrab
-  - 
+  - Flag
   - 
   - 
   - 
