@@ -103,6 +103,7 @@ public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
             {
                 team = Team.NONE;
             }
+            gameObject.GetComponent<CF_Player>().team = team;
         }
     }
 }
