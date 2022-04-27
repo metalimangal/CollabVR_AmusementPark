@@ -23,7 +23,7 @@ public class CF_PlayerTeam : MonoBehaviourPunCallbacks
     [PunRPC]
     private void ChangeTeam()
     {
-        string t = PhotonNetwork.LocalPlayer.CustomProperties["Team"].ToString();
+        string t = photonView.Owner.CustomProperties["Team"].ToString();
         if (t == "BLUE")
         {
             team = Team.BLUE;
