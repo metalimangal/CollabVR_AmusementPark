@@ -46,7 +46,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     
     public void SetOwnerName()
     {
-        view.RPC("RCPSetOwner", RpcTarget.All);
+        view.RPC("RPCSetOwner", RpcTarget.All);
     }
     [PunRPC]
     private void RPCSetOwner()
