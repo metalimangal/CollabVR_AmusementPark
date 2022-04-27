@@ -43,9 +43,15 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         PhotonNetwork.AddCallbackTarget(this);
     }
 
+    
     public void SetOwnerName()
     {
-        ownerName = firstInteractorSelecting.transform.root.GetComponent<CF_PlayerMovement>().playerName;
+        view.RPC("RCPSetOwner", RpcTarget.All);
+    }
+    [PunRPC]
+    private void RPCSetOwner()
+    {
+        ownerName = "Player " + view.Owner.ActorNumber;
     }
 
     protected override void OnHoverEntered(HoverEnterEventArgs args)

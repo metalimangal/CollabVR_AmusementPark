@@ -21,7 +21,7 @@ public class CF_Player : MonoBehaviourPunCallbacks
     private void Awake()
     {
         CF_GameManager.OnGameStateChanged += GameManagerOnOnGameStateChanged;
-        playerName = "Player " + photonView.ViewID;
+        playerName = "Player " + photonView.Owner.ActorNumber;
     }
 
 
@@ -44,11 +44,10 @@ public class CF_Player : MonoBehaviourPunCallbacks
 
     public void TakeDamage(int damage, string attacker, out bool killedPlayer)
     {
-        Debug.Log(damage + " damage taken from: " + attacker);
+        Debug.Log(playerName + " took " + damage + " from: " + attacker);
         // photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
         if (damage < health)
         {
-            Debug.Log(damage + " less than health");
             photonView.RPC("RPCTakeDamage", RpcTarget.All, damage);
             killedPlayer = false;
         }
@@ -71,7 +70,6 @@ public class CF_Player : MonoBehaviourPunCallbacks
     [PunRPC]
     private void RPCTakeDamage(int damage)
     {
-        Debug.Log("RPC Damaged" + damage);
         health -= damage;
     }
 }

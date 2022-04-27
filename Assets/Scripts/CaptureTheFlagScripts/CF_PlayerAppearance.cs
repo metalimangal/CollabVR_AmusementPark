@@ -19,7 +19,7 @@ public class CF_PlayerAppearance : MonoBehaviourPunCallbacks
 
     private void Awake()
     {
-        playerName = "Player " + photonView.ViewID;
+        playerName = "Player " + photonView.Owner.ActorNumber;
         photonView.RPC("ChangeName", RpcTarget.All, playerName);
     }
 
