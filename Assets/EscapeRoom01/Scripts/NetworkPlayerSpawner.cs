@@ -4,31 +4,35 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
-{
-	[SerializeField] GameObject PlayerPrefab;
-	private GameObject spawnedPlayerPrefab;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+//using EscapeRoom01;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-	
-	public override void OnJoinedRoom()
+
+	public class NetworkPlayerSpawner : MonoBehaviourPunCallbacks
 	{
-		base.OnJoinedRoom();
-		spawnedPlayerPrefab = PhotonNetwork.Instantiate("EscapeRoom01/" + PlayerPrefab.name, transform.position, transform.rotation);
+		[SerializeField] GameObject PlayerPrefab;
+		private GameObject spawnedPlayerPrefab;
+		// Start is called before the first frame update
+		void Start()
+		{
+			
+		}
+
+		// Update is called once per frame
+		void Update()
+		{
+			
+		}
+		
+		public override void OnJoinedRoom()
+		{
+			base.OnJoinedRoom();
+			spawnedPlayerPrefab = PhotonNetwork.Instantiate("EscapeRoom01/" + PlayerPrefab.name, transform.position, transform.rotation);
+		}
+		
+		public override void OnLeftRoom()
+		{
+			base.OnLeftRoom();
+			PhotonNetwork.Destroy(spawnedPlayerPrefab);
+		}
 	}
-	
-	public override void OnLeftRoom()
-	{
-		base.OnLeftRoom();
-		PhotonNetwork.Destroy(spawnedPlayerPrefab);
-	}
-}
+

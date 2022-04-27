@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+//using EscapeRoom01;
+
 
 	public class KeyboardSolid : MonoBehaviour
 	{
@@ -58,3 +60,4 @@ using TMPro;
 		}
 
 	}
+

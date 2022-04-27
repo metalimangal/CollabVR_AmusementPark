@@ -2,105 +2,108 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+//using EscapeRoom01;
 
-public class HandPresence : MonoBehaviour
-{
-    public bool showController = false;
-    public InputDeviceCharacteristics controllerCharacteristics;
-    public List<GameObject> controllerPrefabs;
-    public GameObject handModelPrefab;
-    
-    private InputDevice targetDevice;
-    private GameObject spawnedController;
-    private GameObject spawnedHandModel;
-    private Animator handAnimator;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        TryInitialize();
-    }
+	public class HandPresence : MonoBehaviour
+	{
+		public bool showController = false;
+		public InputDeviceCharacteristics controllerCharacteristics;
+		public List<GameObject> controllerPrefabs;
+		public GameObject handModelPrefab;
+		
+		private InputDevice targetDevice;
+		private GameObject spawnedController;
+		private GameObject spawnedHandModel;
+		private Animator handAnimator;
 
-    void TryInitialize()
-    {
-        List<InputDevice> devices = new List<InputDevice>();
+		// Start is called before the first frame update
+		void Start()
+		{
+			TryInitialize();
+		}
 
-        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
+		void TryInitialize()
+		{
+			List<InputDevice> devices = new List<InputDevice>();
 
-        foreach (var item in devices)
-        {
-            Debug.Log(item.name + item.characteristics);
-        }
+			InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
 
-        if (devices.Count > 0)
-        {
-            targetDevice = devices[0];
-            GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
-            if (prefab)
-            {
-                spawnedController = Instantiate(prefab, transform);
-            }
-            else
-            {
-                Debug.Log("Did not find corresponding controller model");
-            }
+			foreach (var item in devices)
+			{
+				Debug.Log(item.name + item.characteristics);
+			}
 
-            spawnedHandModel = Instantiate(handModelPrefab, transform);
-            handAnimator = spawnedHandModel.GetComponent<Animator>();
-        }
-    }
-
-    void UpdateHandAnimation()
-    {
-        if(targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
-        {
-            handAnimator.SetFloat("Trigger", triggerValue);
-        }
-        else
-        {
-            handAnimator.SetFloat("Trigger", 0);
-        }
-
-        if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
-        {
-            handAnimator.SetFloat("Grip", gripValue);
-        }
-        else
-        {
-            handAnimator.SetFloat("Grip", 0);
-        }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(!targetDevice.isValid)
-        {
-            TryInitialize();
-        }
-        else
-        {
-            if (showController)
-            {
-                if(spawnedHandModel)
-                    spawnedHandModel.SetActive(false);
-                if(spawnedController)
-                    spawnedController.SetActive(true);
-            }
-            else
-            {
-                if (spawnedHandModel)
+			if (devices.Count > 0)
+			{
+				targetDevice = devices[0];
+				GameObject prefab = controllerPrefabs.Find(controller => controller.name == targetDevice.name);
+				if (prefab)
 				{
-                    spawnedHandModel.SetActive(true);
-					//spawnedHandModel.GetComponentsInChildren<Renderer>().enabled = false;
+					spawnedController = Instantiate(prefab, transform);
 				}
-                if (spawnedController)
+				else
 				{
-                    spawnedController.SetActive(false);
-					//spawnedController.GetComponentsInChildren<Renderer>().enabled = false;
+					Debug.Log("Did not find corresponding controller model");
 				}
-                UpdateHandAnimation();
-            }
-        }
-    }
-}
+
+				spawnedHandModel = Instantiate(handModelPrefab, transform);
+				handAnimator = spawnedHandModel.GetComponent<Animator>();
+			}
+		}
+
+		void UpdateHandAnimation()
+		{
+			if(targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue))
+			{
+				handAnimator.SetFloat("Trigger", triggerValue);
+			}
+			else
+			{
+				handAnimator.SetFloat("Trigger", 0);
+			}
+
+			if (targetDevice.TryGetFeatureValue(CommonUsages.grip, out float gripValue))
+			{
+				handAnimator.SetFloat("Grip", gripValue);
+			}
+			else
+			{
+				handAnimator.SetFloat("Grip", 0);
+			}
+		}
+
+		// Update is called once per frame
+		void Update()
+		{
+			if(!targetDevice.isValid)
+			{
+				TryInitialize();
+			}
+			else
+			{
+				if (showController)
+				{
+					if(spawnedHandModel)
+						spawnedHandModel.SetActive(false);
+					if(spawnedController)
+						spawnedController.SetActive(true);
+				}
+				else
+				{
+					if (spawnedHandModel)
+					{
+						spawnedHandModel.SetActive(true);
+						//spawnedHandModel.GetComponentsInChildren<Renderer>().enabled = false;
+					}
+					if (spawnedController)
+					{
+						spawnedController.SetActive(false);
+						//spawnedController.GetComponentsInChildren<Renderer>().enabled = false;
+					}
+					UpdateHandAnimation();
+				}
+			}
+		}
+	}
+

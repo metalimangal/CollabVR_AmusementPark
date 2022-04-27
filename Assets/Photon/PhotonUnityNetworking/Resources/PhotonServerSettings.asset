@@ -16,7 +16,7 @@ MonoBehaviour:
     AppIdRealtime: 24a9c28d-8419-4537-a9c6-c6ebd53596d7
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: 
+    AppIdVoice: ef468dc3-a90e-4725-b929-ee6fb294c7b3
     AppVersion: 
     UseNameServer: 1
     FixedRegion: us
@@ -45,6 +45,14 @@ MonoBehaviour:
   - RPC_SetColor
   - RPC_SetNumber
   - RPC_SetNumberColor
+  - RPC_SwitchLight
+  - RPC_UpdateTimer
+  - RPC_ActivateTileSlot
+  - RPC_OpenDoor
+  - RPC_SetTimerValue
+  - RPC_UpdateAngle
+  - RPC_ActivateKeySlot
+  - RPC_OpenChest
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

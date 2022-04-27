@@ -1,0 +1,33 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+//using EscapeRoom01;
+
+
+	/// <summary>
+	/// This will be picked up automatically by the wrist watch when it get spawn in the scene by the Interaction toolkit
+	/// and setup the buttons and the linked events on the canvas
+	/// </summary>
+	public class ER01_UIHook : MyWatchScript.IUIHook
+	{
+		public GameObject LeftUILineRenderer;
+		public GameObject RightUILineRenderer;
+		
+		public GameObject gameSceneManager;
+		
+		public override void GetHook(MyWatchScript watch)
+		{
+			//watch.AddButton("Scene Lobby", () => { SceneManager.LoadScene(0); });
+			//watch.AddButton("Scene Lobby", () => { gameSceneManager.GetComponent<GameSceneManager>().LeaveRoom; });
+			watch.AddButton("Scene Lobby", () => { gameSceneManager.GetComponent<GameSceneManager>().ShouldLeaveRoom = true; });
+			watch.AddButton("Main Lobby", () => {MasterController.Instance.TeleporterParent.SetActive(true);});
+			//watch.AddToggle("Closed Caption", (state) => { CCManager.Instance.gameObject.SetActive(state); });
+
+			LeftUILineRenderer.SetActive(false);
+			RightUILineRenderer.SetActive(false);
+
+			watch.UILineRenderer = LeftUILineRenderer;
+		}
+	}
+

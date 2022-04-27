@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using EscapeRoom01;
+
 
 	public class TypingArea : MonoBehaviour
 	{
@@ -38,3 +40,4 @@ using UnityEngine;
 			}
 		}
 	}
+

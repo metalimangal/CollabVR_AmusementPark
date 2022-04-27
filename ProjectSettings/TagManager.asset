@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Ignite
   - NonCharKeyboard
+  - GameSceneManager
+  - timer
+  - Tile_Book
   layers:
   - Default
   - TransparentFX
@@ -20,9 +23,9 @@ TagManager:
   - Teleporter
   - NoHandCollide
   - Keyboard
-  - 
-  - 
-  - 
+  - ground
+  - network_player
+  - xr_rig
   - 
   - 
   - 
