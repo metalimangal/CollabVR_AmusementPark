@@ -35,8 +35,15 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
     {
         CF_GameManager.OnGameStateChanged += GameStateChanged;
         CF_Player.OnRespawn += OnOnRespawn;
+        CF_TeamManager.OnSetTeam += OnOnSetTeam;
     }
 
+    private void OnDestroy()
+    {
+        CF_GameManager.OnGameStateChanged -= GameStateChanged;
+        CF_Player.OnRespawn -= OnOnRespawn;
+        CF_TeamManager.OnSetTeam -= OnOnSetTeam;
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -123,15 +130,6 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
 
         else movement.enabled = true;
     }
-
-    //public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-    //{
-    //    base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-    //    if (changedProps.ContainsKey("Team") && photonView.Owner == targetPlayer)
-    //    {
-    //        OnOnSetTeam();
-    //    }
-    //}
 
     private void OnOnSetTeam()
     {
