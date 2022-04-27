@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: CF_RifleData
   m_EditorClassIdentifier: 
   ammoCount: 30
-  fireRate: 10
+  fireRate: 9
   isAutomatic: 1
   reloadTime: 4
   damage: 12

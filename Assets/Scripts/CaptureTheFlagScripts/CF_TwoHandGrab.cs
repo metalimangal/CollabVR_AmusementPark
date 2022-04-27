@@ -81,7 +81,7 @@ public class CF_TwoHandGrab : CF_WeaponGrab, IPunOwnershipCallbacks
         if (view.IsMine)
         {
             belongsTo = args.interactorObject.transform.root.GetComponent<CF_PlayerMovement>().team;
-            SetOwnerName();
+            view.RPC("RPCSetOwner", RpcTarget.All, "Player " + view.Owner.ActorNumber.ToString());
         }
         base.OnSelectEntered(args);
     }
@@ -91,7 +91,7 @@ public class CF_TwoHandGrab : CF_WeaponGrab, IPunOwnershipCallbacks
         base.OnSelectExited(args);
         secondInteractor = null;
         belongsTo = Team.NONE;
-        ownerName = "";
+        view.RPC("RPCSetOwner", RpcTarget.All, "Player " + view.Owner.ActorNumber.ToString());
 
     }
 
@@ -109,5 +109,11 @@ public class CF_TwoHandGrab : CF_WeaponGrab, IPunOwnershipCallbacks
             Debug.Log("Gun Ownership Requested");
         }
         base.OnHoverEntered(args);
+    }
+
+    [PunRPC]
+    private void RPCSetOwner( string name)
+    {
+        ownerName = name;
     }
 }
