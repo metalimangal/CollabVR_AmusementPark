@@ -44,10 +44,11 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
 
     public void TakeDamage(int damage, string attacker, out bool killedPlayer)
     {
+        Debug.Log(damage + " damage taken from: " + attacker);
         // photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
         if (damage < health)
         {
-            Debug.Log(damage + " damage taken from: " + attacker);
+            Debug.Log(damage + " less than health");
             health -= damage;
             killedPlayer = false;
         }
