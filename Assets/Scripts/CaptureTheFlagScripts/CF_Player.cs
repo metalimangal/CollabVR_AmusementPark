@@ -83,9 +83,6 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
         else if (stream.IsReading)
         {
             var incoming = stream.ReceiveNext();
-
-            Debug.Log(incoming);
-            Debug.Log(incoming.GetType());
             health = (int)incoming;
 
         }
