@@ -37,7 +37,7 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
             }
             else
             {
-                view.RPC("EnableGravity", RpcTarget.Others, "false");
+                view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
             }
         }
         base.OnSelectEntered(args);
@@ -46,7 +46,7 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
         base.OnSelectExited(args);
-        view.RPC("EnableGravity", RpcTarget.Others, "true");
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "true");
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
