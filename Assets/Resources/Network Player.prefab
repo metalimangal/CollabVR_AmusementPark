@@ -640,10 +640,11 @@ MonoBehaviour:
   ObservedComponentsFoldoutOpen: 1
   Group: 0
   prefixField: -1
-  Synchronization: 1
+  Synchronization: 2
   OwnershipTransfer: 0
   observableSearch: 2
   ObservedComponents:
+  - {fileID: 2278325454394819291}
   - {fileID: 7193941264443144200}
   - {fileID: 4188557014522173294}
   - {fileID: 9191552310976134113}

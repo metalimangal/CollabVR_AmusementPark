@@ -12,6 +12,7 @@ public class CF_Gun : MonoBehaviourPun
 {
     [Header("Gun Parameters")]
     [SerializeField] private bool _friendlyFire = false;
+    private string ownerName;
 
 
     [Header("References")]
@@ -172,25 +173,21 @@ public class CF_Gun : MonoBehaviourPun
         {
             if (hit.transform.root.TryGetComponent(out CF_Player enemyPlayer))
             {
-                Debug.Log("Shot hit: " + enemyPlayer.playerName);
+                
 
                 if (!_friendlyFire)
                 {
-                    if (enemyPlayer.team != _interactable.belongsTo) { enemyPlayer.TakeDamage(_gunDamage, _interactable.ownerName, out enemyKilled); }
+                    if (enemyPlayer.team != _interactable.belongsTo) { enemyPlayer.TakeDamage(_gunDamage, ownerName, out enemyKilled); }
                 }
                 else
                 {
-                    enemyPlayer.TakeDamage(_gunDamage, _interactable.ownerName, out enemyKilled);
+                    enemyPlayer.TakeDamage(_gunDamage, ownerName, out enemyKilled);
                 }
 
                 if (enemyKilled)
                 {
                     Debug.Log("You killed " + enemyPlayer.playerName);
                 }
-            }
-            else
-            {
-                Debug.Log("Shot Missed");
             }
         }
         if (!_isAutomatic) StartCoroutine(SingleFireDelay());
@@ -218,11 +215,20 @@ public class CF_Gun : MonoBehaviourPun
     private void BindReload(SelectEnterEventArgs args)
     {
         reloadReference.action.performed += OnReload;
+        if (isTwoHand)
+        {
+            ownerName = _interactable2.ownerName;
+        }
+        else
+        {
+            ownerName = _interactable.ownerName;
+        }
     }
 
     private void UnbindReload(SelectExitEventArgs args)
     {
         reloadReference.action.performed -= OnReload;
+        ownerName = "";
     }
 
     [PunRPC]
