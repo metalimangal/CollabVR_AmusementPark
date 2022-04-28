@@ -6,7 +6,7 @@ using System;
 using TMPro;
 using Photon.Realtime;
 
-public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
+public class CF_Player : MonoBehaviourPunCallbacks
 {
     public Team team;
     public string playerName;
@@ -45,10 +45,9 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     public void TakeDamage(int damage, string attacker, out bool killedPlayer)
     {
         Debug.Log(playerName + " took " + damage + " from: " + attacker);
-        // photonView.RPC("RPCTakeDamage", RpcTarget.All, damage.ToString());
         if (damage < health)
         {
-            //photonView.RPC("RPCTakeDamage", RpcTarget.All, damage);
+            photonView.RPC("RPCTakeDamage", RpcTarget.All, damage);
             health -= damage;
             killedPlayer = false;
         }
@@ -71,20 +70,9 @@ public class CF_Player : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     private void RPCTakeDamage(int damage)
     {
+        if (!photonView.IsMine)
+            return;
+           
         health -= damage;
-    }
-
-    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-    {
-        if (stream.IsWriting)
-        {
-            stream.SendNext(health);
-        }
-        else if (stream.IsReading)
-        {
-            var incoming = stream.ReceiveNext();
-            health = (int)incoming;
-
-        }
     }
 }

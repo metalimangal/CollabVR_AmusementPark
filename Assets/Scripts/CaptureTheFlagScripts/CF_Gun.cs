@@ -98,6 +98,7 @@ public class CF_Gun : MonoBehaviourPun
                     _lastFired = Time.time;
                     ammoText.text = _currentAmmo.ToString();
                     photonView.RPC("Shoot", RpcTarget.All);
+                    ShootRaycast();
                 }
             }
         }
@@ -120,6 +121,7 @@ public class CF_Gun : MonoBehaviourPun
                 if (_allowShoot && _currentAmmo > 0 && !_isReloading)
                 {
                     photonView.RPC("Shoot", RpcTarget.All);
+                    ShootRaycast();
                 }
                 else if (_currentAmmo == 0)
                 {
@@ -159,22 +161,24 @@ public class CF_Gun : MonoBehaviourPun
     }
 
     [PunRPC]
-    private void Shoot()
+    private void Shoot() //this is for audio and effects only
     {
-        bool enemyKilled = false;
 
         if (_currentAmmo > 0) { _currentAmmo -= 1; }
         ammoText.text = _currentAmmo.ToString();
 
         ps.Play();
         _audioSource.PlayOneShot(_shootAudio);
+    }
+
+    private void ShootRaycast()
+    {
+        bool enemyKilled = false;
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
         if (Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             if (hit.transform.root.TryGetComponent(out CF_Player enemyPlayer))
             {
-                
-
                 if (!_friendlyFire)
                 {
                     if (enemyPlayer.team != _interactable.belongsTo) { enemyPlayer.TakeDamage(_gunDamage, ownerName, out enemyKilled); }
