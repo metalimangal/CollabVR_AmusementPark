@@ -16198,6 +16198,7 @@ GameObject:
   - component: {fileID: 1602536505}
   - component: {fileID: 1602536506}
   - component: {fileID: 1602536507}
+  - component: {fileID: 1602536508}
   m_Layer: 0
   m_Name: FlagSpawn (blue)
   m_TagString: Untagged
@@ -16264,7 +16265,7 @@ MonoBehaviour:
   m_OnSelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_ShowInteractableHoverMeshes: 1
+  m_ShowInteractableHoverMeshes: 0
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
   m_SocketActive: 1
@@ -16283,6 +16284,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1602536508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1602536504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e66026617357a949883e4d5d58b785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1607550237
 GameObject:
   m_ObjectHideFlags: 0
@@ -21704,6 +21717,7 @@ GameObject:
   - component: {fileID: 2074298711}
   - component: {fileID: 2074298712}
   - component: {fileID: 2074298713}
+  - component: {fileID: 2074298714}
   m_Layer: 0
   m_Name: FlagSpawn (red)
   m_TagString: Untagged
@@ -21770,7 +21784,7 @@ MonoBehaviour:
   m_OnSelectExited:
     m_PersistentCalls:
       m_Calls: []
-  m_ShowInteractableHoverMeshes: 1
+  m_ShowInteractableHoverMeshes: 0
   m_InteractableHoverMeshMaterial: {fileID: 0}
   m_InteractableCantHoverMeshMaterial: {fileID: 0}
   m_SocketActive: 1
@@ -21789,6 +21803,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2, y: 2, z: 2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &2074298714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2074298710}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e66026617357a949883e4d5d58b785a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2077577066
 PrefabInstance:
   m_ObjectHideFlags: 0
