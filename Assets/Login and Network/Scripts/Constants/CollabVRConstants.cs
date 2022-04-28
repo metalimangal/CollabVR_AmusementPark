@@ -10,6 +10,6 @@ public class CollabVRConstants
     public const string MAP_TYPE_VALUE_ESCAPE_ROOM2 = "escape_room2";
     public const string MAP_TYPE_VALUE_CAPTURE_THE_FLAG = "capture_the_flag";
     public const string MAP_TYPE_VALUE_HORROR_HOUSE = "horror_house";
-    public const string MAP_TYPE_VALUE_HIDE_AND_SEEK = "hide_and_seek";
+    public const string MAP_TYPE_VALUE_HIDE_AND_SEEK = "HideAndSeek";
     public const string AVATAR_SELECTION_NUMBER = "Avatar_Selection_Number";
 }

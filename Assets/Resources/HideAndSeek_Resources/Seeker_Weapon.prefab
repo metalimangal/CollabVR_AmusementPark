@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 182079070667858544}
   - component: {fileID: 182079070667858551}
   - component: {fileID: 182079070667858546}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Seeker_Weapon
-  m_TagString: Untagged
+  m_TagString: Seeker Weapons
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
