@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class CF_TestNetworkGrab : XRGrabInteractable
+public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 {
     private PhotonView view;
 
@@ -48,8 +48,10 @@ public class CF_TestNetworkGrab : XRGrabInteractable
             Debug.Log("Not this gameobject");
             return;
         }
-        else
+        if (targetView.Owner != requestingPlayer)
+        {
             targetView.TransferOwnership(requestingPlayer);
+        }
     }
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
