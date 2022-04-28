@@ -45,6 +45,7 @@ public class CF_TestNetworkGrab : XRGrabInteractable
 
         if (targetView.gameObject != this.gameObject)
         {
+            Debug.Log("Not this gameobject");
             return;
         }
         else
