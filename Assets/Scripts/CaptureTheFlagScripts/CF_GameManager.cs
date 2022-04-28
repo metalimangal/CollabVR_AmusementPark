@@ -5,7 +5,7 @@ using UnityEngine;
 using Photon.Pun;
 using TMPro;
 
-public class CF_GameManager : MonoBehaviourPun
+public class CF_GameManager : MonoBehaviourPunCallbacks
 {
     public static CF_GameManager Instance { get; private set; }
 

@@ -26,7 +26,7 @@ public class CF_FlagGrabListener : MonoBehaviour
     IEnumerator DisableSocketCo()
     {
         socket.socketActive = false;
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1);
         socket.socketActive = true;
     }
 }

@@ -21,6 +21,7 @@ public class CF_Gun : MonoBehaviourPun
     public InputActionReference reloadReference;
     private CF_WeaponGrab _interactable;
     private CF_TwoHandGrab _interactable2;
+    private bool isTwoHand;
 
     [Header("Gun Scriptable")]
     [SerializeField] private CF_GunScriptableObject _gunData;
@@ -61,7 +62,7 @@ public class CF_Gun : MonoBehaviourPun
 
         _currentAmmo = _ammoCount;
         ammoText.text = _currentAmmo.ToString();
-        reloadReference.action.performed += OnReload;
+        
 
         _audioSource = gameObject.GetComponent<AudioSource>();
 
@@ -70,12 +71,18 @@ public class CF_Gun : MonoBehaviourPun
             _interactable = weaponGrab;
             _interactable.activated.AddListener(OnActivate);
             _interactable.deactivated.AddListener(StoppedFiring);
+            _interactable.selectEntered.AddListener(BindReload);
+            _interactable.selectExited.AddListener(UnbindReload);
+            isTwoHand = false;
         }
         else
         {
             _interactable2 = gameObject.GetComponent<CF_TwoHandGrab>();
             _interactable2.deactivated.AddListener(StoppedFiring);
             _interactable2.activated.AddListener(OnActivate);
+            _interactable2.selectEntered.AddListener(BindReload);
+            _interactable2.selectExited.AddListener(UnbindReload);
+            isTwoHand = true;
         }
     }
 
@@ -191,10 +198,31 @@ public class CF_Gun : MonoBehaviourPun
 
     private void OnReload(InputAction.CallbackContext ctx)
     {
-        if (photonView.IsMine && _interactable.isSelected)
+        if (isTwoHand)
         {
-            photonView.RPC("Reload", RpcTarget.All);
+            if (_interactable2.isSelected && photonView.IsMine)
+            {
+                photonView.RPC("Reload", RpcTarget.All);
+            }
         }
+        else
+        {
+            if (_interactable.isSelected && photonView.IsMine)
+            {
+                photonView.RPC("Reload", RpcTarget.All);
+            }
+        }
+        
+    }
+
+    private void BindReload(SelectEnterEventArgs args)
+    {
+        reloadReference.action.performed += OnReload;
+    }
+
+    private void UnbindReload(SelectExitEventArgs args)
+    {
+        reloadReference.action.performed -= OnReload;
     }
 
     [PunRPC]

@@ -30,13 +30,13 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
-        if (PhotonNetwork.InRoom)
+        if (PhotonNetwork.InRoom && args.interactorObject.GetType() != typeof(XRSocketInteractor))
         {
-            view.RequestOwnership();
-            Debug.Log("Ownership Requested");
-            if (args.interactorObject.GetType() != typeof(XRSocketInteractor))
+            view.RPC("InvokeGrabEvent", RpcTarget.All);
+            if (!view.IsMine)
             {
-                view.RPC("InvokeGrabEvent", RpcTarget.All);
+                view.RequestOwnership();
+                Debug.Log("Ownership Requested");
             }
         }
         base.OnSelectEntered(args);
@@ -50,7 +50,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
             return;
         }
 
-        if (!IsSelectedBySocket() && targetView.Owner != requestingPlayer)
+        if (targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
         }
@@ -60,7 +60,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         foreach (var item in interactorsSelecting)
         {
-            if (item.transform.TryGetComponent(out XRSocketInteractor socket))
+            if (item.GetType() == typeof(XRSocketInteractor))
             {
                 return true;
             }
