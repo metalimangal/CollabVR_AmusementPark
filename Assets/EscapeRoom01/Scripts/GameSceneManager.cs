@@ -196,8 +196,8 @@ using System.Linq;
 			}
 			else if (BackToMainLobby)
 			{
-				//PhotonNetwork.Disconnect();
-				SceneManager.LoadScene(MainLobbySceneIndex);
+				PhotonNetwork.Disconnect();
+				//SceneManager.LoadScene(MainLobbySceneIndex);
 				//PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 			}
 			else
@@ -212,7 +212,8 @@ using System.Linq;
 		public override void OnDisconnected(DisconnectCause cause)
 		{
 			base.OnDisconnected(cause);
-			SceneManager.LoadScene(MainLobbySceneIndex);
+			//SceneManager.LoadScene(MainLobbySceneIndex);
+			PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 		}
 
 		//So we stop loading scenes if we quit app

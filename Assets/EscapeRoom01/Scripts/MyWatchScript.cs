@@ -64,7 +64,7 @@ using UnityEngine.UI;
 					OnLoaded.Invoke();
 					UILineRenderer.SetActive(true);
 					LoadingSlider.gameObject.SetActive(false);
-					TimerText.gameObject.SetActive(true);
+					//TimerText.gameObject.SetActive(true);
 					m_Loading = false;
 				}
 			}
@@ -84,7 +84,7 @@ using UnityEngine.UI;
 			m_Loading = false;
 			OnUnloaded.Invoke();
 			LoadingSlider.gameObject.SetActive(false);
-			TimerText.gameObject.SetActive(false);
+			//TimerText.gameObject.SetActive(false);
 			UILineRenderer.SetActive(false);
 		}
 
