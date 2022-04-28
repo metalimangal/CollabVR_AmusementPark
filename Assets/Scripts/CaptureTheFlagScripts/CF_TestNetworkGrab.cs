@@ -54,19 +54,6 @@ public class CF_TestNetworkGrab : XRGrabInteractable
         }
     }
 
-    public override bool IsSelectableBy(IXRSelectInteractor interactor)
-    {
-        foreach (var item in interactorsSelecting)
-        {
-            if (item.GetType() == typeof(XRSocketInteractor))
-            {
-                return true;
-            }
-        }
-        bool isAlreadyGrabbed = interactorsSelecting.Count > 0 && !interactor.Equals(interactorsSelecting[0]);
-        return base.IsSelectableBy(interactor) && !isAlreadyGrabbed;
-    }
-
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
         Debug.Log("Ownership Request Transfered");
