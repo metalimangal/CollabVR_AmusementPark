@@ -87,7 +87,6 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
-        Debug.Log("Gun Ownership Request Received");
 
         if (targetView.gameObject != this.gameObject)
         {
@@ -102,7 +101,6 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-        Debug.Log("Gun Ownership Transfered");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)

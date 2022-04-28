@@ -116,14 +116,12 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
         if (PhotonNetwork.InRoom && !view.IsMine)
         {
             view.RequestOwnership();
-            Debug.Log("Gun Ownership Requested");
         }
         base.OnHoverEntered(args);
     }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
-        Debug.Log("Rifle Ownership Request Received");
 
         if (targetView.gameObject != this.gameObject)
         {
@@ -138,7 +136,6 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-        Debug.Log("Rifle Ownership Transfered");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
