@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 using Photon.Pun;
-
+using System;
 
 public class CF_Flag : MonoBehaviourPunCallbacks
 {
@@ -13,6 +13,8 @@ public class CF_Flag : MonoBehaviourPunCallbacks
 
     private XRGrabInteractable interactable;
     private CF_NetworkGrab networkGrab;
+
+    public static event Action OnFlagGrabbed;
 
     private void Awake()
     {
@@ -67,14 +69,9 @@ public class CF_Flag : MonoBehaviourPunCallbacks
     [PunRPC]
     private void DisableSocket()
     {
-        StartCoroutine(DisableSocketCo());
+        OnFlagGrabbed?.Invoke();
     }
 
-    IEnumerator DisableSocketCo()
-    {
-        flagSocket.socketActive = false;
-        yield return new WaitForSeconds(0.5f);
-        flagSocket.socketActive = true;
-    }
+    
 
 }
