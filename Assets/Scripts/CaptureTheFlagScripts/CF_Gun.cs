@@ -13,6 +13,7 @@ public class CF_Gun : MonoBehaviourPun
     [Header("Gun Parameters")]
     [SerializeField] private bool _friendlyFire = false;
     private string ownerName;
+    private Team ownerTeam;
 
 
     [Header("References")]
@@ -181,7 +182,7 @@ public class CF_Gun : MonoBehaviourPun
             {
                 if (!_friendlyFire)
                 {
-                    if (enemyPlayer.team != _interactable.belongsTo) { enemyPlayer.TakeDamage(_gunDamage, ownerName, out enemyKilled); }
+                    if (enemyPlayer.team != ownerTeam) { enemyPlayer.TakeDamage(_gunDamage, ownerName, out enemyKilled); }
                 }
                 else
                 {
@@ -222,10 +223,12 @@ public class CF_Gun : MonoBehaviourPun
         if (isTwoHand)
         {
             ownerName = _interactable2.ownerName;
+            ownerTeam = _interactable2.belongsTo;
         }
         else
         {
             ownerName = _interactable.ownerName;
+            ownerTeam = _interactable.belongsTo;
         }
     }
 
@@ -233,6 +236,7 @@ public class CF_Gun : MonoBehaviourPun
     {
         reloadReference.action.performed -= OnReload;
         ownerName = "";
+        ownerTeam = Team.NONE;
     }
 
     [PunRPC]
