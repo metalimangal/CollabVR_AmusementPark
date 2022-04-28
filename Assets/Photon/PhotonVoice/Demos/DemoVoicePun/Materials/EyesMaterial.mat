@@ -9,7 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: EyesMaterial
   m_Shader: {fileID: 46, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _EMISSION _GLOSSYREFLECTIONS_OFF _SPECULAR_SETUP
+  m_ShaderKeywords: _EMISSION _LIGHTMAPPING_DYNAMIC_LIGHTMAPS _LIGHTMAPPING_REALTIME
+    _SPECULAR_SETUP _UVSEC_UV1
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -93,9 +94,9 @@ Material:
     - _DstBlend: 0
     - _EmissionScaleUI: 1
     - _EnvironmentReflections: 1
-    - _GlossMapScale: 0
+    - _GlossMapScale: 1
     - _Glossiness: 0.5
-    - _GlossyReflections: 0
+    - _GlossyReflections: 1
     - _Lightmapping: 1
     - _Metallic: 0
     - _Mode: 0
@@ -123,3 +124,16 @@ Material:
     - _SpecColor: {r: 0.59607846, g: 0.59607846, b: 0.59607846, a: 1}
     - _SpecularColor: {r: 0.49264705, g: 0.49264705, b: 0.49264705, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &9064840319553906929
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 4

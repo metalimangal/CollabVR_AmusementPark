@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ignite
-  - NonCharKeyboard
-  - GameSceneManager
-  - timer
-  - Tile_Book
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,16 +11,16 @@ TagManager:
   - 
   - Water
   - UI
+  - LocalAvatarHead
+  - LocalAvatarBody
+  - Teleport
+  - Interactable
+  - Player
   - 
   - 
-  - Grabbable
-  - Hands
-  - Teleporter
-  - NoHandCollide
-  - Keyboard
-  - ground
-  - network_player
-  - xr_rig
+  - 
+  - 
+  - 
   - 
   - 
   - 

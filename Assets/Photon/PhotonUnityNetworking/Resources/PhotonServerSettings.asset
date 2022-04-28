@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: ef468dc3-a90e-4725-b929-ee6fb294c7b3
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: us
+    FixedRegion: 
     Server: 
     Port: 0
     ProxyServer: 
@@ -28,7 +28,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: us
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -42,17 +42,9 @@ MonoBehaviour:
   - CantHearYou
   - ChangeColour
   - HeresWhy
-  - RPC_SetColor
-  - RPC_SetNumber
-  - RPC_SetNumberColor
-  - RPC_SwitchLight
-  - RPC_UpdateTimer
-  - RPC_ActivateTileSlot
-  - RPC_OpenDoor
-  - RPC_SetTimerValue
-  - RPC_UpdateAngle
-  - RPC_ActivateKeySlot
-  - RPC_OpenChest
+  - StartNetworkGrabbing
+  - StopNetworkGrabbing
+  - InitializeSelectedAvatarModel
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0
