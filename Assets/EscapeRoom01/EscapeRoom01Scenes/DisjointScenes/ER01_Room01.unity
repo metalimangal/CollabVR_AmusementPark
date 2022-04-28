@@ -34579,7 +34579,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MainLobbySceneIndex: 1
-  ER01_LobbySceneIndex: 4
+  ER01_LobbySceneIndex: 3
   PlayerPrefab: {fileID: 7618038454999154757, guid: 45ebefc31b021a64fa3401eb0ab6b131,
     type: 3}
   ovrCameraRig: {fileID: 1847692702}

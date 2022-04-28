@@ -202,7 +202,7 @@ using System.Linq;
 			}
 			else
 			{
-				SceneManager.LoadScene(MainLobbySceneIndex);
+				PhotonNetwork.Disconnect();
 			}
 			//PhotonNetwork.Disconnect();
 			//SceneManager.LoadScene(ER01_LobbySceneIndex);
