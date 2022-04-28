@@ -44,35 +44,34 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public void OnEnterButtonClickedEscapeRoom1()
     {
-        PhotonNetwork.LeaveRoom();
         mapType = CollabVRConstants.MAP_TYPE_VALUE_ESCAPE_ROOM1;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { CollabVRConstants.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
     public void OnEnterButtonClickedEscapeRoom2()
     {
-        PhotonNetwork.LeaveRoom();
+
         mapType = CollabVRConstants.MAP_TYPE_VALUE_ESCAPE_ROOM2;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { CollabVRConstants.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
     public void OnEnterButtonClickedCaptureTheFlag()
     {
-        PhotonNetwork.LeaveRoom();
+
         mapType = CollabVRConstants.MAP_TYPE_VALUE_CAPTURE_THE_FLAG;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { CollabVRConstants.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
     public void OnEnterButtonClickedHorrorHouse()
     {
-        PhotonNetwork.LeaveRoom();
+
         mapType = CollabVRConstants.MAP_TYPE_VALUE_HORROR_HOUSE;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { CollabVRConstants.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
     }
     public void OnEnterButtonClickedHideAndSeek()
     {
-        PhotonNetwork.LeaveRoom();
+
         mapType = CollabVRConstants.MAP_TYPE_VALUE_HIDE_AND_SEEK;
         ExitGames.Client.Photon.Hashtable expectedCustomRoomProperties = new ExitGames.Client.Photon.Hashtable() { { CollabVRConstants.MAP_TYPE_KEY, mapType } };
         PhotonNetwork.JoinRandomRoom(expectedCustomRoomProperties, 0);
