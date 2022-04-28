@@ -35,11 +35,19 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
                 view.RequestOwnership();
                 Debug.Log("Ownership Requested");
             }
+            else
+            {
+                view.RPC("EnableGravity", RpcTarget.Others, "false");
+            }
         }
         base.OnSelectEntered(args);
     }
 
-    
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        base.OnSelectExited(args);
+        view.RPC("EnableGravity", RpcTarget.Others, "true");
+    }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
@@ -65,30 +73,19 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     }
 
-    protected override void OnSelectEntering(SelectEnterEventArgs args)
-    {
-        base.OnSelectEntering(args);
-        view.RPC("EnableGravity", RpcTarget.All, "false");
-    }
-    protected override void OnSelectExiting(SelectExitEventArgs args)
-    {
-        base.OnSelectExiting(args);
-        view.RPC("EnableGravity", RpcTarget.All, "true");
-    }
-
     [PunRPC]
     private void EnableGravity(string state)
     {
         var rigidbody = gameObject.GetComponent<Rigidbody>();
         if (state == "true")
         {
-            rigidbody.useGravity = false;
-            rigidbody.isKinematic = true;
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
         }
         else
         {
-            rigidbody.useGravity = true;
-            rigidbody.isKinematic = false;
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
         }
     }
 }
