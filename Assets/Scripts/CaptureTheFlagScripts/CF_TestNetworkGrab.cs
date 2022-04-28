@@ -37,7 +37,7 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
             }
             else
             {
-                view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
+
             }
         }
         base.OnSelectEntered(args);
@@ -66,6 +66,7 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
         Debug.Log("Ownership Request Transfered");
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
