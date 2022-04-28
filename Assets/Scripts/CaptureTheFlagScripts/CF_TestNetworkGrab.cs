@@ -39,6 +39,8 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
         base.OnSelectEntered(args);
     }
 
+    
+
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
         if (targetView.gameObject != this.gameObject)
@@ -61,5 +63,32 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
     {
 
+    }
+
+    protected override void OnSelectEntering(SelectEnterEventArgs args)
+    {
+        base.OnSelectEntering(args);
+        view.RPC("EnableGravity", RpcTarget.All, "false");
+    }
+    protected override void OnSelectExiting(SelectExitEventArgs args)
+    {
+        base.OnSelectExiting(args);
+        view.RPC("EnableGravity", RpcTarget.All, "true");
+    }
+
+    [PunRPC]
+    private void EnableGravity(string state)
+    {
+        var rigidbody = gameObject.GetComponent<Rigidbody>();
+        if (state == "true")
+        {
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
+        }
+        else
+        {
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+        }
     }
 }
