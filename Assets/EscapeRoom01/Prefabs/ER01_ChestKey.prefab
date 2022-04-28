@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 7716863682598820281}
   - component: {fileID: 7716863682598820280}
   - component: {fileID: 7716863682598820283}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ER01_ChestKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -171,6 +171,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -206,6 +209,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -317,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8372199961734451}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +360,7 @@ GameObject:
   - component: {fileID: 7710309218674950223}
   - component: {fileID: 7716863683322991403}
   - component: {fileID: 3453629140541311497}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Key
   m_TagString: Untagged
   m_Icon: {fileID: 0}

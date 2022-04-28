@@ -12,7 +12,7 @@ using Photon.Pun;
 public class Timer : MonoBehaviourPun
 {
 	public string timerValue;
-	
+	public GameObject GameSceneManager;
 	public string timerValue_temp;
 	bool timerActive = false;
 	float currentTime;
@@ -29,9 +29,12 @@ public class Timer : MonoBehaviourPun
 	void Update()
 	{
 		if(PhotonNetwork.LocalPlayer.ActorNumber == 1)
-		{
-		//if(PhotonNetwork.IsMasterClient)
+		//if(PhotonNetwork.CurrentRoom.PlayerCount == 1)
 		//{
+		//if (GameSceneManager.GetComponent<GameSceneManager>().CurrentPlayerNumber == 1)
+		//{
+		//if(PhotonNetwork.IsMasterClient)
+		{
 			if (timerActive)
 			{
 				currentTime = currentTime + Time.deltaTime;
@@ -55,7 +58,7 @@ public class Timer : MonoBehaviourPun
 	void RPC_UpdateTimer(float n)
 	{
 		TimeSpan time = TimeSpan.FromSeconds(n);
-		timerValue = time.Minutes.ToString() + ":" + time.Seconds.ToString();
+		timerValue = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");
 	}
 }
 

@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 3706420591196889170}
   - component: {fileID: 3706420591196889171}
   - component: {fileID: 119151686101495443}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ER01_TileBase
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -149,6 +149,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -184,6 +187,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -351,7 +360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4230538648350537583}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

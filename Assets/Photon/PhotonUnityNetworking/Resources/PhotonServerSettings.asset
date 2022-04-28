@@ -45,6 +45,16 @@ MonoBehaviour:
   - StartNetworkGrabbing
   - StopNetworkGrabbing
   - InitializeSelectedAvatarModel
+  - RPC_ActivateKeySlot
+  - RPC_ActivateTileSlot
+  - RPC_OpenChest
+  - RPC_OpenDoor
+  - RPC_SetColor
+  - RPC_SetNumber
+  - RPC_SetNumberColor
+  - RPC_SetTimerValue
+  - RPC_SwitchLight
+  - RPC_UpdateTimer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 0

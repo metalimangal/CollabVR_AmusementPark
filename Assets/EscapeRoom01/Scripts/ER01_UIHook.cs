@@ -20,12 +20,12 @@ using UnityEngine.SceneManagement;
 		{
 			//watch.AddButton("Scene Lobby", () => { SceneManager.LoadScene(0); });
 			//watch.AddButton("Scene Lobby", () => { gameSceneManager.GetComponent<GameSceneManager>().LeaveRoom; });
-			watch.AddButton("Scene Lobby", () => { 
+			/*watch.AddButton("Menu", () => { 
 						gameSceneManager.GetComponent<GameSceneManager>().ShouldLeaveRoom = true;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToMainLobby = false;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToSubLobby = true;
-						});
-			watch.AddButton("Main Lobby", () => {
+						});*/
+			watch.AddButton("Home", () => {
 						gameSceneManager.GetComponent<GameSceneManager>().ShouldLeaveRoom = true;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToMainLobby = true;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToSubLobby = false;

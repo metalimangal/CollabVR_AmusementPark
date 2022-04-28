@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6579532501829156575}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 7067743163187199300}
   - component: {fileID: 798501096196203388}
   - component: {fileID: 8325752998360404182}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: instructionsFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   - component: {fileID: 5974557507083026401}
   - component: {fileID: 916578143866514704}
   - component: {fileID: 4366547928778732782}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ER01_MainClue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -198,6 +198,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -209,6 +212,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -350,7 +359,7 @@ GameObject:
   - component: {fileID: 5491273799813787467}
   - component: {fileID: 7036420372687132449}
   - component: {fileID: 4693021097538744923}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: instructionsPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -430,7 +439,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3569481174073920386}
   - component: {fileID: 195391884749764749}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: InstructionsPaper
   m_TagString: Untagged
   m_Icon: {fileID: 0}

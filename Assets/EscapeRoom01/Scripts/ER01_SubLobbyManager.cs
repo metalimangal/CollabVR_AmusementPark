@@ -18,7 +18,7 @@ public class DefaultRoomSubLobby
 public class ER01_SubLobbyManager : MonoBehaviourPunCallbacks
 {
 	[SerializeField] int SubLobbySceneIndex = 1;
-	[SerializeField] int MainLobbySceneIndex = 0;
+	[SerializeField] int LoginSceneIndex = 0;
 	
 	public bool EnableInput = false;
 	bool enterPressed = false;
@@ -44,7 +44,7 @@ public class ER01_SubLobbyManager : MonoBehaviourPunCallbacks
 	{
 		if (!PhotonNetwork.NetworkingClient.IsConnected)
 		{
-			SceneManager.LoadScene(MainLobbySceneIndex);
+			SceneManager.LoadScene(LoginSceneIndex);
 			return;
 		}
 	}
@@ -64,8 +64,11 @@ public class ER01_SubLobbyManager : MonoBehaviourPunCallbacks
 		}*/
 		if (PhotonNetwork.IsConnected && !triesToConnectToMaster && !triesToConnectToRoom && enterPressed && !NoSelection)
 		{
-			StartCoroutine(WaitFrameAndConnect());
+			//StartCoroutine(WaitFrameAndConnect());
+			SceneManager.LoadScene(roomSettings.sceneIndex);
 		}
+		
+		
 	}
 	
 	public void LoginSwitch()
@@ -91,6 +94,9 @@ public class ER01_SubLobbyManager : MonoBehaviourPunCallbacks
 		roomSettings = defaultRooms[n];
 	}
 	
+	
+	
+	/*
 	public void ConnectToMaster()
 	{
 		PhotonNetwork.OfflineMode = false; //true would "fake" an online connection
@@ -179,6 +185,9 @@ public class ER01_SubLobbyManager : MonoBehaviourPunCallbacks
 		//create a room (null as a name means "does not matter")
 		PhotonNetwork.CreateRoom(roomSettings.Name, new RoomOptions { MaxPlayers = roomSettings.maxPlayer });
 	}
+	
+	
+	*/
 }
 
 

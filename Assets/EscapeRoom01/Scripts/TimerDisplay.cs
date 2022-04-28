@@ -34,6 +34,14 @@ public class TimerDisplay : MonoBehaviourPun
 			//timerText.text = timer.GetComponent<Timer>().timerValue;
 			
 		}
+		else if (timer == null)
+		{
+			var all = FindObjectsOfType<GameObject>();
+			foreach ( var item in all ) { 
+			if (item.tag.CompareTo("timer") == 0) 
+				timer = item;
+			}
+		}
     }
 	
 	[PunRPC]

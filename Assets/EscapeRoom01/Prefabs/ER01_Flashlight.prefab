@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4929365922254389523}
   - component: {fileID: 2328790122895093119}
   - component: {fileID: 4281912790180578111}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Spot Light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4522848077838134255}
   - component: {fileID: 1415715072236215900}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ObjectActivator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -213,7 +213,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 816411735603609335}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -248,7 +248,7 @@ GameObject:
   - component: {fileID: 5279919993865623382}
   - component: {fileID: 6657803895117004097}
   - component: {fileID: 1714675529125565162}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: FlashlightBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -329,7 +329,7 @@ GameObject:
   - component: {fileID: 7386393488119575419}
   - component: {fileID: 6319605790304736541}
   - component: {fileID: 193296350881536456}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: FlashlightGlass
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +412,7 @@ GameObject:
   - component: {fileID: 4217099353246560431}
   - component: {fileID: 4217099353246560425}
   - component: {fileID: 4217099353246560426}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: ER01_Flashlight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,6 +471,9 @@ MonoBehaviour:
   m_InteractionLayerMask:
     serializedVersion: 2
     m_Bits: 4294967295
+  m_InteractionLayers:
+    m_Bits: 1
+  m_SelectMode: 0
   m_CustomReticle: {fileID: 0}
   m_FirstHoverEntered:
     m_PersistentCalls:
@@ -482,6 +485,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_HoverExited:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FirstSelectEntered:
+    m_PersistentCalls:
+      m_Calls: []
+  m_LastSelectExited:
     m_PersistentCalls:
       m_Calls: []
   m_SelectEntered:
@@ -621,7 +630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3611435177797557097}
   - component: {fileID: 2959507225787353347}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: FlashlightCollider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -664,7 +673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 719085849507885715}
-  m_Layer: 8
+  m_Layer: 11
   m_Name: Attach
   m_TagString: Untagged
   m_Icon: {fileID: 0}

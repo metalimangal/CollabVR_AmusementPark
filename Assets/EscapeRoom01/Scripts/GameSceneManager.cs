@@ -19,12 +19,13 @@ using System.Linq;
 		[SerializeField] GameObject PlayerPrefab;
 		[SerializeField] GameObject ovrCameraRig;
 		[SerializeField] Transform[] spawnPoints;
+		[SerializeField] int MaxPlayersAllowed = 4;
 		private GameObject spawnedPlayerPrefab;
 		
 		#region For player numbering
 		private GameObject Head, LeftHand, RightHand;
 			
-			
+		public int CurrentPlayerNumber = 0;
 		public static GameSceneManager instance;
 		public bool ShouldLeaveRoom = false;
 		public bool BackToMainLobby = false;
@@ -151,6 +152,23 @@ using System.Linq;
 			{
 				LeaveRoom();
 			}
+			
+			if (PhotonNetwork.CurrentRoom.PlayerCount > MaxPlayersAllowed)
+			{
+				LeaveRoom();
+			}
+			
+			/*
+			if (ShouldLeaveRoom && BackToSubLobby)
+			{
+				SceneManager.LoadScene(ER01_LobbySceneIndex);
+			}
+			
+			else if (ShouldLeaveRoom && BackToMainLobby)
+			{
+				LeaveRoom();
+			}
+			*/
 		}
 		
 		/*public override void OnJoinedRoom()
@@ -172,11 +190,18 @@ using System.Linq;
 			
 			if (BackToSubLobby)
 			{
-				SceneManager.LoadScene(ER01_LobbySceneIndex);
+				//SceneManager.LoadScene(ER01_LobbySceneIndex);
+				SceneManager.LoadScene(MainLobbySceneIndex);
+				//PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 			}
 			else if (BackToMainLobby)
 			{
 				//PhotonNetwork.Disconnect();
+				SceneManager.LoadScene(MainLobbySceneIndex);
+				//PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
+			}
+			else
+			{
 				SceneManager.LoadScene(MainLobbySceneIndex);
 			}
 			//PhotonNetwork.Disconnect();
@@ -243,11 +268,18 @@ using System.Linq;
 			spawnedPlayerPrefab.GetComponent<SetNumber>().SetNumberRPC(PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1);
 			spawnedPlayerPrefab.GetComponent<SetNumberColor>().SetNumberColorRPC(PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1);
 			
+			CurrentPlayerNumber = PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1;
 			//spawnedPlayerPrefab.transform.GetComponentInChildren<SetColor>().SetColorRPC(PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1);
 			
 			//spawnedPlayerPrefab.transform.GetComponentInChildren<SetColor>().SetColorRPC(PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1);
 			
 			// NEED CHANGES
+			
+			if((PhotonNetwork.LocalPlayer.GetPlayerNumber()) <= spawnPoints.Length + 1)
+			{
+				ovrCameraRig.transform.position = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.position;
+				ovrCameraRig.transform.rotation = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.rotation;
+			}
 		}
 		
 		
@@ -337,6 +369,12 @@ using System.Linq;
 		{
 			PhotonNetwork.LeaveRoom();
 			//SceneManager.LoadScene(0);
+			
+			//PhotonNetwork.Destroy(spawnedPlayerPrefab);
+			// For player numbering
+			//PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
+			
+			//PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 		}
 	}
 
