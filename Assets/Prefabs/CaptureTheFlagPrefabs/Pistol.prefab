@@ -5528,7 +5528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3357b00c93eebb5409e41d5123aa5c42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _friendlyFire: 1
+  _friendlyFire: 0
   shootTransform: {fileID: 6462681694950182717}
   ps: {fileID: 3003700734922627629}
   ammoText: {fileID: 2794634297927363597}

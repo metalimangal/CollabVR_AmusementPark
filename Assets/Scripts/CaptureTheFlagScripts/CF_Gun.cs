@@ -12,6 +12,7 @@ public class CF_Gun : MonoBehaviourPun
 {
     [Header("Gun Parameters")]
     [SerializeField] private bool _friendlyFire = false;
+    [SerializeField] private bool _canHurt = true;
     private string ownerName;
     private Team ownerTeam;
 
@@ -176,7 +177,7 @@ public class CF_Gun : MonoBehaviourPun
     {
         bool enemyKilled = false;
         Ray ray = new Ray(shootTransform.position, shootTransform.forward);
-        if (Physics.Raycast(ray, out RaycastHit hit, 100f))
+        if (_canHurt && Physics.Raycast(ray, out RaycastHit hit, 100f))
         {
             if (hit.transform.root.TryGetComponent(out CF_Player enemyPlayer))
             {
