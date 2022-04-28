@@ -1,21 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
 using Photon.Pun;
 using Photon.Realtime;
-using System;
+using UnityEngine.XR.Interaction.Toolkit;
 
-[RequireComponent(typeof(PhotonView), typeof(PhotonTransformView))]
-public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
+public class CF_TestNetworkGrab : XRGrabInteractable
 {
     private PhotonView view;
-    public static event Action OnFlagGrabbed;
 
     protected override void Awake()
     {
         base.Awake();
-        
+
     }
     protected override void OnDestroy()
     {
@@ -23,16 +20,16 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
         PhotonNetwork.RemoveCallbackTarget(this);
     }
 
-    private void Start() {
+    private void Start()
+    {
         view = GetComponent<PhotonView>();
         PhotonNetwork.AddCallbackTarget(this);
     }
-    
+
     protected override void OnSelectEntered(SelectEnterEventArgs args)
     {
         if (PhotonNetwork.InRoom && args.interactorObject.GetType() != typeof(XRSocketInteractor))
         {
-            view.RPC("InvokeGrabEvent", RpcTarget.All);
             if (!view.IsMine)
             {
                 view.RequestOwnership();
@@ -46,7 +43,8 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         Debug.Log("Ownership Request Received");
 
-        if (targetView.gameObject != this.gameObject) {
+        if (targetView.gameObject != this.gameObject)
+        {
             return;
         }
 
@@ -76,12 +74,6 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
     {
-        
-    }
 
-    [PunRPC]
-    private void InvokeGrabEvent()
-    {
-        OnFlagGrabbed?.Invoke();
     }
 }
