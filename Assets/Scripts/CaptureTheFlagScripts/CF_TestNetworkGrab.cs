@@ -47,11 +47,8 @@ public class CF_TestNetworkGrab : XRGrabInteractable
         {
             return;
         }
-
-        if (targetView.Owner != requestingPlayer)
-        {
+        else
             targetView.TransferOwnership(requestingPlayer);
-        }
     }
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
