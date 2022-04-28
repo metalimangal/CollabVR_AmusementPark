@@ -14,7 +14,6 @@ public class CF_Flag : MonoBehaviourPunCallbacks
     private XRGrabInteractable interactable;
     private CF_NetworkGrab networkGrab;
 
-    public static event Action OnFlagGrabbed;
 
     private void Awake()
     {
@@ -54,24 +53,4 @@ public class CF_Flag : MonoBehaviourPunCallbacks
 
         return Team.NONE;
     }
-
-    public void OnGrabbed()
-    {
-        foreach (var item in interactable.interactorsSelecting)
-        {
-            if (item.transform.TryGetComponent(out XRController controller))
-            {
-                photonView.RPC("DisableSocket", RpcTarget.All);
-            }
-        }
-    }
-
-    [PunRPC]
-    private void DisableSocket()
-    {
-        OnFlagGrabbed?.Invoke();
-    }
-
-    
-
 }

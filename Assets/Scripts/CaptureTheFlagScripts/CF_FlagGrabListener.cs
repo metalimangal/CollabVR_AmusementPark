@@ -10,12 +10,12 @@ public class CF_FlagGrabListener : MonoBehaviour
     private void Awake()
     {
         socket = gameObject.GetComponent<XRSocketInteractor>();
-        CF_Flag.OnFlagGrabbed += OnOnFlagGrabbed;
+        CF_NetworkGrab.OnFlagGrabbed += OnOnFlagGrabbed;
     }
 
     private void OnDestroy()
     {
-        CF_Flag.OnFlagGrabbed -= OnOnFlagGrabbed;
+        CF_NetworkGrab.OnFlagGrabbed -= OnOnFlagGrabbed;
     }
 
     private void OnOnFlagGrabbed()
