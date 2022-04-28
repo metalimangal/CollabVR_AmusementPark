@@ -92,6 +92,7 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
             view.RPC("SetTeam", RpcTarget.All, grabber.team.ToString());
             view.RPC("RPCSetOwner", RpcTarget.All, grabber.playerName);
         }
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
         base.OnSelectEntered(args);
     }
 
@@ -102,6 +103,7 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
         secondHandGrabPoint.enabled = false;
         view.RPC("SetTeam", RpcTarget.All, " ");
         view.RPC("RPCSetOwner", RpcTarget.All, "");
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "true");
 
     }
 
@@ -136,6 +138,7 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
+        
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
@@ -162,6 +165,22 @@ public class CF_TwoHandGrab : XRGrabInteractable, IPunOwnershipCallbacks
         else
         {
             belongsTo = Team.NONE;
+        }
+    }
+
+    [PunRPC]
+    private void EnableGravity(string state)
+    {
+        var rigidbody = gameObject.GetComponent<Rigidbody>();
+        if (state == "true")
+        {
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+        }
+        else
+        {
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
         }
     }
 }
