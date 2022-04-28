@@ -1,0 +1,13 @@
+﻿# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/contentModel.xml
+/modules.xml
+/projectSettingsUpdater.xml
+/.idea.CollabVR_AmusementPark.iml
+# Datasource local storage ignored files
+/../../../../../../../../../:\Users\Aditya Oka\Documents\GitHub\CollabVR_AmusementPark\.idea\.idea.CollabVR_AmusementPark\.idea/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
