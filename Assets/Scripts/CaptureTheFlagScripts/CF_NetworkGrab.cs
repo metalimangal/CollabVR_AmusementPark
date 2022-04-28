@@ -44,12 +44,10 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
-        Debug.Log("Ownership Request Received");
-
         if (targetView.gameObject != this.gameObject) {
             return;
         }
-
+        Debug.Log("Ownership Request Received");
         if (targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
