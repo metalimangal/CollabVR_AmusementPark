@@ -14,7 +14,6 @@ public class CF_PlayerTeam : MonoBehaviourPunCallbacks
         base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
         if (changedProps.ContainsKey("Team") && photonView.Owner == targetPlayer)
         {
-            Debug.Log("team property updated");
             photonView.RPC("ChangeTeam", RpcTarget.All);
             playerAppearance.ChangeColorForTeam(changedProps["Team"].ToString());
         }

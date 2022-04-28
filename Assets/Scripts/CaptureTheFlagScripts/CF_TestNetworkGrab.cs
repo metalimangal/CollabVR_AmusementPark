@@ -56,7 +56,6 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
             return;
         }
 
-        Debug.Log("Ownership Request Received");
         if (targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
@@ -65,7 +64,6 @@ public class CF_TestNetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-        Debug.Log("Ownership Request Transfered");
         view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
     }
 

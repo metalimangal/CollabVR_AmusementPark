@@ -41,13 +41,17 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
         }
         base.OnSelectEntered(args);
     }
+    protected override void OnSelectExited(SelectExitEventArgs args)
+    {
+        base.OnSelectExited(args);
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "true");
+    }
 
     public void OnOwnershipRequest(PhotonView targetView, Player requestingPlayer)
     {
         if (targetView.gameObject != this.gameObject) {
             return;
         }
-        Debug.Log("Ownership Request Received");
         if (targetView.Owner != requestingPlayer)
         {
             targetView.TransferOwnership(requestingPlayer);
@@ -69,7 +73,7 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
 
     public void OnOwnershipTransfered(PhotonView targetView, Player previousOwner)
     {
-        Debug.Log("Ownership Request Transfered");
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
     }
 
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
@@ -81,5 +85,20 @@ public class CF_NetworkGrab : XRGrabInteractable, IPunOwnershipCallbacks
     private void InvokeGrabEvent()
     {
         OnFlagGrabbed?.Invoke();
+    }
+    [PunRPC]
+    private void EnableGravity(string state)
+    {
+        var rigidbody = gameObject.GetComponent<Rigidbody>();
+        if (state == "true")
+        {
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+        }
+        else
+        {
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
+        }
     }
 }

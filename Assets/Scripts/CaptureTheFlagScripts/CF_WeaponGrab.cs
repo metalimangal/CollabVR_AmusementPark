@@ -68,6 +68,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
             var grabber = firstInteractorSelecting.transform.root.GetComponent<CF_PlayerMovement>();
             view.RPC("SetTeam", RpcTarget.All, grabber.team.ToString());
             view.RPC("RPCSetOwner", RpcTarget.All, grabber.playerName);
+            view.RPC("EnableGravity", RpcTarget.AllBuffered, "false");
         }
         base.OnSelectEntered(args);
     }
@@ -76,6 +77,7 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         view.RPC("SetTeam", RpcTarget.All, " ");
         view.RPC("RPCSetOwner", RpcTarget.All, "");
+        view.RPC("EnableGravity", RpcTarget.AllBuffered, "true");
         base.OnSelectExited(args);
     }
 
@@ -122,6 +124,22 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
         else
         {
             belongsTo = Team.NONE;
+        }
+    }
+
+    [PunRPC]
+    private void EnableGravity(string state)
+    {
+        var rigidbody = gameObject.GetComponent<Rigidbody>();
+        if (state == "true")
+        {
+            rigidbody.useGravity = true;
+            rigidbody.isKinematic = false;
+        }
+        else
+        {
+            rigidbody.useGravity = false;
+            rigidbody.isKinematic = true;
         }
     }
 }
