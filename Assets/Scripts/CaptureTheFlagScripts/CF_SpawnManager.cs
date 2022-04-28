@@ -27,14 +27,18 @@ public class CF_SpawnManager : MonoBehaviour
     private Transform GetNextRedSpawn()
     {
         Transform t = redTeamSpawns[redSpawnCounter].transform;
-        redSpawnCounter += 1;
+        if (redSpawnCounter < redTeamSpawns.Length)
+            redSpawnCounter += 1;
+        else redSpawnCounter = 0;
         return t;
     }
 
     private Transform GetNextBlueSpawn()
     {
         Transform t = blueTeamSpawns[blueSpawnCounter].transform;
-        blueSpawnCounter += 1;
+        if (blueSpawnCounter < blueTeamSpawns.Length)
+            blueSpawnCounter += 1;
+        else blueSpawnCounter = 0;
         return t;
     }
 
