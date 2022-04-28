@@ -4,5 +4,20 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Login and Network/Scenes/LoginScene.unity
+    guid: b3049d4882a276f4dbae81c84962e9ed
+  - enabled: 1
+    path: Assets/Login and Network/Scenes/HomeScene.unity
+    guid: 66249e54836b48a42acadcc57da3e448
+  - enabled: 1
+    path: Assets/Login and Network/Scenes/World_School.unity
+    guid: b72244336204212439510723e69fa9f9
+  - enabled: 1
+    path: Assets/Login and Network/Scenes/World_Outdoor.unity
+    guid: 5041d70b592f91c4c8b6824c2ef6484f
+  m_configObjects:
+    Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 879c1deb24a1f4b4cade8bea1d915484, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c44e5abf228816a4eb1c3a94d5300d0a, type: 2}
+    com.unity.xr.openxr.settings4: {fileID: 11400000, guid: f1b58cf20abf3884a9ebde529e2db96b, type: 2}
