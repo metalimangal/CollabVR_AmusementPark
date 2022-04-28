@@ -14,6 +14,8 @@ using System.Linq;
 
 	public class GameSceneManager : MonoBehaviourPunCallbacks
 	{
+		[SerializeField] int MainLobbySceneIndex = 0;
+		[SerializeField] int ER01_LobbySceneIndex = 0;
 		[SerializeField] GameObject PlayerPrefab;
 		[SerializeField] GameObject ovrCameraRig;
 		[SerializeField] Transform[] spawnPoints;
@@ -25,6 +27,9 @@ using System.Linq;
 			
 		public static GameSceneManager instance;
 		public bool ShouldLeaveRoom = false;
+		public bool BackToMainLobby = false;
+		public bool BackToSubLobby = false;
+		
 		public static Player[] SortedPlayers;
 
 		/// <summary>
@@ -58,7 +63,7 @@ using System.Linq;
 			/// If the game starts in Room scene, and is not connected, sends the player back to Lobby scene to connect first.
 			if (!PhotonNetwork.NetworkingClient.IsConnected)
 			{
-				SceneManager.LoadScene(0);
+				SceneManager.LoadScene(MainLobbySceneIndex);
 				return;
 			}
 			/////////////////////////////////
@@ -165,15 +170,24 @@ using System.Linq;
 			PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
 			// For player numbering
 			
+			if (BackToSubLobby)
+			{
+				SceneManager.LoadScene(ER01_LobbySceneIndex);
+			}
+			else if (BackToMainLobby)
+			{
+				//PhotonNetwork.Disconnect();
+				SceneManager.LoadScene(MainLobbySceneIndex);
+			}
 			//PhotonNetwork.Disconnect();
-			SceneManager.LoadScene(0);
+			//SceneManager.LoadScene(ER01_LobbySceneIndex);
 		}
 		
 		//If disconnected from server, returns to Lobby to reconnect
 		public override void OnDisconnected(DisconnectCause cause)
 		{
 			base.OnDisconnected(cause);
-			SceneManager.LoadScene(0);
+			SceneManager.LoadScene(MainLobbySceneIndex);
 		}
 
 		//So we stop loading scenes if we quit app

@@ -11,16 +11,19 @@ using TMPro;
 		public Button[] OtherRooms;
 		public GameObject[] RoomDescriptions;
 		public int ThisRoomNumber;
+		public string ButtonType;
 		Color defaultColor;
 		Color pressedColor;
 		Color hoverColor;
+		Color defaultTextColor;
 		public TextMeshProUGUI DisplayText;
 		// Start is called before the first frame update
 		void Start()
 		{
 			defaultColor = GetComponent<Image>().color;
+			defaultTextColor = GetComponentInChildren<TextMeshProUGUI>().color;
 			pressedColor = Color.black;
-			hoverColor = new Color32(1,195,195,195);
+			hoverColor = new Color32(1,240,195,195);
 		}
 
 		// Update is called once per frame
@@ -31,38 +34,68 @@ using TMPro;
 		
 		public void SetHoverColor()
 		{
-			if (GetComponent<Image>().color != pressedColor)
+			if (ButtonType == "Room Button")
 			{
-				GetComponent<Image>().color = hoverColor;
-				DisplayText.color = Color.black;
+				if (GetComponent<Image>().color != pressedColor)
+				{
+					GetComponent<Image>().color = hoverColor;
+					DisplayText.color = Color.white;
+				}
+				foreach (var item in RoomDescriptions)
+				{
+					item.SetActive(false);
+				}
+				RoomDescriptions[ThisRoomNumber - 1].SetActive(true);
 			}
-			foreach (var item in RoomDescriptions)
+			else if (ButtonType == "Play Button")
 			{
-				item.SetActive(false);
+				if (GetComponent<Image>().color != pressedColor)
+				{
+					GetComponent<Image>().color = hoverColor;
+					DisplayText.color = Color.white;
+				}
 			}
-			RoomDescriptions[ThisRoomNumber - 1].SetActive(true);
 		}
 		
 		public void SetPressedColor()
 		{
-			GetComponent<Image>().color = pressedColor;
-			DisplayText.color = Color.white;
-			
-			foreach (var item in OtherRooms)
+			if (ButtonType == "Room Button")
 			{
-				item.GetComponent<Image>().color = defaultColor;
-				item.GetComponentInChildren<TextMeshProUGUI>().color = Color.black;
+				GetComponent<Image>().color = pressedColor;
+				DisplayText.color = Color.white;
+				
+				foreach (var item in OtherRooms)
+				{
+					item.GetComponent<Image>().color = defaultColor;
+					item.GetComponentInChildren<TextMeshProUGUI>().color = defaultTextColor;
+				}
+			}
+			else if (ButtonType == "Play Button")
+			{
+				GetComponent<Image>().color = pressedColor;
+				DisplayText.color = Color.white;
 			}
 		}
 		
 		public void SetDefaultColor()
 		{
-			if (GetComponent<Image>().color != pressedColor)
+			if (ButtonType == "Room Button")
 			{
-				GetComponent<Image>().color = defaultColor;
-				DisplayText.color = Color.black;
+				if (GetComponent<Image>().color != pressedColor)
+				{
+					GetComponent<Image>().color = defaultColor;
+					DisplayText.color = defaultTextColor;
+				}
+				RoomDescriptions[ThisRoomNumber - 1].SetActive(false);
 			}
-			RoomDescriptions[ThisRoomNumber - 1].SetActive(false);
+			else if (ButtonType == "Play Button")
+			{
+				if (GetComponent<Image>().color != pressedColor)
+				{
+					GetComponent<Image>().color = defaultColor;
+					DisplayText.color = defaultTextColor;
+				}
+			}
 		}
 	}
 

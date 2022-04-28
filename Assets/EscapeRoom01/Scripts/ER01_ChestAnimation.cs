@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
-
+using System;
 using Photon.Realtime;
 using Photon.Pun;
+
+using Random = UnityEngine.Random;
 
 // Interpolates rotation between the rotations
 // of from and to.
@@ -28,6 +30,17 @@ public class ER01_ChestAnimation : MonoBehaviourPun
 	public Vector3 targetAngle = new Vector3(0f, 0f, 0f);
 	private Vector3 currentAngle;
 	private Vector3 newAngle;
+	public AudioClip ChestOpenSound;
+	private AudioSource MyAudioSource;
+	
+	private bool ToggleChange;
+	private bool PlayMusic;
+	
+	static int s_IDMax = 0;
+
+    public bool CloseCaptioned = false;
+	
+	int m_ID;
 	
 	private PhotonView pv;
 	
@@ -36,7 +49,15 @@ public class ER01_ChestAnimation : MonoBehaviourPun
 	
 	public void Start()
 	{
+		m_ID = s_IDMax;
+        s_IDMax++;
+		
 		pv = GetComponent<PhotonView>();
+		
+		MyAudioSource = GetComponentInChildren<AudioSource>();
+		PlayMusic = true;
+		ToggleChange = true;
+		
 		for (int i = 0; i < KeySlots.Length - 1; i++)
 		{
 			KeySlots[i] = false;
@@ -63,6 +84,16 @@ public class ER01_ChestAnimation : MonoBehaviourPun
 		
 		if (KeySlots[0] && KeySlots[1])
 		{
+			if (ToggleChange)
+			{
+				SFXPlayer.Instance.PlaySFX(ChestOpenSound, gameObject.transform.position, new SFXPlayer.PlayParameters()
+					{
+						Volume = 1.0f,
+						Pitch = Random.Range(0.8f, 1.2f),
+						SourceID = m_ID
+					}, 2f, CloseCaptioned);
+					ToggleChange = false;
+			}
 			OpenChest();
 		}
     }

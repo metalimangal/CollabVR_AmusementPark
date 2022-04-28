@@ -5,28 +5,25 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
-    path: Assets/EscapeRoom01/VR Beginner/Scenes/Final/EscapeRoom.unity
-    guid: 0f290611f0f8be4419d06b71aba4e36a
   - enabled: 1
+    path: Assets/EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_MainLobby.unity
+    guid: c09b4d8e57fe2e64293776acbe3d217e
+  - enabled: 1
+    path: Assets/EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_SubLobby.unity
+    guid: 66feeee667c920e44abcb1abd3293319
+  - enabled: 1
+    path: Assets/EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_Room01.unity
+    guid: c6bd105c187e8e449acdec025647ab63
+  - enabled: 0
     path: Assets/EscapeRoom01/EscapeRoom01Scenes/ER01_Lobby.unity
     guid: da8a4f44ec9704748ba60e40bf26a6f1
-  - enabled: 1
+  - enabled: 0
     path: Assets/EscapeRoom01/EscapeRoom01Scenes/ER01_GameScene.unity
     guid: 706a4bae8d7e41148923557f196ea56f
   - enabled: 0
-    path: Assets/EscapeRoom01/EscapeRoom01Scenes/ER01_Scene01_short.unity
-    guid: bdbe23e71bd143f44a0af58a41153ad6
-  - enabled: 0
-    path: Assets/EscapeRoom01/EscapeRoom01Scenes/OldScene02.unity
-    guid: 55718bad7752729438e95fc2b7b81e49
-  - enabled: 1
     path: Assets/EscapeRoom01/EscapeRoom01Scenes/ER01_Scene02.unity
     guid: c64dcb96e17c6c24ebf776b7c9466ba2
   - enabled: 0
-    path: Assets/EscapeRoom01/EscapeRoom01Scenes/TutorialRoom01.unity
-    guid: e35c6a61f053e3d48a652d32379272c4
-  - enabled: 1
     path: Assets/EscapeRoom01/EscapeRoom01Scenes/ER01_Scene03.unity
     guid: ae82d607fab7db44282158f50874f128
   m_configObjects:
