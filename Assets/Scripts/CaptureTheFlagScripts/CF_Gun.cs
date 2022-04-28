@@ -20,6 +20,7 @@ public class CF_Gun : MonoBehaviourPun
     public TextMeshProUGUI ammoText;
     public InputActionReference reloadReference;
     private CF_WeaponGrab _interactable;
+    private CF_TwoHandGrab _interactable2;
 
     [Header("Gun Scriptable")]
     [SerializeField] private CF_GunScriptableObject _gunData;
@@ -63,9 +64,19 @@ public class CF_Gun : MonoBehaviourPun
         reloadReference.action.performed += OnReload;
 
         _audioSource = gameObject.GetComponent<AudioSource>();
-        _interactable = gameObject.GetComponent<CF_WeaponGrab>();
-        _interactable.activated.AddListener(OnActivate);
-        _interactable.deactivated.AddListener(StoppedFiring);
+
+        if (gameObject.TryGetComponent(out CF_WeaponGrab weaponGrab))
+        {
+            _interactable = weaponGrab;
+            _interactable.activated.AddListener(OnActivate);
+            _interactable.deactivated.AddListener(StoppedFiring);
+        }
+        else
+        {
+            _interactable2 = gameObject.GetComponent<CF_TwoHandGrab>();
+            _interactable2.deactivated.AddListener(StoppedFiring);
+            _interactable2.activated.AddListener(OnActivate);
+        }
     }
 
     private void Update()

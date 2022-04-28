@@ -87,6 +87,7 @@ public class CF_PlayerMovement : MonoBehaviourPunCallbacks
     {
         if (ownerNumber == networkPlayerInstance.GetPhotonView().Owner.ActorNumber.ToString())
         {
+            Debug.Log("Respawning Player: " + ownerNumber);
             StartCoroutine(Respawn(3));
         }
     }

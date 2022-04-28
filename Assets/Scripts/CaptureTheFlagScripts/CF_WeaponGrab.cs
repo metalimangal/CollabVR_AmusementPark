@@ -23,6 +23,8 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public Team belongsTo = Team.NONE;
     public string ownerName = "";
 
+    private string grabberTeam;
+
     public PhotonView view;
 
     protected override void Awake()
@@ -63,15 +65,16 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     {
         if (view.IsMine)
         {
-            belongsTo = args.interactorObject.transform.root.GetComponent<CF_PlayerMovement>().team;
-            view.RPC("RPCSetOwner", RpcTarget.All, "Player " + view.Owner.ActorNumber.ToString());
+            var grabber = firstInteractorSelecting.transform.root.GetComponent<CF_PlayerMovement>();
+            view.RPC("SetTeam", RpcTarget.All, grabber.team.ToString());
+            view.RPC("RPCSetOwner", RpcTarget.All, grabber.playerName);
         }
         base.OnSelectEntered(args);
     }
 
     protected override void OnSelectExited(SelectExitEventArgs args)
     {
-        belongsTo = Team.NONE;
+        view.RPC("SetTeam", RpcTarget.All, " ");
         view.RPC("RPCSetOwner", RpcTarget.All, "");
         base.OnSelectExited(args);
     }
@@ -105,5 +108,22 @@ public class CF_WeaponGrab : XRGrabInteractable, IPunOwnershipCallbacks
     public void OnOwnershipTransferFailed(PhotonView targetView, Player senderOfFailedRequest)
     {
         Debug.Log("Gun Ownership Transfered Failed!");
+    }
+
+    [PunRPC]
+    private void SetTeam(string t)
+    {
+        if (t == "BLUE")
+        {
+            belongsTo = Team.BLUE;
+        }
+        else if (t == "RED")
+        {
+            belongsTo = Team.RED;
+        }
+        else
+        {
+            belongsTo = Team.NONE;
+        }
     }
 }
