@@ -40,7 +40,8 @@ public class Timer : MonoBehaviourPunCallbacks, IPunObservable
 		//{
 		if (timerActive)
 		{
-			currentTime = currentTime + (startTime - Time.deltaTime);
+			//currentTime = currentTime + (startTime - Time.deltaTime);
+			currentTime = currentTime + Time.deltaTime;
 		}
 		TimeSpan time = TimeSpan.FromSeconds(currentTime);
 		timerValue = time.Minutes.ToString("00") + ":" + time.Seconds.ToString("00");

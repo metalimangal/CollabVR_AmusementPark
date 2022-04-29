@@ -19,7 +19,7 @@ MonoBehaviour:
     AppIdVoice: ef468dc3-a90e-4725-b929-ee6fb294c7b3
     AppVersion: 
     UseNameServer: 1
-    FixedRegion: 
+    FixedRegion: us
     Server: 
     Port: 0
     ProxyServer: 
@@ -57,6 +57,8 @@ MonoBehaviour:
   - RPC_UpdateTimer
   - RPC_DropWater
   - RPC_DestroyObject
+  - RPC_DisableWaitingSign
+  - RPC_OpenDoorInstantly
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
