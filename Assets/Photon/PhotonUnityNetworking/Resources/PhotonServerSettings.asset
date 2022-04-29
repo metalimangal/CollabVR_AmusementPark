@@ -28,8 +28,8 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: cae
-  PunLogging: 2
+  DevRegion: us
+  PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
@@ -48,6 +48,18 @@ MonoBehaviour:
   - StartNetworkGrabbing
   - StopNetworkGrabbing
   - InitializeSelectedAvatarModel
+  - RPC_ActivateKeySlot
+  - RPC_ActivateTileSlot
+  - RPC_OpenChest
+  - RPC_OpenDoor
+  - RPC_SetColor
+  - RPC_SetNumber
+  - RPC_SetNumberColor
+  - RPC_SetTimerValue
+  - RPC_SwitchLight
+  - RPC_UpdateTimer
+  - RPC_DropWater
+  - RPC_DestroyObject
   DisableAutoOpenWizard: 1
   ShowSettings: 1
-  DevRegionSetOnce: 0
+  DevRegionSetOnce: 1
