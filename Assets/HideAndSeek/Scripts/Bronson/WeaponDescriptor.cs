@@ -20,7 +20,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     private bool canFire = true;
     private float lastFired = 0.0f;
 
-    void Start()
+    void Awake()
     {
         bullets = this.GetComponent<ParticleSystem>();
         //owningPlayer = GetOwningPlayer(this.gameObject);
