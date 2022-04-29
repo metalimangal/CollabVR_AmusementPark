@@ -25,6 +25,8 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     private TeamManager teamManager;
     private List<GameObject> seekerWeapons = new List<GameObject>();
     private List<GameObject> hiderWeapons = new List<GameObject>();
+    private int framesToSkip = 10;
+    private bool hasJoinedTeam = false;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -56,7 +58,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         //if (isLocalPlayer)
         //{
-            teamManager.ChangeTeam(defaultTeam, playerName);   //Join the default team upon connecting
+               //Join the default team upon connecting
         //}
         foreach(GameObject child in this.transform)
         {
@@ -75,6 +77,18 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        if (!hasJoinedTeam)
+        {
+            if(framesToSkip <= 0)
+            {
+                teamManager.ChangeTeam(defaultTeam, playerName);
+                hasJoinedTeam = true;
+            }
+            else
+            {
+                framesToSkip -= 1;
+            }
+        }
         if (isLocalPlayer)
         {
             if(health <= 0)
@@ -96,17 +110,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (isHider)
         {
-            if (other.tag == seekerWeaponTag)
-            {
                 TakeDamage(other);
-            }
-        }
-        if (isSeeker)
-        {
-            if (other.tag == hiderWeaponTag)
-            {
-                TakeDamage(other);
-            }
         }
     }
 

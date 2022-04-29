@@ -16,8 +16,13 @@ public class ForfeitButton : MonoBehaviour
         hideAndSeekManager = FindObjectOfType<HideAndSeekManager>();
         button = this.GetComponent<Button>();
         button.onClick.AddListener(Forfeit);
-
-        HideAndSeekPlayer[] players = FindObjectsOfType(typeof(HideAndSeekPlayer)) as HideAndSeekPlayer[];
+        GameObject[] temp = GameObject.FindGameObjectsWithTag("HaSHitbox");
+        List<HideAndSeekPlayer> temp1 = new List<HideAndSeekPlayer>();
+        foreach(GameObject obj in temp)
+        {
+            temp1.Add(obj.GetComponent<HideAndSeekPlayer>());
+        }
+        HideAndSeekPlayer[] players = temp1.ToArray();
         if (players.Length == 0)
         {
             Debug.LogError("No players found.", this);
