@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.XR;
 
 public class UpdateUserInfo : MonoBehaviour
 {
     private string userName;
     private int coinNum;
+    private InputDevice targetDevice;
     
+    public InputDeviceCharacteristics controllerCharacteristics;
     public Canvas cv;
     public Text txtCoin;
 
@@ -15,14 +18,39 @@ public class UpdateUserInfo : MonoBehaviour
     void Start()
     {
         coinNum = 1;
+        TryInitialize();
     }
+
+    void TryInitialize()
+    {
+        List<InputDevice> devices = new List<InputDevice>();
+
+        InputDevices.GetDevicesWithCharacteristics(controllerCharacteristics, devices);
+
+        foreach (var item in devices)
+        {
+            Debug.Log(item.name + item.characteristics);
+        }
+
+        if (devices.Count > 0)
+        {
+            targetDevice = devices[0];
+        }
+    }
+
+    bool pressed = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown("x"))
+        targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out pressed);
+        if (pressed)
         {
-            cv.enabled = !cv.enabled;
+            cv.enabled = true;
+        }
+        else
+        {
+            cv.enabled = false;
         }
 
         infoUpdate();
