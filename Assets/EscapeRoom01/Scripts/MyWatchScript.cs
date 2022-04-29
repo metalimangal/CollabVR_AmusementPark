@@ -21,6 +21,8 @@ public class MyWatchScript : MonoBehaviour
 	public float LoadingTime = 2.0f;
 	public Slider LoadingSlider;
 	public Text GameInfoText;
+	public Text TimerText;
+	public GameObject InstructionsPanel;
 
 	[Header("UI")]
 	public Canvas RootCanvas;
@@ -32,16 +34,21 @@ public class MyWatchScript : MonoBehaviour
 	public UnityEvent OnLoaded;
 	public UnityEvent OnUnloaded;
 
-	public GameObject UILineRenderer;
+	public GameObject LeftUILineRenderer;
+	public GameObject RightUILineRenderer;
 	
 	bool m_Loading = false;
 	float m_LoadingTimer;
-
+	
+	public bool InstructionsOn = false;
 
 	void Start()
 	{
 		LoadingSlider.gameObject.SetActive(false);
 		GameInfoText.gameObject.SetActive(false);
+		TimerText.gameObject.SetActive(false);
+		InstructionsPanel.gameObject.SetActive(false);
+		InstructionsOn = false;
 
 		var hooks = FindObjectsOfType<IUIHook>();
 		foreach (var h in hooks)
@@ -62,11 +69,17 @@ public class MyWatchScript : MonoBehaviour
 			if (m_LoadingTimer >= LoadingTime)
 			{
 				OnLoaded.Invoke();
-				UILineRenderer.SetActive(true);
+				LeftUILineRenderer.SetActive(true);
 				LoadingSlider.gameObject.SetActive(false);
 				GameInfoText.gameObject.SetActive(true);
+				TimerText.gameObject.SetActive(true);
+				//InstructionsPanel.gameObject.SetActive(true);
 				m_Loading = false;
 			}
+		}
+		if (InstructionsOn)
+		{
+			InstructionsPanel.gameObject.SetActive(true);
 		}
 	}
 
@@ -85,7 +98,10 @@ public class MyWatchScript : MonoBehaviour
 		OnUnloaded.Invoke();
 		LoadingSlider.gameObject.SetActive(false);
 		GameInfoText.gameObject.SetActive(false);
-		UILineRenderer.SetActive(false);
+		TimerText.gameObject.SetActive(false);
+		InstructionsPanel.gameObject.SetActive(false);
+		LeftUILineRenderer.SetActive(false);
+		RightUILineRenderer.SetActive(false);
 	}
 
 	public void AddButton(string name, UnityAction clickedEvent)
@@ -110,6 +126,18 @@ public class MyWatchScript : MonoBehaviour
 		text.text = name;
 		
 		newToggle.onValueChanged.AddListener(checkedEvent);
+	}
+	
+	public void ToggleInstructions()
+	{
+		if (InstructionsOn)
+		{
+			InstructionsOn = false;
+		}
+		else if (!InstructionsOn)
+		{
+			InstructionsOn = true;
+		}
 	}
 
 	void RecursiveLayerChange(Transform root, int layer)

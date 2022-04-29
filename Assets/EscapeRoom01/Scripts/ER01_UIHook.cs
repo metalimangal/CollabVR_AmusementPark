@@ -25,6 +25,11 @@ using UnityEngine.SceneManagement;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToMainLobby = false;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToSubLobby = true;
 						});*/
+			/*watch.AddButton("Help", () => {
+						watch.ToggleInstructions();
+						//gameSceneManager.GetComponent<GameSceneManager>().BackToMainLobby = true;
+						//gameSceneManager.GetComponent<GameSceneManager>().BackToSubLobby = false;
+						});*/
 			watch.AddButton("Home", () => {
 						gameSceneManager.GetComponent<GameSceneManager>().ShouldLeaveRoom = true;
 						gameSceneManager.GetComponent<GameSceneManager>().BackToMainLobby = true;
@@ -34,8 +39,12 @@ using UnityEngine.SceneManagement;
 
 			LeftUILineRenderer.SetActive(false);
 			RightUILineRenderer.SetActive(false);
+			
+			//LeftUILineRenderer.SetActive(true);
+			//RightUILineRenderer.SetActive(true);
 
-			watch.UILineRenderer = LeftUILineRenderer;
+			watch.LeftUILineRenderer = LeftUILineRenderer;
+			watch.RightUILineRenderer = RightUILineRenderer;
 		}
 	}
 

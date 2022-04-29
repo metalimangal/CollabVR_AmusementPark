@@ -191,6 +191,8 @@ MonoBehaviour:
   inputSource: 4
   lid: {fileID: 1385988951347274037}
   targetAngle: {x: -90, y: 0, z: 0}
+  ChestOpenSound: {fileID: 0}
+  CloseCaptioned: 0
   KeySlots: 0000
   OpenChestIndicator: 0
 --- !u!114 &7243033519175048631
@@ -534,6 +536,11 @@ PrefabInstance:
       propertyPath: OnSelectedEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 4016965582139688522}
+    - target: {fileID: 6017408640790900668, guid: 65dbe4f961f87db4ab3dabe87ac78953,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7d67d7d7ddb88542b23886a4b496c77, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65dbe4f961f87db4ab3dabe87ac78953, type: 3}
 --- !u!4 &5499852473400163312 stripped
@@ -619,6 +626,11 @@ PrefabInstance:
       propertyPath: OnSelectedEnter.m_PersistentCalls.m_Calls.Array.data[2].m_Target
       value: 
       objectReference: {fileID: 4016965582139688522}
+    - target: {fileID: 6017408640790900668, guid: 65dbe4f961f87db4ab3dabe87ac78953,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: b7d67d7d7ddb88542b23886a4b496c77, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65dbe4f961f87db4ab3dabe87ac78953, type: 3}
 --- !u!4 &8825313415882948631 stripped
