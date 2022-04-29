@@ -17,7 +17,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     private ParticleSystem bullets;
     public GameObject owningPlayer;
     private bool localControl;
-    private bool canFire = true;
+    public bool canFire = true;
     private float lastFired = 0.0f;
 
     void Start()
@@ -79,7 +79,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
             {
                 if (hapticsEnabled)
                 {
-                    controller.SendHapticImpulse(0, 0.1f); //Vibrate the controller, if enabled
+                    controller.SendHapticImpulse(0, 0.01f); //Vibrate the controller, if enabled
                 }
                 fire = true;
             }
@@ -96,14 +96,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
 
         var emission = bullets.emission;
 
-        if (canFire && fire)
-        {
-            emission.enabled = fire;
-        }
-        else
-        {
-            emission.enabled = false;
-        }
+        emission.enabled = fire;
     }
 
     //private GameObject GetOwningPlayer(GameObject obj)

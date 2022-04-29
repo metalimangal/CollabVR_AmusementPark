@@ -119,6 +119,10 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public List<HideAndSeekPlayer> FindPlayerScriptsFromNames(List<string> names)
     {
         List<HideAndSeekPlayer> scripts = new List<HideAndSeekPlayer>();
+        foreach (HideAndSeekPlayer script in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
+        {
+            scripts.Add(script);
+        }
         return scripts;
     }
 
@@ -152,12 +156,12 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         foreach(Transform hider in hiderTransforms)
         {
             allActivePlayers.Add(hider);
-            hider.SendMessage("SetSpectator");
+            hider.BroadcastMessage("SetSpectator");
         }
         foreach(Transform seeker in seekerTransforms)
         {
             allActivePlayers.Add(seeker);
-            seeker.SendMessage("SetSpectator");
+            seeker.BroadcastMessage("SetSpectator");
         }
 
         teleportManager.objectsToTeleport = allActivePlayers;
@@ -175,7 +179,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             teleportManager.objectsToTeleport = temp;
             teleportManager.teleportLocation = spectatorSpawnArea;
             teleportManager.TeleportObjectsToArea();
-            seekerTransforms[idx].gameObject.SendMessage("SetSpectator");
+            seekerTransforms[idx].BroadcastMessage("SetSpectator");
             activeSeekers.Remove(playerName);
             seekerTransforms.Remove(seekerTransforms[idx]);
         }
@@ -189,7 +193,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 teleportManager.objectsToTeleport = temp;
                 teleportManager.teleportLocation = spectatorSpawnArea;
                 teleportManager.TeleportObjectsToArea();
-                hiderTransforms[idx].gameObject.SendMessage("SetSpectator");
+                hiderTransforms[idx].BroadcastMessage("SetSpectator");
                 activeHiders.Remove(playerName);
                 hiderTransforms.Remove(hiderTransforms[idx]);
             }
@@ -208,7 +212,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         hiderTransforms = FindPlayerTransformsFromNames(activeHiders);
         foreach(Transform hider in hiderTransforms)
         {
-            hider.gameObject.SendMessage("SetHider");
+            hider.BroadcastMessage("SetHider");
         }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
@@ -227,7 +231,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         seekerTransforms = FindPlayerTransformsFromNames(activeSeekers);
         foreach(Transform seeker in seekerTransforms)
         {
-            seeker.gameObject.SendMessage("SetSeeker");
+            seeker.BroadcastMessage("SetSeeker");
         }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
