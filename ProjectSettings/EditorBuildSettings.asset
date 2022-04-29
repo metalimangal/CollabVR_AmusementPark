@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Login and Network/Scenes/HomeScene.unity
     guid: 2aebb649fde2c6042bede7aea794096f
   - enabled: 1
+    path: Assets/SocialSpace/Scenes/SocialSpace.unity
+    guid: 5cde3215cc67074458f33513a47db3dd
+  - enabled: 1
     path: Assets/Login and Network/Scenes/World_Outdoor.unity
     guid: 5041d70b592f91c4c8b6824c2ef6484f
   - enabled: 1
