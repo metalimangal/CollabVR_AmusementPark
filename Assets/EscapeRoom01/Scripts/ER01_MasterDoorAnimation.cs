@@ -15,13 +15,13 @@ using Random = UnityEngine.Random;
 // (Choose from and to not to be the same as
 // the object you attach this script to)
 
-public class ER01_DoorAnimation : MonoBehaviourPun
+public class ER01_MasterDoorAnimation : MonoBehaviourPun
 {
     //public Transform RotateFrom;
     //public Transform RotateTo;
     //public float speed = 1f;
     //public float timeCount = 0.0f;
-	
+	public UnityEvent OnSuccess;
 	public XRNode inputSource;
 	
 	public bool NoKeyRequired = false;
@@ -144,6 +144,7 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 				}, 2f, CloseCaptioned);
 				ToggleChange = false;
 		}
+		OnSuccess.Invoke();
 		pv.RPC("RPC_OpenDoor", RpcTarget.AllBufferedViaServer, 0);
 	}
 	

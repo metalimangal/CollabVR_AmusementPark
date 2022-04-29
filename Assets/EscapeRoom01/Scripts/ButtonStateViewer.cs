@@ -23,7 +23,7 @@ using TMPro;
 			defaultColor = GetComponent<Image>().color;
 			defaultTextColor = GetComponentInChildren<TextMeshProUGUI>().color;
 			pressedColor = Color.black;
-			hoverColor = new Color32(1,240,195,195);
+			hoverColor = new Color32(1,195,195,195);
 		}
 
 		// Update is called once per frame
