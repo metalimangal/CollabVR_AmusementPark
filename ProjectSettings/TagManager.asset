@@ -4,34 +4,26 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - GameSceneManager
-  - timer
-  - PlayerEyes
-  - Tile_Book
-  - NonCharKeyboard
-  - fire
-  - Balloon
-  - Water
-  - ExplodingBox
+  - Bullet
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - LocalAvatarHead
-  - LocalAvatarBody
-  - Teleport
-  - Interactable
-  - Player
+  - Grabber
   - Grabbable
-  - Hands
-  - NoHandCollide
-  - ground
-  - network_player
-  - xr_rig
-  - Keyboard
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

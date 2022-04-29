@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 24a9c28d-8419-4537-a9c6-c6ebd53596d7
+    AppIdRealtime: d28133f2-6a89-42b5-84c9-632f1b7a0ca9
     AppIdFusion: 
     AppIdChat: 
-    AppIdVoice: ef468dc3-a90e-4725-b929-ee6fb294c7b3
+    AppIdVoice: 
     AppVersion: 
     UseNameServer: 1
     FixedRegion: us
@@ -39,26 +39,16 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - CantHearYou
-  - ChangeColour
-  - HeresWhy
-  - StartNetworkGrabbing
-  - StopNetworkGrabbing
-  - InitializeSelectedAvatarModel
-  - RPC_ActivateKeySlot
-  - RPC_ActivateTileSlot
-  - RPC_OpenChest
-  - RPC_OpenDoor
-  - RPC_SetColor
-  - RPC_SetNumber
-  - RPC_SetNumberColor
-  - RPC_SetTimerValue
-  - RPC_SwitchLight
-  - RPC_UpdateTimer
-  - RPC_DropWater
-  - RPC_DestroyObject
-  - RPC_DisableWaitingSign
-  - RPC_OpenDoorInstantly
+  - SetColor
+  - setColor
+  - SyncInfo
+  - SetFound
+  - SyncTime
+  - SyncVoteClassmate
+  - SyncVoteDetective
+  - SyncVoteGirlFriend
+  - SyncVoteMother
+  - SyncDecide
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
