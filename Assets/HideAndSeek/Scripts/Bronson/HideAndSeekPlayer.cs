@@ -27,6 +27,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     private List<GameObject> hiderWeapons = new List<GameObject>();
     private int framesToSkip = 10;
     private bool hasJoinedTeam = false;
+    private HideAndSeekManager hideAndSeekManager;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -81,8 +82,11 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         {
             if(framesToSkip <= 0)
             {
+                this.gameObject.layer = 11;
                 teamManager.ChangeTeam(defaultTeam, playerName);
                 hasJoinedTeam = true;
+
+                hideAndSeekManager = GameObject.FindGameObjectWithTag("HaSManager").GetComponent<HideAndSeekManager>();
             }
             else
             {
@@ -108,10 +112,14 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnCollision(GameObject other)
     {
+        List<Transform> temp = new List<Transform>();
+        temp.Add(playerParentTransform);
+        hideAndSeekManager.InitiateTeleport(0, temp);
         //if (isHider)
         //{
-                TakeDamage(other);
+        //TakeDamage(other);
         //}
+        health -= 1;
     }
 
     public void TakeDamage(GameObject weapon)
