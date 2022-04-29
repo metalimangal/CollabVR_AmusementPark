@@ -16,7 +16,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     [Tooltip("The message to send upwards in the event the local player's health is at or below 0.")] public string deathMessage = "OnLocalPlayerDeath";
 
     public bool isLocalPlayer = false;
-    [System.NonSerialized] public string playerName;
+    public string playerName;
     [System.NonSerialized] public bool isHider = false;
     [System.NonSerialized] public bool isSeeker = false;
 
@@ -30,12 +30,14 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
+            stream.SendNext(playerName);
             stream.SendNext(health);
             stream.SendNext(isHider);
             stream.SendNext(isSeeker);
         }
         else
         {
+            playerName = (string)stream.ReceiveNext();
             health = (int)stream.ReceiveNext();
             isHider = (bool)stream.ReceiveNext();
             isSeeker = (bool)stream.ReceiveNext();

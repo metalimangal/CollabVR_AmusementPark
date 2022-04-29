@@ -18,7 +18,7 @@ public class TeleportManager : MonoBehaviour
         float currentX = area.minimumLocation.x;
         float currentY = area.maximumLocation.y;
         foreach(Transform obj in objectsToTeleport){
-            Vector3 newLoc = new Vector3(currentX, currentY, area.zLocation);
+            Vector3 newLoc = new Vector3(currentX, area.zLocation, currentY);
             obj.position = newLoc;
             obj.gameObject.SendMessage(area.teleportMessage);
             currentX += xSeparation;
