@@ -15,7 +15,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
 
     private InputDevice controller;
     private ParticleSystem bullets;
-    private GameObject owningPlayer;
+    public GameObject owningPlayer;
     private bool localControl;
     private bool canFire = true;
     private float lastFired = 0.0f;
@@ -23,7 +23,7 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         bullets = this.GetComponent<ParticleSystem>();
-        owningPlayer = GetOwningPlayer(this.gameObject);
+        //owningPlayer = GetOwningPlayer(this.gameObject);
         localControl = owningPlayer.GetComponent<HideAndSeekPlayer>().isLocalPlayer;
         if (localControl)
         {
@@ -105,19 +105,19 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private GameObject GetOwningPlayer(GameObject obj)
-    {
-        GameObject player;
-        if(obj.TryGetComponent<HideAndSeekPlayer>(out HideAndSeekPlayer HaSP))
-        {
-            player = obj;
-        }
-        else
-        {
-            player = GetOwningPlayer(obj.transform.parent.gameObject);
-        }
-        return player;
-    }
+    //private GameObject GetOwningPlayer(GameObject obj)
+    //{
+    //    GameObject player;
+    //    if(obj.TryGetComponent<HideAndSeekPlayer>(out HideAndSeekPlayer HaSP))
+    //    {
+    //        player = obj;
+    //    }
+    //    else
+    //    {
+    //        player = GetOwningPlayer(obj.transform.parent.gameObject);
+    //    }
+    //    return player;
+    //}
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

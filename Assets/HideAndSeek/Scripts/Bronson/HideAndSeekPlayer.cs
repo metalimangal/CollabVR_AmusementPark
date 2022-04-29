@@ -48,7 +48,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         {
             isLocalPlayer = true;
         }
-        playerName = playerNameField.GetComponent<TMP_InputField>().text;
+        playerName = playerNameField.GetComponent<TMP_Text>().text;
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         if (isLocalPlayer)
         {
