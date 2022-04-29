@@ -28,6 +28,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     private int framesToSkip = 10;
     private bool hasJoinedTeam = false;
     private HideAndSeekManager hideAndSeekManager;
+    private float startingHealth;
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
@@ -49,6 +50,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     void Awake()
     {
+        startingHealth = health;
         //Find if the player is local
         if (photonView.IsMine)
         {
@@ -97,7 +99,11 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         {
             if(health <= 0)
             {
-                SendMessageUpwards(deathMessage);
+                //SendMessageUpwards(deathMessage);
+                List<Transform> temp = new List<Transform>();
+                temp.Add(playerParentTransform);
+                hideAndSeekManager.InitiateTeleport(0, temp);
+                health = startingHealth;
             }
         }
         if (isHider)
@@ -110,11 +116,9 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void OnCollisionEnter(GameObject other)
+    void OnCollisionEnter(GameObject other)
     {
-        List<Transform> temp = new List<Transform>();
-        temp.Add(playerParentTransform);
-        hideAndSeekManager.InitiateTeleport(0, temp);
+        
         //if (isHider)
         //{
         //TakeDamage(other);
