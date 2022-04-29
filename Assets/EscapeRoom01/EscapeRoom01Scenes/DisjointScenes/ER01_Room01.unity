@@ -39819,7 +39819,7 @@ MonoBehaviour:
   - {fileID: 1213042199}
   - {fileID: 1450150549}
   - {fileID: 962317676}
-  MaxPlayersAllowed: 3
+  MaxPlayersAllowed: 4
   CurrentPlayerNumber: 0
   ShouldLeaveRoom: 0
   BackToMainLobby: 0
@@ -90728,7 +90728,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 936655011564001588}
         m_TargetAssemblyTypeName: ER01_StartingDoorAnimation, Assembly-CSharp
-        m_MethodName: OpenDoor
+        m_MethodName: OpenDoorInstantly
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
