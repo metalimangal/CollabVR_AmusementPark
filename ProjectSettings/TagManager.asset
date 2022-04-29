@@ -4,10 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - HaSHitbox
-  - HaSPlayer
-  - Seeker Weapon
-  - HaSManager
+  - GameSceneManager
+  - timer
+  - PlayerEyes
+  - Tile_Book
+  - NonCharKeyboard
+  - fire
+  - Balloon
+  - Water
+  - ExplodingBox
   layers:
   - Default
   - TransparentFX
@@ -20,13 +25,13 @@ TagManager:
   - Teleport
   - Interactable
   - Player
-  - HaS
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Grabbable
+  - Hands
+  - NoHandCollide
+  - ground
+  - network_player
+  - xr_rig
+  - Keyboard
   - 
   - 
   - 

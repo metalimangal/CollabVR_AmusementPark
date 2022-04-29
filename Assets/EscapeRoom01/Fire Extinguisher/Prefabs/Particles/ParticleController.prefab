@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1733308486793562
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4207809647789308}
+  - component: {fileID: 114974494017988616}
+  m_Layer: 0
+  m_Name: ParticleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4207809647789308
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733308486793562}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.1311846, y: 2.8468652, z: -1.771239}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114974494017988616
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1733308486793562}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18c1f41eae0648e4d8e5f13eb4245519, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  followerAppear: {fileID: 0}
+  followerVanish: {fileID: 0}
+  explosion: {fileID: 1191606724516356, guid: cabb5f5f264ef574c8eabb3e33ccdd6e, type: 3}
+  fire: {fileID: 1902167287455962, guid: bc07743978bb0e8498911a3d91f320b9, type: 3}
+  balloonPop: {fileID: 1860100708644102, guid: 8e3abd03f8074f246aa088b4e8d40ba7, type: 3}
+  waterDrop: {fileID: 1034145531022036, guid: 097df0d2798ba8842b796987b428ce52, type: 3}
+  particles: []
+  explosionParticles: []
