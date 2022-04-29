@@ -84,6 +84,11 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             quitGameButton.interactable = false;
             startGameButton.interactable = false;
         }
+        else
+        {
+            quitGameButton.interactable = true;
+            startGameButton.interactable = true;
+        }
         if (gameRunning)
         {
             if (false)//isInitiatingManager)
