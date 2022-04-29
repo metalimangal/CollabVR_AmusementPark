@@ -26,6 +26,8 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 	
 	public bool NoKeyRequired = false;
 	
+	public bool IsMasterDoor = false;
+	
 	private bool buttonInput;
 	
 	//public GameObject lid;
@@ -35,7 +37,8 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 	
 	private PhotonView pv;
 	
-	public bool[] KeySlots; // 0 = ChestKeySlot01, 1 = ChestKeySlot02
+	// 0 = book, 1 = oven, 2 = chest, 3 = downstairs
+	public bool[] KeySlots;
 	public bool OpenDoorIndicator;
 	public AudioClip DoorOpenSound;
 	private AudioSource MyAudioSource;
@@ -88,17 +91,27 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 		//Debug.Log(gameObject.transform.position);
 		if (!NoKeyRequired)
 		{
-			if (KeySlots[0])
+			if (IsMasterDoor)
 			{
-				/*if (PlayMusic == true && ToggleChange == true)
+				if (KeySlots[0] && KeySlots[1] && KeySlots[2] && KeySlots[3])
 				{
-					//Play the audio you attach to the AudioSource component
-					MyAudioSource.Play();
-					//Ensure audio doesn’t play more than once
-					ToggleChange = false;
-				}*/
-				OpenDoor();
-				
+					OpenDoor();
+				}
+			}
+			else if (!IsMasterDoor)
+			{
+				if (KeySlots[0])
+				{
+					/*if (PlayMusic == true && ToggleChange == true)
+					{
+						//Play the audio you attach to the AudioSource component
+						MyAudioSource.Play();
+						//Ensure audio doesn’t play more than once
+						ToggleChange = false;
+					}*/
+					OpenDoor();
+					
+				}
 			}
 		}
 		else if (NoKeyRequired)

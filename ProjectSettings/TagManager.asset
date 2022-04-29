@@ -9,6 +9,10 @@ TagManager:
   - PlayerEyes
   - Tile_Book
   - NonCharKeyboard
+  - fire
+  - Balloon
+  - Water
+  - ExplodingBox
   layers:
   - Default
   - TransparentFX

@@ -64,7 +64,8 @@ using System.Linq;
 			/// If the game starts in Room scene, and is not connected, sends the player back to Lobby scene to connect first.
 			if (!PhotonNetwork.NetworkingClient.IsConnected)
 			{
-				SceneManager.LoadScene(MainLobbySceneIndex);
+				//SceneManager.LoadScene(MainLobbySceneIndex);
+				PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 				return;
 			}
 			/////////////////////////////////
