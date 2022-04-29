@@ -16,20 +16,17 @@ public class JoinTeamButton : MonoBehaviour
 
     void Start()
     {
+        //DelayedStart(0.1f);
         //teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         //button = this.GetComponent<Button>();
         //button.onClick.AddListener(ChangeTeam);
 
-        HideAndSeekPlayer[] players = FindObjectsOfType(typeof(HideAndSeekPlayer)) as HideAndSeekPlayer[];
-        if(players.Length == 0)
-        {
-            Debug.LogError("No players found.", this);
-        }
-        foreach(HideAndSeekPlayer player in players)
+        foreach (HideAndSeekPlayer player in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
         {
             if (player.isLocalPlayer)
             {
                 localPlayer = player.playerName;
+                Debug.Log(localPlayer);
             }
         }
     }
@@ -39,6 +36,22 @@ public class JoinTeamButton : MonoBehaviour
         if (canChangeTeams)
         {
             teamManager.ChangeTeam(teamToJoin, localPlayer);
+        }
+    }
+
+    IEnumerator DelayedStart(float timeToWait)
+    {
+        yield return new WaitForSecondsRealtime(timeToWait);
+        //teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
+        //button = this.GetComponent<Button>();
+        //button.onClick.AddListener(ChangeTeam);
+
+        foreach (HideAndSeekPlayer player in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
+        {
+            if (player.isLocalPlayer)
+            {
+                localPlayer = player.playerName;
+            }
         }
     }
 }

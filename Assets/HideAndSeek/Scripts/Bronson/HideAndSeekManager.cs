@@ -109,21 +109,16 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public List<Transform> FindPlayerTransformsFromNames(List<string> names)
     {
         List<Transform> transforms = new List<Transform>();
-        foreach(HideAndSeekPlayer script in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
+        foreach (GameObject player in GameObject.FindGameObjectsWithTag("HaSPlayer"))
         {
-            transforms.Add(script.playerParentTransform);
+             transforms.Add(player.transform);
         }
+        //foreach(GameObject scriptOwner in GameObject.FindGameObjectsWithTag("HaSHitbox"))
+        //{
+        //    transforms.Add(scriptOwner.GetComponent<HideAndSeekPlayer>().playerParentTransform);
+        //    Debug.Log(scriptOwner.GetComponent<HideAndSeekPlayer>().playerParentTransform);
+        //}
         return transforms;
-    }
-
-    public List<HideAndSeekPlayer> FindPlayerScriptsFromNames(List<string> names)
-    {
-        List<HideAndSeekPlayer> scripts = new List<HideAndSeekPlayer>();
-        foreach (HideAndSeekPlayer script in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
-        {
-            scripts.Add(script);
-        }
-        return scripts;
     }
 
     public void HiderWinCheck()
@@ -209,7 +204,12 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public void StartHiderGameNow()
     {
         activeHiders = teamManager.RetrieveTeamOfName(hiderTeamName).teammates;
+        foreach(string hider in activeHiders)
+        {
+            Debug.Log(hider);
+        }
         hiderTransforms = FindPlayerTransformsFromNames(activeHiders);
+        Debug.Log(hiderTransforms.Count);
         foreach(Transform hider in hiderTransforms)
         {
             hider.BroadcastMessage("SetHider");

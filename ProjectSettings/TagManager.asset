@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Seeker Weapons
+  - HaSHitbox
+  - HaSPlayer
   layers:
   - Default
   - TransparentFX

@@ -15,7 +15,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     [Tooltip("Set the initial value here.")] public float health = 1.0f;
     [Tooltip("The message to send upwards in the event the local player's health is at or below 0.")] public string deathMessage = "OnLocalPlayerDeath";
 
-    [System.NonSerialized] public bool isLocalPlayer = false;
+    public bool isLocalPlayer = false;
     [System.NonSerialized] public string playerName;
     [System.NonSerialized] public bool isHider = false;
     [System.NonSerialized] public bool isSeeker = false;
@@ -42,7 +42,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void Start()
+    void Awake()
     {
         //Find if the player is local
         if (photonView.IsMine)
