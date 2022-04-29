@@ -46,39 +46,39 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            foreach(TeamList team in teams)
-            {
-                stream.SendNext(team.teammates.ToArray());
-            }
-            //stream.SendNext(listStartCode);
             //foreach(TeamList team in teams)
             //{
-            //    SendListString(stream, team.teammates, team.breakCode);
+            //    stream.SendNext(team.teammates.ToArray());
             //}
+            stream.SendNext(listStartCode);
+            foreach(TeamList team in teams)
+            {
+                SendListString(stream, team.teammates, team.breakCode);
+            }
         }
         else
         {
-            foreach (TeamList team in teams)
-            {
-                while (team.teammates.Count > 0)
-                {
-                    team.teammates.RemoveAt(0);
-                }
-                string[] temp = stream.ReceiveNext() as string[];
-                foreach(string name in temp)
-                {
-                    team.teammates.Add(name);
-                }
-            }
-            //string temp = (string)stream.PeekNext();
-            //if(temp == listStartCode)
+            //foreach (TeamList team in teams)
             //{
-            //    stream.ReceiveNext();
-            //    foreach(TeamList team in teams)
+            //    while (team.teammates.Count > 0)
             //    {
-            //        team.teammates = ReceiveListString(stream, team.breakCode);
+            //        team.teammates.RemoveAt(0);
+            //    }
+            //    string[] temp = stream.ReceiveNext() as string[];
+            //    foreach(string name in temp)
+            //    {
+            //        team.teammates.Add(name);
             //    }
             //}
+            string temp = (string)stream.PeekNext();
+            if(temp == listStartCode)
+            {
+                stream.ReceiveNext();
+                foreach(TeamList team in teams)
+                {
+                    team.teammates = ReceiveListString(stream, team.breakCode);
+                }
+            }
         }
     }
 
