@@ -2772,6 +2772,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1761504030647388834, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1916790877496727150, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: spawnPosition.x
       value: 0
@@ -2943,6 +2947,14 @@ PrefabInstance:
     - target: {fileID: 3968925246694552542, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: m_Text
       value: Hide and Seek
+      objectReference: {fileID: 0}
+    - target: {fileID: 4651421060358449537, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6877778682883040494, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: sceneViewId
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8316094942212125229, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teamManager
@@ -3182,35 +3194,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e37293ce215a5745a6f4d6a54803dec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &4929291828899285399 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1916790877672354770, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
-  m_PrefabInstance: {fileID: 4929291828899285397}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4929291828899285400
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4929291828899285399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  observableSearch: 2
-  ObservedComponents:
-  - {fileID: 4929291828899285398}
-  - {fileID: 354652870}
-  sceneViewId: 2
-  InstantiationId: 0
-  isRuntimeInstantiated: 0
 --- !u!114 &4929291828899285401 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3968925246606176925, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4411616480959294435}
   - component: {fileID: 4411616480959294432}
   - component: {fileID: 4411616480959294433}
+  - component: {fileID: 1953044400976010302}
   m_Layer: 0
   m_Name: HideAndSeekManager
   m_TagString: Untagged
@@ -55,8 +56,6 @@ MonoBehaviour:
   timeToStart: 30
   hidingTime: 30
   disableTeamChangeAt: 5
-  startGameButtonName: Button_Start
-  quitGameButtonName: cancel
   clockDisplay: {fileID: 3623390040317935347}
   announcementDisplay: {fileID: 0}
   hiderTeamName: Hiders
@@ -64,6 +63,8 @@ MonoBehaviour:
   spectatorSpawnArea: 0
   hiderSpawnArea: 1
   seekerSpawnArea: 2
+  startGameButton: {fileID: 0}
+  quitGameButton: {fileID: 0}
 --- !u!114 &4411616480959294435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -133,6 +134,28 @@ MonoBehaviour:
     zLocation: 0
     separationDistance: 0
     teleportMessage: 
+--- !u!114 &1953044400976010302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4411616480959294446}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &4411616479816038055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -774,33 +797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &6407662119577423605 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7337950867144499685, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
-  m_PrefabInstance: {fileID: 4411616481235267344}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &6407662120798330632 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7337950865134743576, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
-  m_PrefabInstance: {fileID: 4411616481235267344}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &6407662120798330646 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7337950865134743558, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
-  m_PrefabInstance: {fileID: 4411616481235267344}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6407662120798330632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6407662120014569364 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7337950866507870340, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
@@ -839,6 +835,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &6407662120798330632 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7337950865134743576, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
+  m_PrefabInstance: {fileID: 4411616481235267344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6407662119577423605 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7337950867144499685, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
+  m_PrefabInstance: {fileID: 4411616481235267344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6407662120798330646 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7337950865134743558, guid: a573246a951d81843bd5e8c8c023c5e7, type: 3}
+  m_PrefabInstance: {fileID: 4411616481235267344}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407662120798330632}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3963423339790928637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6407662120491293214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324eb28e86afc3f4dbd09e03374b81a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamToJoin: Spectators
+  teamManager: {fileID: 0}
 --- !u!114 &4433187001654786460
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,19 +920,20 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &3963423339790928637
+--- !u!114 &4816810102425227843
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6407662120491293214}
+  m_GameObject: {fileID: 6407662120667630936}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 324eb28e86afc3f4dbd09e03374b81a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  teamToJoin: Spectators
+  teamToJoin: Seekers
+  teamManager: {fileID: 0}
 --- !u!114 &6259478085396714954
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -940,19 +978,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4816810102425227843
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6407662120667630936}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 324eb28e86afc3f4dbd09e03374b81a2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  teamToJoin: Seekers
 --- !u!114 &6191648344242371493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,3 +1035,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   teamToJoin: Hiders
+  teamManager: {fileID: 0}
