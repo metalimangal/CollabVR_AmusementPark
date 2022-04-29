@@ -54,10 +54,10 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         //playerName = playerNameField.GetComponent<TMP_Text>().text;
         playerName = PhotonNetwork.PlayerList.Length.ToString();
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
-        if (isLocalPlayer)
-        {
+        //if (isLocalPlayer)
+        //{
             teamManager.ChangeTeam(defaultTeam, playerName);   //Join the default team upon connecting
-        }
+        //}
         foreach(GameObject child in this.transform)
         {
             if(child.tag == seekerWeaponTag)
