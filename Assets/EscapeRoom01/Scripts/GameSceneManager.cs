@@ -14,6 +14,7 @@ using System.Linq;
 
 	public class GameSceneManager : MonoBehaviourPunCallbacks
 	{
+		public bool LimitedRoom = false;
 		[SerializeField] int MainLobbySceneIndex = 0;
 		[SerializeField] int ER01_LobbySceneIndex = 0;
 		[SerializeField] GameObject PlayerPrefab;
@@ -21,6 +22,8 @@ using System.Linq;
 		[SerializeField] Transform[] spawnPoints;
 		public int MaxPlayersAllowed = 4;
 		private GameObject spawnedPlayerPrefab;
+		
+		private PhotonView pv;
 		
 		#region For player numbering
 		private GameObject Head, LeftHand, RightHand;
@@ -59,6 +62,7 @@ using System.Linq;
 		
 		private void Awake()
 		{
+			pv = GetComponent<PhotonView>();
 			CCManager.Instance.gameObject.SetActive(false);
 			ShouldLeaveRoom = false;
 			/// If the game starts in Room scene, and is not connected, sends the player back to Lobby scene to connect first.
@@ -142,6 +146,13 @@ using System.Linq;
 			{
 				ovrCameraRig.transform.position = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].transform.position;
 				ovrCameraRig.transform.rotation = spawnPoints[PhotonNetwork.LocalPlayer.ActorNumber - 1].transform.rotation;
+			}
+			
+			else if ((PhotonNetwork.LocalPlayer.ActorNumber) > spawnPoints.Length)
+			{
+				int n = (PhotonNetwork.LocalPlayer.ActorNumber) % (spawnPoints.Length);
+				ovrCameraRig.transform.position = spawnPoints[n - 1].transform.position;
+				ovrCameraRig.transform.rotation = spawnPoints[n - 1].transform.rotation;
 			}
 		}
 
@@ -259,6 +270,7 @@ using System.Linq;
 			}
 			Debug.Log("Updated " + PhotonNetwork.LocalPlayer.GetPlayerNumber());
 			
+			
 			// NEED CHANGES
 			
 			print(PhotonNetwork.LocalPlayer.GetPlayerNumber());
@@ -274,16 +286,16 @@ using System.Linq;
 			
 			// NEED CHANGES
 			
-			if((PhotonNetwork.LocalPlayer.GetPlayerNumber()) <= spawnPoints.Length + 1)
+			/*if((PhotonNetwork.LocalPlayer.GetPlayerNumber()) <= spawnPoints.Length + 1)
 			{
 				ovrCameraRig.transform.position = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.position;
 				ovrCameraRig.transform.rotation = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.rotation;
-			}
+			}*/
 			
-			if ((PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1) > MaxPlayersAllowed)
+			/*if ((PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1) > MaxPlayersAllowed)
 			{
 				LeaveRoom();
-			}
+			}*/
 		}
 		
 		

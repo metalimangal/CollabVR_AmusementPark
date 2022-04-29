@@ -15,7 +15,7 @@ using Random = UnityEngine.Random;
 // (Choose from and to not to be the same as
 // the object you attach this script to)
 
-public class ER01_DoorAnimation : MonoBehaviourPun
+public class ER01_StartingDoorAnimation : MonoBehaviourPun
 {
     //public Transform RotateFrom;
     //public Transform RotateTo;
