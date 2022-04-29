@@ -11,32 +11,41 @@ public class ForfeitButton : MonoBehaviour
 
     private Button button;
     private HideAndSeekManager hideAndSeekManager;
+    private int framesToSkip = 15;
+    private bool localPlayerFound = false;
 
-    void Awake()
+    void Update()
     {
-        hideAndSeekManager = GameObject.FindGameObjectWithTag("HaSManager").GetComponent<HideAndSeekManager>();
-        button = this.GetComponent<Button>();
-        button.onClick.AddListener(Forfeit);
-        GameObject[] temp = GameObject.FindGameObjectsWithTag("HaSHitbox");
-        List<HideAndSeekPlayer> temp1 = new List<HideAndSeekPlayer>();
-        foreach(GameObject obj in temp)
+        if (!localPlayerFound)
         {
-            temp1.Add(obj.GetComponent<HideAndSeekPlayer>());
-        }
-        HideAndSeekPlayer[] players = temp1.ToArray();
-        if (players.Length == 0)
-        {
-            Debug.LogError("No players found.", this);
-        }
-        foreach (HideAndSeekPlayer player in players)
-        {
-            if (player.isLocalPlayer)
+            if(framesToSkip > 0)
             {
-                localPlayer = player.playerName;
-                localPlayerTransform = player.playerParentTransform;
+                framesToSkip -= 1;
             }
-        }
-    }
+            else
+            {
+                hideAndSeekManager = GameObject.FindGameObjectWithTag("HaSManager").GetComponent<HideAndSeekManager>();
+                button = this.GetComponent<Button>();
+                button.onClick.AddListener(Forfeit);
+                GameObject[] temp = GameObject.FindGameObjectsWithTag("HaSHitbox");
+                List<HideAndSeekPlayer> players = new List<HideAndSeekPlayer>();
+                foreach (GameObject obj in temp)
+                {
+                    players.Add(obj.GetComponent<HideAndSeekPlayer>());
+                    Debug.Log("Player added.");
+                }
+                foreach (HideAndSeekPlayer player in players)
+                {
+                    if (player.isLocalPlayer)
+                    {
+                        localPlayer = player.playerName;
+                        localPlayerTransform = player.playerParentTransform;
+                        Debug.Log("Local player found.");
+                    }
+                }
+                localPlayerFound = true;
+            }
+        }    }
 
     void Forfeit()
     {
