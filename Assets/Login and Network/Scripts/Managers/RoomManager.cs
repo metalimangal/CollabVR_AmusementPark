@@ -124,10 +124,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         PhotonNetwork.LoadLevel(""); //Load capture the flag
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_ESCAPE_ROOM1:
-                        PhotonNetwork.LoadLevel(""); //Load escape room 1
+                        PhotonNetwork.LoadLevel("EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_Room01"); //Load escape room 1 // ADDED BY Syed Tanzim Mubarrat
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_ESCAPE_ROOM2:
-                        PhotonNetwork.LoadLevel(""); //Load escape room 2
+                        PhotonNetwork.LoadLevel(""); //Load escape room 2 
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_HORROR_HOUSE:
                         PhotonNetwork.LoadLevel(""); //Load Horror House
