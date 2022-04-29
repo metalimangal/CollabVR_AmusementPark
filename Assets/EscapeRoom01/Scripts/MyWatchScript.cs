@@ -8,118 +8,118 @@ using UnityEngine.UI;
 //using EscapeRoom01;
 
 
-	public class MyWatchScript : MonoBehaviour
+public class MyWatchScript : MonoBehaviour
+{
+	
+	//by making a script subclass that, the wrist will pick them up at start time and will notify them it's been loaded
+	//this will allow them to add button to the UI that are scene specific.
+	public abstract class IUIHook : MonoBehaviour
 	{
-		
-		//by making a script subclass that, the wrist will pick them up at start time and will notify them it's been loaded
-		//this will allow them to add button to the UI that are scene specific.
-		public abstract class IUIHook : MonoBehaviour
+		public abstract void GetHook(MyWatchScript watch);
+	}
+	
+	public float LoadingTime = 2.0f;
+	public Slider LoadingSlider;
+	public Text GameInfoText;
+
+	[Header("UI")]
+	public Canvas RootCanvas;
+	public Transform ButtonParentTransform;
+	public Button ButtonPrefab;
+	public Toggle TogglePrefab;
+	
+	[Header("Event")]
+	public UnityEvent OnLoaded;
+	public UnityEvent OnUnloaded;
+
+	public GameObject UILineRenderer;
+	
+	bool m_Loading = false;
+	float m_LoadingTimer;
+
+
+	void Start()
+	{
+		LoadingSlider.gameObject.SetActive(false);
+		GameInfoText.gameObject.SetActive(false);
+
+		var hooks = FindObjectsOfType<IUIHook>();
+		foreach (var h in hooks)
 		{
-			public abstract void GetHook(MyWatchScript watch);
+			h.GetHook(this);
 		}
 		
-		public float LoadingTime = 2.0f;
-		public Slider LoadingSlider;
-		public Text TimerText;
+		RootCanvas.worldCamera = Camera.main;
+	}
 
-		[Header("UI")]
-		public Canvas RootCanvas;
-		public Transform ButtonParentTransform;
-		public Button ButtonPrefab;
-		public Toggle TogglePrefab;
-		
-		[Header("Event")]
-		public UnityEvent OnLoaded;
-		public UnityEvent OnUnloaded;
-
-		public GameObject UILineRenderer;
-		
-		bool m_Loading = false;
-		float m_LoadingTimer;
-
-
-		void Start()
+	// Update is called once per frame
+	void Update()
+	{
+		if (m_Loading)
 		{
-			LoadingSlider.gameObject.SetActive(false);
-			TimerText.gameObject.SetActive(false);
-
-			var hooks = FindObjectsOfType<IUIHook>();
-			foreach (var h in hooks)
+			m_LoadingTimer += Time.deltaTime;
+			LoadingSlider.value = Mathf.Clamp01(m_LoadingTimer / LoadingTime);
+			if (m_LoadingTimer >= LoadingTime)
 			{
-				h.GetHook(this);
+				OnLoaded.Invoke();
+				UILineRenderer.SetActive(true);
+				LoadingSlider.gameObject.SetActive(false);
+				GameInfoText.gameObject.SetActive(true);
+				m_Loading = false;
 			}
-			
-			RootCanvas.worldCamera = Camera.main;
-		}
-
-		// Update is called once per frame
-		void Update()
-		{
-			if (m_Loading)
-			{
-				m_LoadingTimer += Time.deltaTime;
-				LoadingSlider.value = Mathf.Clamp01(m_LoadingTimer / LoadingTime);
-				if (m_LoadingTimer >= LoadingTime)
-				{
-					OnLoaded.Invoke();
-					UILineRenderer.SetActive(true);
-					LoadingSlider.gameObject.SetActive(false);
-					//TimerText.gameObject.SetActive(true);
-					m_Loading = false;
-				}
-			}
-		}
-
-		public void LookedAt()
-		{
-			m_Loading = true;
-			m_LoadingTimer = 0.0f;
-			LoadingSlider.value = 0.0f;
-			LoadingSlider.gameObject.SetActive(true);
-			//TimerText.gameObject.SetActive(true);
-		}
-
-		public void LookedAway()
-		{
-			m_Loading = false;
-			OnUnloaded.Invoke();
-			LoadingSlider.gameObject.SetActive(false);
-			//TimerText.gameObject.SetActive(false);
-			UILineRenderer.SetActive(false);
-		}
-
-		public void AddButton(string name, UnityAction clickedEvent)
-		{
-			var newButton = Instantiate(ButtonPrefab, ButtonParentTransform);
-			var text = newButton.GetComponentInChildren<Text>();
-			
-			RecursiveLayerChange(newButton.transform, ButtonParentTransform.gameObject.layer);
-
-			text.text = name;
-
-			newButton.onClick.AddListener(clickedEvent);
-		}
-
-		public void AddToggle(string name, UnityAction<bool> checkedEvent)
-		{
-			var newToggle = Instantiate(TogglePrefab, ButtonParentTransform);
-			var text = newToggle.GetComponentInChildren<Text>();
-			
-			RecursiveLayerChange(newToggle.transform, ButtonParentTransform.gameObject.layer);
-
-			text.text = name;
-			
-			newToggle.onValueChanged.AddListener(checkedEvent);
-		}
-
-		void RecursiveLayerChange(Transform root, int layer)
-		{
-			foreach (Transform t in root)
-			{
-				RecursiveLayerChange(t, layer);
-			}
-
-			root.gameObject.layer = layer;
 		}
 	}
+
+	public void LookedAt()
+	{
+		m_Loading = true;
+		m_LoadingTimer = 0.0f;
+		LoadingSlider.value = 0.0f;
+		LoadingSlider.gameObject.SetActive(true);
+		//GameInfoText.gameObject.SetActive(true);
+	}
+
+	public void LookedAway()
+	{
+		m_Loading = false;
+		OnUnloaded.Invoke();
+		LoadingSlider.gameObject.SetActive(false);
+		GameInfoText.gameObject.SetActive(false);
+		UILineRenderer.SetActive(false);
+	}
+
+	public void AddButton(string name, UnityAction clickedEvent)
+	{
+		var newButton = Instantiate(ButtonPrefab, ButtonParentTransform);
+		var text = newButton.GetComponentInChildren<Text>();
+		
+		RecursiveLayerChange(newButton.transform, ButtonParentTransform.gameObject.layer);
+
+		text.text = name;
+
+		newButton.onClick.AddListener(clickedEvent);
+	}
+
+	public void AddToggle(string name, UnityAction<bool> checkedEvent)
+	{
+		var newToggle = Instantiate(TogglePrefab, ButtonParentTransform);
+		var text = newToggle.GetComponentInChildren<Text>();
+		
+		RecursiveLayerChange(newToggle.transform, ButtonParentTransform.gameObject.layer);
+
+		text.text = name;
+		
+		newToggle.onValueChanged.AddListener(checkedEvent);
+	}
+
+	void RecursiveLayerChange(Transform root, int layer)
+	{
+		foreach (Transform t in root)
+		{
+			RecursiveLayerChange(t, layer);
+		}
+
+		root.gameObject.layer = layer;
+	}
+}
 

@@ -24,6 +24,8 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 	
 	public XRNode inputSource;
 	
+	public bool NoKeyRequired = false;
+	
 	private bool buttonInput;
 	
 	//public GameObject lid;
@@ -84,26 +86,30 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 		}*/
 		
 		//Debug.Log(gameObject.transform.position);
-		if (KeySlots[0])
+		if (!NoKeyRequired)
 		{
-			/*if (PlayMusic == true && ToggleChange == true)
+			if (KeySlots[0])
 			{
-				//Play the audio you attach to the AudioSource component
-				MyAudioSource.Play();
-				//Ensure audio doesn’t play more than once
-				ToggleChange = false;
-			}*/
-			if (ToggleChange)
-			{
-				SFXPlayer.Instance.PlaySFX(DoorOpenSound, gameObject.transform.position, new SFXPlayer.PlayParameters()
-					{
-						Volume = 1.0f,
-						Pitch = Random.Range(0.8f, 1.2f),
-						SourceID = m_ID
-					}, 2f, CloseCaptioned);
+				/*if (PlayMusic == true && ToggleChange == true)
+				{
+					//Play the audio you attach to the AudioSource component
+					MyAudioSource.Play();
+					//Ensure audio doesn’t play more than once
 					ToggleChange = false;
+				}*/
+				OpenDoor();
+				
 			}
-			OpenDoor();
+		}
+		else if (NoKeyRequired)
+		{
+			InputDevice device = InputDevices.GetDeviceAtXRNode(inputSource);
+			device.TryGetFeatureValue(CommonUsages.primaryButton, out buttonInput);
+			
+			if (buttonInput)
+			{
+				OpenDoor();
+			}
 			
 		}
     }
@@ -115,6 +121,16 @@ public class ER01_DoorAnimation : MonoBehaviourPun
 	
 	public void OpenDoor()
 	{
+		if (ToggleChange)
+		{
+			SFXPlayer.Instance.PlaySFX(DoorOpenSound, gameObject.transform.position, new SFXPlayer.PlayParameters()
+				{
+					Volume = 1.0f,
+					Pitch = Random.Range(0.8f, 1.2f),
+					SourceID = m_ID
+				}, 2f, CloseCaptioned);
+				ToggleChange = false;
+		}
 		pv.RPC("RPC_OpenDoor", RpcTarget.AllBufferedViaServer, 0);
 	}
 	

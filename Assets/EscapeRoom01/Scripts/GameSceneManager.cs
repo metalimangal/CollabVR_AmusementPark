@@ -19,7 +19,7 @@ using System.Linq;
 		[SerializeField] GameObject PlayerPrefab;
 		[SerializeField] GameObject ovrCameraRig;
 		[SerializeField] Transform[] spawnPoints;
-		[SerializeField] int MaxPlayersAllowed = 4;
+		public int MaxPlayersAllowed = 4;
 		private GameObject spawnedPlayerPrefab;
 		
 		#region For player numbering
@@ -153,10 +153,7 @@ using System.Linq;
 				LeaveRoom();
 			}
 			
-			if (PhotonNetwork.CurrentRoom.PlayerCount > MaxPlayersAllowed)
-			{
-				LeaveRoom();
-			}
+			
 			
 			/*
 			if (ShouldLeaveRoom && BackToSubLobby)
@@ -280,6 +277,11 @@ using System.Linq;
 			{
 				ovrCameraRig.transform.position = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.position;
 				ovrCameraRig.transform.rotation = spawnPoints[PhotonNetwork.LocalPlayer.GetPlayerNumber()].transform.rotation;
+			}
+			
+			if ((PhotonNetwork.LocalPlayer.GetPlayerNumber() + 1) > MaxPlayersAllowed)
+			{
+				LeaveRoom();
 			}
 		}
 		

@@ -17,7 +17,7 @@ using Photon.Pun;
 		
 		public XRNode inputSource;
 		
-		public PhotonView pv;
+		private PhotonView pv;
 		
 		private XRRig rig;
 		private bool buttonInput;
