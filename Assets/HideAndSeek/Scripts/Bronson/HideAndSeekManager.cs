@@ -8,11 +8,11 @@ using Photon.Realtime;
 public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 {
     [Tooltip("How long a match should last.")] public float matchTime = 180f;
-    [Tooltip("How long to wait before the game starts.")] public float timeToStart = 30f;
+    [Tooltip("How long to wait before the game starts.")] public float timeToStart = 10f;
     [Tooltip("How long seekers must wait for hiders to hide.")] public float hidingTime = 30f;
     [Tooltip("The time remaining before team changes are disabled.")] public float disableTeamChangeAt = 5f;
-    public string startGameButtonName = "Start Game";
-    public string quitGameButtonName = "Quit Game";
+    //public string startGameButtonName = "Start Game";
+    //public string quitGameButtonName = "Quit Game";
     public Text clockDisplay;
     public Text announcementDisplay;
     public string hiderTeamName = "Hiders";
@@ -29,7 +29,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     private bool gameRunning = false;
     private bool startHiders = false;
     private bool startSeekers = false;
-    private Button startGameButton;
+    public Button startGameButton;
     public Button quitGameButton;
     private List<JoinTeamButton> teamButtons;
     //private QuitManager quitManager;
@@ -39,22 +39,24 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     private List<string> activeSeekers = new List<string>();
     private List<Transform> hiderTransforms = new List<Transform>();
     private List<Transform> seekerTransforms = new List<Transform>();
+    private List<HideAndSeekPlayer> hiderScripts = new List<HideAndSeekPlayer>();
+    private List<HideAndSeekPlayer> seekerScripts = new List<HideAndSeekPlayer>();
     private bool isInitiatingManager = false;   //Determine whether this manager is the one initiating a game start (used for teleporting players)
 
     // Start is called before the first frame update
     void Start()
     {
         //Find and sort buttons
-        foreach(Button button in FindObjectsOfType<Button>())
-        {
-            if(button.name == startGameButtonName)
-            {
-                if (startGameButton)
-                {
-                    Debug.LogWarning("More than one start button found.  Updating to use the last found start button.");
-                }
-                startGameButton = button;
-            }
+        //foreach(Button button in FindObjectsOfType<Button>())
+        //{
+        //    if(button.name == startGameButtonName)
+        //    {
+        //        if (startGameButton)
+        //        {
+        //            Debug.LogWarning("More than one start button found.  Updating to use the last found start button.");
+        //        }
+        //        startGameButton = button;
+        //    }
             //if (button.name == quitGameButtonName)
             //{
             //    if (quitGameButton)
@@ -63,14 +65,14 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             //    }
             //    quitGameButton = button;
             //}
-        }
+        //}
 
         //quitManager = FindObjectOfType<QuitManager>();
         teamButtons = new List<JoinTeamButton>(FindObjectsOfType<JoinTeamButton>());
-        teamManager = FindObjectOfType<TeamManager>();
-        teleportManager = FindObjectOfType<TeleportManager>();
+        teamManager = this.gameObject.GetComponent<TeamManager>();
+        teleportManager = this.gameObject.GetComponent<TeleportManager>();
 
-        startGameButton.onClick.AddListener(StartGameAfterCountdown);
+        //startGameButton.onClick.AddListener(StartGameAfterCountdown);
     }
 
     // Update is called once per frame
@@ -107,8 +109,17 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public List<Transform> FindPlayerTransformsFromNames(List<string> names)
     {
         List<Transform> transforms = new List<Transform>();
-
+        foreach(HideAndSeekPlayer script in FindObjectsOfTypeAll(typeof(HideAndSeekPlayer)))
+        {
+            transforms.Add(script.playerParentTransform);
+        }
         return transforms;
+    }
+
+    public List<HideAndSeekPlayer> FindPlayerScriptsFromNames(List<string> names)
+    {
+        List<HideAndSeekPlayer> scripts = new List<HideAndSeekPlayer>();
+        return scripts;
     }
 
     public void HiderWinCheck()
@@ -188,7 +199,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public void StartGameAfterCountdown()
     {
         clockTime = timeToStart;
-        StartCoroutine(CountdownTimerToZero(startHiders));
+        StartCoroutine(CountdownTimerToZero(1));
     }
 
     public void StartHiderGameNow()
@@ -207,7 +218,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         clockTime = hidingTime;  //Set the local clock time to be displayed
         isInitiatingManager = false;    //Reset the initiating manager status
-        StartCoroutine(CountdownTimerToZero(startSeekers));
+        StartCoroutine(CountdownTimerToZero(0));
     }
 
     public void StartSeekerGameNow()
@@ -227,18 +238,29 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         clockTime = matchTime;  //Set the local clock time to be displayed
         isInitiatingManager = false;    //Reset the initiating manager status
         bool standIn = false;
-        StartCoroutine(CountdownTimerToZero(standIn));
+        StartCoroutine(CountdownTimerToZero(2));
         gameRunning = true;
     }
 
-    IEnumerator CountdownTimerToZero(bool boolToSet)
+    IEnumerator CountdownTimerToZero(int boolToSet)
     {
         while(clockTime > 0)
         {
             yield return new WaitForSecondsRealtime(1f);
-            clockTime--;
+            clockTime-=1;
         }
-        boolToSet = true;
+        if(boolToSet == 0)
+        {
+            startSeekers = true;
+        }
+        if(boolToSet == 1)
+        {
+            startHiders = true;
+        }
+        if(boolToSet == 2)
+        {
+            gameRunning = true;
+        }
     }
 
     public void AnnounceWin()

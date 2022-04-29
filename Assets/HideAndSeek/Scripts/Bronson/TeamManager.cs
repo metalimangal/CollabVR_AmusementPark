@@ -37,6 +37,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
                 {
                     temp = temp + teammate + newline;
                 }
+                team.teamListTextBox.text = temp;
             }
         }
     }

@@ -2340,6 +2340,10 @@ PrefabInstance:
       propertyPath: playerNameField
       value: 
       objectReference: {fileID: 2404926663503307298}
+    - target: {fileID: 6070820374930417947, guid: f5cbc08303b011747bf782915ae10050, type: 3}
+      propertyPath: playerParentTransform
+      value: 
+      objectReference: {fileID: 1636239961266386418}
     - target: {fileID: 7641477547923256504, guid: f5cbc08303b011747bf782915ae10050, type: 3}
       propertyPath: m_RootOrder
       value: 1

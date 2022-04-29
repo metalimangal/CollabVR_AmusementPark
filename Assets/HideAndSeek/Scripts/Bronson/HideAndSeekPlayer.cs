@@ -8,6 +8,7 @@ using TMPro;
 [RequireComponent(typeof(Collider))]
 public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 {
+    public Transform playerParentTransform;
     public string defaultTeam = "Spectators";
     public string seekerWeaponTag = "Seeker Weapon";
     public string hiderWeaponTag = "Hider Weapon";
