@@ -78,6 +78,11 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     // Update is called once per frame
     void Update()
     {
+        if((float) clockTime > 0)
+        {
+            quitGameButton.interactable = false;
+            startGameButton.interactable = false;
+        }
         if (gameRunning)
         {
             if (isInitiatingManager)
@@ -85,13 +90,9 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 HiderWinCheck();
                 SeekerWinCheck();
             }
-            quitGameButton.interactable = false;
-            startGameButton.interactable = false;
         }
         else
         {
-            quitGameButton.interactable = true;
-            startGameButton.interactable = true;
             if (startHiders)
             {
                 StartHiderGameNow();
@@ -111,7 +112,10 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         List<Transform> transforms = new List<Transform>();
         foreach (GameObject player in GameObject.FindGameObjectsWithTag("HaSPlayer"))
         {
-             transforms.Add(player.transform);
+            if (names.Contains(player.GetComponentInChildren<HideAndSeekPlayer>().playerName))
+            {
+                transforms.Add(player.transform);
+            }
         }
         //foreach(GameObject scriptOwner in GameObject.FindGameObjectsWithTag("HaSHitbox"))
         //{
@@ -159,9 +163,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             seeker.BroadcastMessage("SetSpectator");
         }
 
-        teleportManager.objectsToTeleport = allActivePlayers;
-        teleportManager.teleportLocation = seekerSpawnArea;
-        teleportManager.TeleportObjectsToArea();
+        InitiateTeleport(spectatorSpawnArea, allActivePlayers);
     }
 
     public void ForfeitPlayer(string playerName)
@@ -171,9 +173,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             int idx = activeSeekers.IndexOf(playerName);
             List<Transform> temp = new List<Transform>();
             temp.Add(seekerTransforms[idx]);
-            teleportManager.objectsToTeleport = temp;
-            teleportManager.teleportLocation = spectatorSpawnArea;
-            teleportManager.TeleportObjectsToArea();
+            InitiateTeleport(spectatorSpawnArea, temp);
             seekerTransforms[idx].BroadcastMessage("SetSpectator");
             activeSeekers.Remove(playerName);
             seekerTransforms.Remove(seekerTransforms[idx]);
@@ -185,9 +185,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 int idx = activeHiders.IndexOf(playerName);
                 List<Transform> temp = new List<Transform>();
                 temp.Add(hiderTransforms[idx]);
-                teleportManager.objectsToTeleport = temp;
-                teleportManager.teleportLocation = spectatorSpawnArea;
-                teleportManager.TeleportObjectsToArea();
+                InitiateTeleport(spectatorSpawnArea, temp);
                 hiderTransforms[idx].BroadcastMessage("SetSpectator");
                 activeHiders.Remove(playerName);
                 hiderTransforms.Remove(hiderTransforms[idx]);
@@ -197,6 +195,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void StartGameAfterCountdown()
     {
+        isInitiatingManager = true;
         clockTime = timeToStart;
         StartCoroutine(CountdownTimerToZero(1));
     }
@@ -216,12 +215,9 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
-            teleportManager.objectsToTeleport = hiderTransforms;
-            teleportManager.teleportLocation = hiderSpawnArea;
-            teleportManager.TeleportObjectsToArea();
+            InitiateTeleport(hiderSpawnArea, hiderTransforms);
         }
         clockTime = hidingTime;  //Set the local clock time to be displayed
-        isInitiatingManager = false;    //Reset the initiating manager status
         StartCoroutine(CountdownTimerToZero(0));
     }
 
@@ -235,15 +231,28 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         {
-            teleportManager.objectsToTeleport = seekerTransforms;
-            teleportManager.teleportLocation = seekerSpawnArea;
-            teleportManager.TeleportObjectsToArea();
+            InitiateTeleport(seekerSpawnArea, seekerTransforms);
         }
         clockTime = matchTime;  //Set the local clock time to be displayed
         isInitiatingManager = false;    //Reset the initiating manager status
         bool standIn = false;
         StartCoroutine(CountdownTimerToZero(2));
+        isInitiatingManager = false;    //Reset the initiating manager status
         gameRunning = true;
+    }
+
+    public void InitiateTeleport(int loc, List<Transform> transforms)
+    {
+        while(teleportManager.objectsToTeleport.Count > 0)
+        {
+            teleportManager.objectsToTeleport.RemoveAt(0);
+        }
+        foreach(Transform transform in transforms)
+        {
+            teleportManager.objectsToTeleport.Add(transform);
+        }
+        teleportManager.teleportLocation = loc;
+        teleportManager.SendMessage("TeleportObjectsToArea");
     }
 
     IEnumerator CountdownTimerToZero(int boolToSet)
@@ -270,6 +279,8 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     public void AnnounceWin()
     {
         announcementDisplay.text = "Winners: " + winningTeamAnnouncement;
+        quitGameButton.interactable = true;
+        startGameButton.interactable = true;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

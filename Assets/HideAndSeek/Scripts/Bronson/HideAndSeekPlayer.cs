@@ -42,7 +42,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void Start()
+    void Awake()
     {
         //Find if the player is local
         if (photonView.IsMine)

@@ -117,11 +117,23 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(fire);
+            int networkFire = 0;
+            if (fire)
+            {
+                networkFire = 1;
+            }
+            stream.SendNext(networkFire);
         }
         else
         {
-            fire = (bool)stream.ReceiveNext();
+            if((int)stream.ReceiveNext() == 1)
+            {
+                fire = true;
+            }
+            else
+            {
+                fire = false;
+            }
         }
     }
 }

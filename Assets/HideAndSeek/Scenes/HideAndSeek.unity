@@ -2953,6 +2953,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8511947082764024790, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: m_Text
+      value: No one has won yet!
+      objectReference: {fileID: 0}
+    - target: {fileID: 8511947082764024790, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: m_FontData.m_MaxSize
       value: 90
       objectReference: {fileID: 0}

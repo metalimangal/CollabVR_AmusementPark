@@ -8,8 +8,10 @@ public class TeleportManager : MonoBehaviour
     [Tooltip("What objects to send to the target location.  Can be reassigned in-game, if needed.")] public List<Transform> objectsToTeleport;
     [SerializeField] public List<TeleportArea> teleportAreas;
 
-    public void TeleportObjectsToArea()
+    private void TeleportObjectsToArea()
     {
+        Debug.Log("Teleport called");
+        Debug.Log("Objects to teleport: " + objectsToTeleport.Count.ToString());
         TeleportArea area = teleportAreas[teleportLocation];    //Retrieve the current teleport destination
         float xSeparation = (area.maximumLocation.x - area.minimumLocation.x) / area.separationDistance;
         float ySeparation = (area.maximumLocation.y - area.minimumLocation.y) / area.separationDistance;
