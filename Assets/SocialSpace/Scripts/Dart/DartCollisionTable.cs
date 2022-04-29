@@ -7,14 +7,14 @@ using Photon.Realtime;
 public class DartCollisionTable : MonoBehaviour
 {
     public int scoreValue;
-    private AudioSource audEffect;
-    private UpdateUserInfo usrInfo;
+    private AudioSource audEffect; 
+    public GameObject spawnManager;
+
 
     // Start is called before the first frame update
     void Start()
     {
         audEffect = this.GetComponent<AudioSource>();
-        usrInfo = GameObject.Find("XR Origin").GetComponent<UpdateUserInfo>();
     }
 
     // Update is called once per frame
@@ -32,7 +32,7 @@ public class DartCollisionTable : MonoBehaviour
             Debug.Log(pv.OwnerActorNr + " : Get Score " + scoreValue);
             Destroy(other.gameObject, 10);
 
-            usrInfo.addCoin();
+            spawnManager.GetComponent<SpawnManagerSocial>().usrInfo.addCoin();
         }
     }
 }

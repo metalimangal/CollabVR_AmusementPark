@@ -8,13 +8,12 @@ using Photon.Realtime;
 public class RespawnBall : MonoBehaviour
 {
     private AudioSource audEffect;
-    private UpdateUserInfo usrInfo;
+    public GameObject spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
         audEffect = this.GetComponent<AudioSource>();
-        usrInfo = GameObject.Find("XR Origin").GetComponent<UpdateUserInfo>();
     }
 
     // Update is called once per frame
@@ -32,7 +31,7 @@ public class RespawnBall : MonoBehaviour
             PhotonView pv = other.gameObject.GetComponent<PhotonView>();
             Debug.Log(pv.OwnerActorNr + " : Get Score");
 
-            usrInfo.addCoin();
+            spawnManager.GetComponent<SpawnManagerSocial>().usrInfo.addCoin();
         }
     }
 }

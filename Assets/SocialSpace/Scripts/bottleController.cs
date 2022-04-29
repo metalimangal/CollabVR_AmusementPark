@@ -5,16 +5,14 @@ using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 public class bottleController : MonoBehaviour
 {
-    private UpdateUserInfo usrUpdate;
     private XRInteractionManager xrManager;
     private XRGrabInteractable xrGrab;
     private SphereCollider sphColl;
-
+    public GameObject spawnManager;
 
     // Start is called before the first frame update
     void Start()
     {
-        usrUpdate = GameObject.Find("XR Origin").GetComponent<UpdateUserInfo>();
         xrManager = GameObject.Find("XR Interaction Manager").GetComponent<XRInteractionManager>();
         xrGrab = this.GetComponent<XRGrabInteractable>();
         sphColl = this.GetComponent<SphereCollider>();
@@ -32,10 +30,10 @@ public class bottleController : MonoBehaviour
 
     public void isEnoughCoin()
     {
-        if(usrUpdate.getCoin() > 0) 
+        if(spawnManager.GetComponent<SpawnManagerSocial>().usrInfo.getCoin() > 0) 
         {
             enableCol();
-            usrUpdate.subCoin();
+            spawnManager.GetComponent<SpawnManagerSocial>().usrInfo.subCoin();
         }
 
         else 
