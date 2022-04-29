@@ -110,7 +110,7 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    private void OnCollision(GameObject other)
+    private void OnCollisionEnter(GameObject other)
     {
         List<Transform> temp = new List<Transform>();
         temp.Add(playerParentTransform);
