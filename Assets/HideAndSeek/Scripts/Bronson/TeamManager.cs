@@ -48,7 +48,7 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             foreach(TeamList team in teams)
             {
-                stream.SendNext(team.teammates);
+                stream.SendNext(team.teammates.ToArray());
             }
             //stream.SendNext(listStartCode);
             //foreach(TeamList team in teams)
@@ -60,7 +60,15 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             foreach (TeamList team in teams)
             {
-                team.teammates = stream.ReceiveNext() as List<string>;
+                while (team.teammates.Count > 0)
+                {
+                    team.teammates.RemoveAt(0);
+                }
+                string[] temp = stream.ReceiveNext() as string[];
+                foreach(string name in temp)
+                {
+                    team.teammates.Add(name);
+                }
             }
             //string temp = (string)stream.PeekNext();
             //if(temp == listStartCode)
