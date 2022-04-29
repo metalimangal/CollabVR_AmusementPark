@@ -2435,6 +2435,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3047237871288952452}
     m_Modifications:
+    - target: {fileID: 182079070667858544, guid: 42a85901766513344bcfc3588c93c5dc, type: 3}
+      propertyPath: CollisionModule.type
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 182079070667858544, guid: 42a85901766513344bcfc3588c93c5dc, type: 3}
+      propertyPath: CollisionModule.collidesWith.m_Bits
+      value: 2048
+      objectReference: {fileID: 0}
+    - target: {fileID: 182079070667858544, guid: 42a85901766513344bcfc3588c93c5dc, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 182079070667858544, guid: 42a85901766513344bcfc3588c93c5dc, type: 3}
+      propertyPath: CollisionModule.m_Planes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1133684129642846406}
     - target: {fileID: 182079070667858545, guid: 42a85901766513344bcfc3588c93c5dc, type: 3}
       propertyPath: m_RootOrder
       value: 0
