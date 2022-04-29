@@ -49,7 +49,8 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         {
             isLocalPlayer = true;
         }
-        playerName = playerNameField.GetComponent<TMP_Text>().text;
+        //playerName = playerNameField.GetComponent<TMP_Text>().text;
+        playerName = PhotonNetwork.PlayerList.Length.ToString();
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         if (isLocalPlayer)
         {
