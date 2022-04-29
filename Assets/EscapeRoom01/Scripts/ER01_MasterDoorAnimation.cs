@@ -95,7 +95,7 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 			{
 				if (KeySlots[0] && KeySlots[1] && KeySlots[2] && KeySlots[3])
 				{
-					OpenDoor();
+					OpenDoorInstantly();
 				}
 			}
 			else if (!IsMasterDoor)
@@ -109,7 +109,7 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 						//Ensure audio doesn’t play more than once
 						ToggleChange = false;
 					}*/
-					OpenDoor();
+					OpenDoorInstantly();
 					
 				}
 			}
@@ -146,6 +146,7 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 		}
 		OnSuccess.Invoke();
 		pv.RPC("RPC_OpenDoor", RpcTarget.AllBufferedViaServer, 0);
+		PhotonNetwork.Destroy(gameObject);
 	}
 	
 	public void OpenDoorInstantly()
@@ -160,7 +161,9 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 				}, 2f, CloseCaptioned);
 				ToggleChange = false;
 		}
+		OnSuccess.Invoke();
 		pv.RPC("RPC_OpenDoorInstantly", RpcTarget.AllBufferedViaServer, 0);
+		PhotonNetwork.Destroy(gameObject);
 	}
 	
 	[PunRPC]
