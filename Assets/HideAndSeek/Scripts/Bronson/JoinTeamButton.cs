@@ -11,14 +11,14 @@ public class JoinTeamButton : MonoBehaviour
     [System.NonSerialized] public string localPlayer;
     [System.NonSerialized] public bool canChangeTeams = true;
 
-    private Button button;
-    private TeamManager teamManager;
+    //private Button button;
+    public TeamManager teamManager;
 
     void Start()
     {
-        teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
-        button = this.GetComponent<Button>();
-        button.onClick.AddListener(ChangeTeam);
+        //teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
+        //button = this.GetComponent<Button>();
+        //button.onClick.AddListener(ChangeTeam);
 
         HideAndSeekPlayer[] players = FindObjectsOfType(typeof(HideAndSeekPlayer)) as HideAndSeekPlayer[];
         if(players.Length == 0)

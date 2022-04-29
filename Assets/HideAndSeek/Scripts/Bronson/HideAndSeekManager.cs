@@ -32,7 +32,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     private Button startGameButton;
     public Button quitGameButton;
     private List<JoinTeamButton> teamButtons;
-    private QuitManager quitManager;
+    //private QuitManager quitManager;
     private TeleportManager teleportManager;
     private TeamManager teamManager;
     private List<string> activeHiders = new List<string>();

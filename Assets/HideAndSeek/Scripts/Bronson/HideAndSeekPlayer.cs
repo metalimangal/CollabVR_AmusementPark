@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(Collider))]
 public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
@@ -17,6 +18,8 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     [System.NonSerialized] public string playerName;
     [System.NonSerialized] public bool isHider = false;
     [System.NonSerialized] public bool isSeeker = false;
+
+    public Text playerNameField;
 
     private TeamManager teamManager;
     private List<GameObject> seekerWeapons = new List<GameObject>();
@@ -44,8 +47,8 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         if (photonView.IsMine)
         {
             isLocalPlayer = true;
-            //Get player's name
         }
+        playerName = playerNameField.text;
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         if (isLocalPlayer)
         {
