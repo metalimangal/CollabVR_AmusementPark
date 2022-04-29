@@ -52,6 +52,6 @@ public class ForfeitButton : MonoBehaviour
         List<Transform> temp = new List<Transform>();
         temp.Add(localPlayerTransform);
         hideAndSeekManager.InitiateTeleport(0, temp);
-        hideAndSeekManager.ForfeitPlayer(localPlayer);
+        //hideAndSeekManager.ForfeitPlayer(localPlayer);
     }
 }
