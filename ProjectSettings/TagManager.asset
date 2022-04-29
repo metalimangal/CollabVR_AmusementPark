@@ -7,6 +7,11 @@ TagManager:
   - BasketBall
   - Dart
   - DartTable
+  - GameSceneManager
+  - timer
+  - PlayerEyes
+  - Tile_Book
+  - NonCharKeyboard
   layers:
   - Default
   - TransparentFX
@@ -19,13 +24,13 @@ TagManager:
   - Teleport
   - Interactable
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Grabbable
+  - Hands
+  - NoHandCollide
+  - ground
+  - network_player
+  - xr_rig
+  - Keyboard
   - 
   - 
   - 
