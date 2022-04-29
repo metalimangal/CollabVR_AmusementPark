@@ -88,7 +88,8 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
                 fire = false;
             }
         }
-        else
+        
+        if(!canFire)
         {
             fire = false;
         }
