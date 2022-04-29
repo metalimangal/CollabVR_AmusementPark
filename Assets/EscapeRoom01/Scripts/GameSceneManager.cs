@@ -205,25 +205,78 @@ using System.Linq;
 			}
 			else if (BackToMainLobby)
 			{
-				PhotonNetwork.Disconnect();
+				//PhotonNetwork.Disconnect();
 				//SceneManager.LoadScene(MainLobbySceneIndex);
-				//PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
+				PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
 			}
 			else
 			{
-				PhotonNetwork.Disconnect();
+				PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
+				//PhotonNetwork.Disconnect();
 			}
 			//PhotonNetwork.Disconnect();
 			//SceneManager.LoadScene(ER01_LobbySceneIndex);
 		}
 		
 		//If disconnected from server, returns to Lobby to reconnect
-		public override void OnDisconnected(DisconnectCause cause)
+		/*public override void OnDisconnected(DisconnectCause cause)
 		{
 			base.OnDisconnected(cause);
 			//SceneManager.LoadScene(MainLobbySceneIndex);
 			PhotonNetwork.LoadLevel("Login and Network/Scenes/HomeScene");
+		}*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		// NEW ON DISCONNECT PROCESS //
+		public override void OnDisconnected(DisconnectCause cause)
+		{
+			if (this.CanRecoverFromDisconnect(cause))
+			{
+				this.Recover();
+			}
 		}
+
+		private bool CanRecoverFromDisconnect(DisconnectCause cause)
+		{
+			switch (cause)
+			{
+				// the list here may be non exhaustive and is subject to review
+				case DisconnectCause.Exception:
+				case DisconnectCause.ServerTimeout:
+				case DisconnectCause.ClientTimeout:
+				case DisconnectCause.DisconnectByServerLogic:
+				case DisconnectCause.DisconnectByServerReasonUnknown:
+					return true;
+			}
+			return false;
+		}
+
+		private void Recover()
+		{
+			if (!PhotonNetwork.ReconnectAndRejoin())
+			{
+				Debug.LogError("ReconnectAndRejoin failed, trying Reconnect");
+				if (!PhotonNetwork.Reconnect())
+				{
+					Debug.LogError("Reconnect failed, trying ConnectUsingSettings");
+					if (!PhotonNetwork.ConnectUsingSettings())
+					{
+						Debug.LogError("ConnectUsingSettings failed");
+					}
+				}
+			}
+		}
+		// NEW ON DISCONNECT PROCESS //
+		
+		
+		
 
 		//So we stop loading scenes if we quit app
 		private void OnApplicationQuit()
