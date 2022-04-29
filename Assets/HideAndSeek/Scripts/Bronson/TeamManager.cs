@@ -46,23 +46,31 @@ public class TeamManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(listStartCode);
             foreach(TeamList team in teams)
             {
-                SendListString(stream, team.teammates, team.breakCode);
+                stream.SendNext(team.teammates);
             }
+            //stream.SendNext(listStartCode);
+            //foreach(TeamList team in teams)
+            //{
+            //    SendListString(stream, team.teammates, team.breakCode);
+            //}
         }
         else
         {
-            string temp = (string)stream.PeekNext();
-            if(temp == listStartCode)
+            foreach (TeamList team in teams)
             {
-                stream.ReceiveNext();
-                foreach(TeamList team in teams)
-                {
-                    team.teammates = ReceiveListString(stream, team.breakCode);
-                }
+                team.teammates = stream.ReceiveNext() as List<string>;
             }
+            //string temp = (string)stream.PeekNext();
+            //if(temp == listStartCode)
+            //{
+            //    stream.ReceiveNext();
+            //    foreach(TeamList team in teams)
+            //    {
+            //        team.teammates = ReceiveListString(stream, team.breakCode);
+            //    }
+            //}
         }
     }
 
