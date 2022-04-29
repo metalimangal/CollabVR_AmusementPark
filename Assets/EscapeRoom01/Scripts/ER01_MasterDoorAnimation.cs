@@ -160,7 +160,7 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 				}, 2f, CloseCaptioned);
 				ToggleChange = false;
 		}
-		gameObject.transform.position = targetPosition;
+		pv.RPC("RPC_OpenDoorInstantly", RpcTarget.AllBufferedViaServer, 0);
 	}
 	
 	[PunRPC]
@@ -197,6 +197,12 @@ public class ER01_MasterDoorAnimation : MonoBehaviourPun
 		//lid.gameObject.transform.position = newPosition;
 		
 		//Debug.Log(lid.gameObject.transform.position);
+	}
+	
+	[PunRPC]
+	void RPC_OpenDoorInstantly(int it)
+	{
+		gameObject.transform.position = targetPosition;
 	}
 	
 	
