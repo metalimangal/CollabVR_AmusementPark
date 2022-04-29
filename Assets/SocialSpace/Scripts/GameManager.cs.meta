@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 2d43bf06d871a444584f60d06c900ef0
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - vrPrefab: {fileID: 100008, guid: ce816f2e6abb0504092c23ed9b970dfd, type: 3}
+  - pcPrefab: {fileID: 7207863102756742894, guid: 06261963babd06a4aa005c2f2e04095e, type: 3}
+  - avatar: {fileID: 3356402213901641473, guid: b8b4fc30031835049948d1a82cb615e2, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
