@@ -3152,6 +3152,10 @@ PrefabInstance:
       propertyPath: announcementDisplay
       value: 
       objectReference: {fileID: 4929291828899285402}
+    - target: {fileID: 8741883927168586558, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: m_TagString
+      value: HaSManager
+      objectReference: {fileID: 0}
     - target: {fileID: 8785824521430090060, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1

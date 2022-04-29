@@ -13,7 +13,7 @@ public class ForfeitButton : MonoBehaviour
 
     void Awake()
     {
-        hideAndSeekManager = FindObjectOfType<HideAndSeekManager>();
+        hideAndSeekManager = GameObject.FindGameObjectWithTag("HaSManager").GetComponent<HideAndSeekManager>();
         button = this.GetComponent<Button>();
         button.onClick.AddListener(Forfeit);
         GameObject[] temp = GameObject.FindGameObjectsWithTag("HaSHitbox");
