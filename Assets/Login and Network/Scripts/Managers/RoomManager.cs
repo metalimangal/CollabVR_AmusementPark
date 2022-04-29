@@ -136,7 +136,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         PhotonNetwork.LoadLevel("World_Outdoor"); //Load Social Space
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_HIDE_AND_SEEK:
-                        PhotonNetwork.LoadLevel(""); //Load Hide And Seek
+                        PhotonNetwork.LoadLevel("HideAndSeek"); //Load Hide And Seek
                         break;
                 }
             }

@@ -30,7 +30,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     private bool startHiders = false;
     private bool startSeekers = false;
     private Button startGameButton;
-    private Button quitGameButton;
+    public Button quitGameButton;
     private List<JoinTeamButton> teamButtons;
     private QuitManager quitManager;
     private TeleportManager teleportManager;
@@ -55,17 +55,17 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 }
                 startGameButton = button;
             }
-            if (button.name == quitGameButtonName)
-            {
-                if (quitGameButton)
-                {
-                    Debug.LogWarning("More than one quit button found.  Updating to use the last found quit button.");
-                }
-                quitGameButton = button;
-            }
+            //if (button.name == quitGameButtonName)
+            //{
+            //    if (quitGameButton)
+            //    {
+            //        Debug.LogWarning("More than one quit button found.  Updating to use the last found quit button.");
+            //    }
+            //    quitGameButton = button;
+            //}
         }
 
-        quitManager = FindObjectOfType<QuitManager>();
+        //quitManager = FindObjectOfType<QuitManager>();
         teamButtons = new List<JoinTeamButton>(FindObjectsOfType<JoinTeamButton>());
         teamManager = FindObjectOfType<TeamManager>();
         teleportManager = FindObjectOfType<TeleportManager>();
