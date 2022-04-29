@@ -4,9 +4,6 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - BasketBall
-  - Dart
-  - DartTable
   - GameSceneManager
   - timer
   - PlayerEyes

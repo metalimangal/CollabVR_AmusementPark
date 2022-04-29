@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PhotonServerSettings
   m_EditorClassIdentifier: 
   AppSettings:
-    AppIdRealtime: 033db378-46b0-47c8-a917-3d89d53896b7
+    AppIdRealtime: 24a9c28d-8419-4537-a9c6-c6ebd53596d7
     AppIdFusion: 
     AppIdChat: 
     AppIdVoice: ef468dc3-a90e-4725-b929-ee6fb294c7b3
@@ -39,9 +39,6 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - changeColor
-  - returnColor
-  - SetColor
   - CantHearYou
   - ChangeColour
   - HeresWhy
@@ -60,6 +57,8 @@ MonoBehaviour:
   - RPC_UpdateTimer
   - RPC_DropWater
   - RPC_DestroyObject
+  - RPC_DisableWaitingSign
+  - RPC_OpenDoorInstantly
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
