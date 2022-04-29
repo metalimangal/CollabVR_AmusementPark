@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ForfeitButton : MonoBehaviour
 {
     [System.NonSerialized] public string localPlayer;
+    public Transform localPlayerTransform;
 
     private Button button;
     private HideAndSeekManager hideAndSeekManager;
@@ -32,12 +33,16 @@ public class ForfeitButton : MonoBehaviour
             if (player.isLocalPlayer)
             {
                 localPlayer = player.playerName;
+                localPlayerTransform = player.playerParentTransform;
             }
         }
     }
 
     void Forfeit()
     {
+        List<Transform> temp = new List<Transform>();
+        temp.Add(localPlayerTransform);
+        hideAndSeekManager.InitiateTeleport(0, temp);
         hideAndSeekManager.ForfeitPlayer(localPlayer);
     }
 }

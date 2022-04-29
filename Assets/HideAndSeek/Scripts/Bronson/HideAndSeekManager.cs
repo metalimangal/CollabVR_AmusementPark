@@ -173,7 +173,6 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             int idx = activeSeekers.IndexOf(playerName);
             List<Transform> temp = new List<Transform>();
             temp.Add(seekerTransforms[idx]);
-            InitiateTeleport(spectatorSpawnArea, temp);
             seekerTransforms[idx].BroadcastMessage("SetSpectator");
             activeSeekers.Remove(playerName);
             seekerTransforms.Remove(seekerTransforms[idx]);
@@ -185,7 +184,6 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
                 int idx = activeHiders.IndexOf(playerName);
                 List<Transform> temp = new List<Transform>();
                 temp.Add(hiderTransforms[idx]);
-                InitiateTeleport(spectatorSpawnArea, temp);
                 hiderTransforms[idx].BroadcastMessage("SetSpectator");
                 activeHiders.Remove(playerName);
                 hiderTransforms.Remove(hiderTransforms[idx]);
