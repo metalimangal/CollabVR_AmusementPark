@@ -3066,15 +3066,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teleportAreas.Array.data[0].teleportMessage
-      value: 
+      value: SetSpectator
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teleportAreas.Array.data[1].teleportMessage
-      value: 
+      value: SetSeeker
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teleportAreas.Array.data[2].teleportMessage
-      value: 
+      value: SetHider
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teleportAreas.Array.data[0].maximumLocation.x
@@ -3126,6 +3126,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: teleportAreas.Array.data[0].separationDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: teleportAreas.Array.data[1].separationDistance
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741883927168586545, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: teleportAreas.Array.data[2].separationDistance
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586546, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}

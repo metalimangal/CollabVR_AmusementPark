@@ -72,6 +72,10 @@ public class WeaponDescriptor : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+        if (!localControl)
+        {
+            canFire = true;
+        }
         if (canFire && localControl)    //Don't bother checking if firing is disabled
         {
             bool triggerValue;

@@ -20,7 +20,7 @@ public class TeleportManager : MonoBehaviour
         foreach(Transform obj in objectsToTeleport){
             Vector3 newLoc = new Vector3(currentX, area.zLocation, currentY);
             obj.position = newLoc;
-            obj.gameObject.SendMessage(area.teleportMessage);
+            obj.gameObject.BroadcastMessage(area.teleportMessage);
             currentX += xSeparation;
             if(currentX > area.maximumLocation.x)
             {

@@ -236,7 +236,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         seekerTransforms = FindPlayerTransformsFromNames(activeSeekers);
         foreach(Transform seeker in seekerTransforms)
         {
-            seeker.BroadcastMessage("SetSeeker");
+            seeker.gameObject.BroadcastMessage("SetSeeker");
         }
         //if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
         //{

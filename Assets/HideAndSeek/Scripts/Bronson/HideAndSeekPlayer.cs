@@ -17,14 +17,14 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     public bool isLocalPlayer = false;
     public string playerName;
-    [System.NonSerialized] public bool isHider = false;
-    [System.NonSerialized] public bool isSeeker = false;
+    public bool isHider = false;
+    public bool isSeeker = false;
 
     public GameObject playerNameField;
 
     private TeamManager teamManager;
-    private List<GameObject> seekerWeapons = new List<GameObject>();
-    private List<GameObject> hiderWeapons = new List<GameObject>();
+    public List<GameObject> seekerWeapons = new List<GameObject>();
+    public List<GameObject> hiderWeapons = new List<GameObject>();
     private int framesToSkip = 10;
     private bool hasJoinedTeam = false;
     private HideAndSeekManager hideAndSeekManager;
@@ -61,21 +61,22 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         teamManager = FindObjectOfType(typeof(TeamManager)) as TeamManager;
         //if (isLocalPlayer)
         //{
-               //Join the default team upon connecting
+        //Join the default team upon connecting
         //}
-        foreach(GameObject child in this.transform)
-        {
-            if(child.tag == seekerWeaponTag)
-            {
-                seekerWeapons.Add(child);
-            }
-            if(child.tag == hiderWeaponTag)
-            {
-                hiderWeapons.Add(child);
-            }
-        }
-        SetActiveList(false, seekerWeapons);
-        SetActiveList(false, hiderWeapons);
+        //foreach(GameObject child in playerParentTransform)
+        //{
+        //    if(child.tag == seekerWeaponTag)
+        //    {
+        //        seekerWeapons.Add(child);
+        //    }
+        //    if(child.tag == hiderWeaponTag)
+        //    {
+        //        hiderWeapons.Add(child);
+        //    }
+        //}
+        //SetActiveList(false, seekerWeapons);
+        //SetActiveList(false, hiderWeapons);
+        SetSpectator();
     }
 
     void Update()
@@ -116,9 +117,26 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
         }
     }
 
-    void OnCollisionEnter(GameObject other)
+    private void OnParticleCollisionEnter(Collision collision)
     {
-        
+        //if (isHider)
+        //{
+        //TakeDamage(other);
+        //}
+        health -= 1;
+    }
+
+    private void OnParticleCollision(GameObject other)
+    {
+        //if (isHider)
+        //{
+        //TakeDamage(other);
+        //}
+        health -= 1;
+    }
+
+    private void OnParticleTrigger()
+    {
         //if (isHider)
         //{
         //TakeDamage(other);
@@ -135,24 +153,36 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
     {
         isHider = false;
         isSeeker = false;
-        SetActiveList(false, seekerWeapons);
-        SetActiveList(false, hiderWeapons);
+        foreach (GameObject seekerWeapon in seekerWeapons)
+        {
+            seekerWeapon.GetComponent<WeaponDescriptor>().canFire = false;
+        }
+        //SetActiveList(false, seekerWeapons);
+        //SetActiveList(false, hiderWeapons);
     }
 
     public void SetSeeker()
     {
         isSeeker = true;
         isHider = false;
-        SetActiveList(true, seekerWeapons);
-        SetActiveList(false, hiderWeapons);
+        //SetActiveList(true, seekerWeapons);
+        //SetActiveList(false, hiderWeapons);
+        foreach (GameObject seekerWeapon in seekerWeapons)
+        {
+            seekerWeapon.GetComponent<WeaponDescriptor>().canFire = true;
+        }
     }
 
     public void SetHider()
     {
         isHider = true;
         isSeeker = false;
-        SetActiveList(true, hiderWeapons);
-        SetActiveList(false, seekerWeapons);
+        foreach (GameObject seekerWeapon in seekerWeapons)
+        {
+            seekerWeapon.GetComponent<WeaponDescriptor>().canFire = false;
+        }
+        //SetActiveList(true, hiderWeapons);
+        //SetActiveList(false, seekerWeapons);
     }
 
     private void SetActiveList(bool val, List<GameObject> list)
