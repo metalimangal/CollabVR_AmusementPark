@@ -119,29 +119,30 @@ public class HideAndSeekPlayer : MonoBehaviourPunCallbacks, IPunObservable
 
     private void OnParticleCollisionEnter(Collision collision)
     {
-        //if (isHider)
-        //{
+        if (isHider)
+        {
         //TakeDamage(other);
-        //}
         health -= 1;
+        }
     }
 
     private void OnParticleCollision(GameObject other)
     {
-        //if (isHider)
-        //{
+        if (isHider)
+        {
         //TakeDamage(other);
-        //}
         health -= 1;
+        }
+
     }
 
     private void OnParticleTrigger()
     {
-        //if (isHider)
-        //{
+        if (isHider)
+        {
         //TakeDamage(other);
-        //}
         health -= 1;
+        }
     }
 
     public void TakeDamage(GameObject weapon)

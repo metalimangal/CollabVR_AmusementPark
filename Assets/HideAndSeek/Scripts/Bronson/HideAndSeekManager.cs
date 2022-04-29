@@ -86,7 +86,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (gameRunning)
         {
-            if (isInitiatingManager)
+            if (true)//isInitiatingManager)
             {
                 HiderWinCheck();
                 SeekerWinCheck();
@@ -157,6 +157,8 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void EndGameTeleport()
     {
+        StopAllCoroutines();
+        clockTime = 0;
         List<Transform> allActivePlayers = new List<Transform>();
         foreach(Transform hider in hiderTransforms)
         {

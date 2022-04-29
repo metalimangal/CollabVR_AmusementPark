@@ -3137,6 +3137,10 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 8741883927168586546, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
+      propertyPath: matchTime
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 8741883927168586546, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: hidingTime
       value: 0
       objectReference: {fileID: 0}
