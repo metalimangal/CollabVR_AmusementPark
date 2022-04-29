@@ -239,6 +239,9 @@ using System.Linq;
 		{
 			if (this.CanRecoverFromDisconnect(cause))
 			{
+				PhotonNetwork.Destroy(spawnedPlayerPrefab);
+				// For player numbering
+				PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
 				this.Recover();
 			}
 			else 
@@ -276,26 +279,26 @@ using System.Linq;
 					{
 						Debug.LogError("ConnectUsingSettings failed");
 					}
-					else 
+					/*else 
 					{
 						PhotonNetwork.Destroy(spawnedPlayerPrefab);
 						// For player numbering
 						PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
-					}
+					}*/
 				}
-				else 
+				/*else 
 				{
 					PhotonNetwork.Destroy(spawnedPlayerPrefab);
 					// For player numbering
 					PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
-				}
+				}*/
 			}
-			else 
+			/*else 
 			{
 				PhotonNetwork.Destroy(spawnedPlayerPrefab);
 				// For player numbering
 				PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
-			}
+			}*/
 		}
 		// NEW ON DISCONNECT PROCESS //
 		
