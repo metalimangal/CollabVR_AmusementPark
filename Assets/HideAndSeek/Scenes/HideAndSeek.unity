@@ -2790,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1916790877672354770, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: m_Name
-      value: '[HaSMANAGERS]'
+      value: HaSMANAGERS
       objectReference: {fileID: 0}
     - target: {fileID: 1916790877672354771, guid: 17f8ac318841ed74d8de037ef5fb9342, type: 3}
       propertyPath: m_RootOrder
