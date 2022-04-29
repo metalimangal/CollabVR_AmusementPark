@@ -239,6 +239,9 @@ using System.Linq;
 		{
 			if (this.CanRecoverFromDisconnect(cause))
 			{
+				PhotonNetwork.Destroy(spawnedPlayerPrefab);
+				// For player numbering
+				PhotonNetwork.LocalPlayer.CustomProperties.Remove(PlayerNumbering.RoomPlayerIndexedProp);
 				this.Recover();
 			}
 			else 
