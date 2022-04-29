@@ -21,18 +21,20 @@ public class CF_ScoreManager : MonoBehaviourPun, IPunObservable
 
     public void AddScore(Team team, int score)
     {
-        if (team == Team.BLUE)
+        if (PhotonNetwork.IsMasterClient)
         {
-            scoreBlue += score;
-            Debug.Log("Blue Scored!");
+            if (team == Team.BLUE)
+            {
+                scoreBlue += score;
+                Debug.Log("Blue Scored!");
+            }
+            else if (team == Team.RED)
+            {
+                scoreRed += score;
+                Debug.Log("Red Scored!");
+            }
+            else Debug.Log("Invalid team");
         }
-        else if (team == Team.RED)
-        {
-            scoreRed += score;
-            Debug.Log("Red Scored!");
-        }
-        else Debug.Log("Invalid team");
-
         photonView.RPC("SetScoreText", RpcTarget.All, scoreBlue.ToString(), scoreRed.ToString());
     }
 
