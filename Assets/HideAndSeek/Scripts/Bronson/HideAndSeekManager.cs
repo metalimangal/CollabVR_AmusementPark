@@ -42,6 +42,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     private List<HideAndSeekPlayer> hiderScripts = new List<HideAndSeekPlayer>();
     private List<HideAndSeekPlayer> seekerScripts = new List<HideAndSeekPlayer>();
     private bool isInitiatingManager = false;   //Determine whether this manager is the one initiating a game start (used for teleporting players)
+    private bool startNetworkCountdown = false;
 
     // Start is called before the first frame update
     void Start()
@@ -105,6 +106,11 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
         clockDisplay.text = clockTime.ToString();
+        if (startNetworkCountdown)
+        {
+            StartCountdown();
+            startNetworkCountdown = false;
+        }
     }
 
     public List<Transform> FindPlayerTransformsFromNames(List<string> names)
@@ -193,6 +199,11 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 
     public void StartGameAfterCountdown()
     {
+        startNetworkCountdown = true;
+    }
+
+    public void StartCountdown()
+    {
         isInitiatingManager = true;
         clockTime = timeToStart;
         StartCoroutine(CountdownTimerToZero(1));
@@ -211,10 +222,10 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             hider.BroadcastMessage("SetHider");
         }
-        if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
-        {
+        //if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
+        //{
             InitiateTeleport(hiderSpawnArea, hiderTransforms);
-        }
+        //}
         clockTime = hidingTime;  //Set the local clock time to be displayed
         StartCoroutine(CountdownTimerToZero(0));
     }
@@ -227,13 +238,13 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         {
             seeker.BroadcastMessage("SetSeeker");
         }
-        if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
-        {
+        //if (isInitiatingManager)    //Only the initiating manager teleports players, to prevent conflict and ensure correct destination
+        //{
             InitiateTeleport(seekerSpawnArea, seekerTransforms);
-        }
+        //}
         clockTime = matchTime;  //Set the local clock time to be displayed
-        isInitiatingManager = false;    //Reset the initiating manager status
-        bool standIn = false;
+        //isInitiatingManager = false;    //Reset the initiating manager status
+        //bool standIn = false;
         StartCoroutine(CountdownTimerToZero(2));
         isInitiatingManager = false;    //Reset the initiating manager status
         gameRunning = true;
@@ -255,6 +266,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
 
     IEnumerator CountdownTimerToZero(int boolToSet)
     {
+        //StopAllCoroutines();
         while(clockTime > 0)
         {
             yield return new WaitForSecondsRealtime(1f);
@@ -285,22 +297,24 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (stream.IsWriting)
         {
-            stream.SendNext(clockTime);
-            if (announceTeamWin)
-            {
-                stream.SendNext(announcementCode);
-                stream.SendNext(winningTeamAnnouncement);
-                announceTeamWin = false;
-            }
+            stream.SendNext(startNetworkCountdown);
+            //stream.SendNext(clockTime);
+            //if (announceTeamWin)
+            //{
+            //    stream.SendNext(announcementCode);
+            //    stream.SendNext(winningTeamAnnouncement);
+            //    announceTeamWin = false;
+            //}
         }
         else
         {
-            clockTime = (float) stream.ReceiveNext();
-            if((string)stream.PeekNext() == announcementCode)
-            {
-                winningTeamAnnouncement = (string)stream.ReceiveNext();
-                AnnounceWin();
-            }
+            stream.SendNext(startNetworkCountdown);
+            //clockTime = (float) stream.ReceiveNext();
+            //if((string)stream.PeekNext() == announcementCode)
+            //{
+            //    winningTeamAnnouncement = (string)stream.ReceiveNext();
+            //    AnnounceWin();
+            //}
         }
     }
 }
