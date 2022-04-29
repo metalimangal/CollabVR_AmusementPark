@@ -86,7 +86,7 @@ public class HideAndSeekManager : MonoBehaviourPunCallbacks, IPunObservable
         }
         if (gameRunning)
         {
-            if (true)//isInitiatingManager)
+            if (false)//isInitiatingManager)
             {
                 HiderWinCheck();
                 SeekerWinCheck();
