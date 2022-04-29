@@ -34431,7 +34431,7 @@ MonoBehaviour:
   - {fileID: 1213042199}
   - {fileID: 1450150549}
   - {fileID: 962317676}
-  MaxPlayersAllowed: 4
+  MaxPlayersAllowed: 3
   CurrentPlayerNumber: 0
   ShouldLeaveRoom: 0
   BackToMainLobby: 0
