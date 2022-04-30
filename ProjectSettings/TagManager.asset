@@ -4,11 +4,15 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - Ground
-  - Flag
-  - BlueSpawn
-  - RedSpawn
-  - HealthBand
+  - GameSceneManager
+  - timer
+  - PlayerEyes
+  - Tile_Book
+  - NonCharKeyboard
+  - fire
+  - Balloon
+  - Water
+  - ExplodingBox
   layers:
   - Default
   - TransparentFX
@@ -16,18 +20,18 @@ TagManager:
   - 
   - Water
   - UI
-  - Ground
-  - 
+  - LocalAvatarHead
+  - LocalAvatarBody
+  - Teleport
+  - Interactable
+  - Player
   - Grabbable
-  - LocalPlayer
-  - NetworkPlayer
-  - SecondHandGrab
-  - ' FlagSheet'
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Hands
+  - NoHandCollide
+  - ground
+  - network_player
+  - xr_rig
+  - Keyboard
   - 
   - 
   - 
