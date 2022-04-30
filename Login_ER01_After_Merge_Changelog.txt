@@ -1,0 +1,24 @@
+- added escape room lobby scene name "EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_Room01"
+  to "RoomManager.cs" Line 127
+
+- added "EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_SubLobby" (SceneIndex = 4) and
+  "EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_Room01" (SceneIndex = 5) to the Scene Manager
+
+- added the following Layers:
+  Layer 11: "Grabbable"
+  Layer 12: "Hands"
+  Layer 13: "NoHandCollide"
+  Layer 14: "ground"
+  Layer 15: "network_player"
+  Layer 16: "xr_rig"
+  Layer 17: "Keyboard"
+
+- changed some values in Project Settings/Physics:
+  
+  - disabled "network_player" vs "xr_rig"
+  - disabled "network_player" vs "Grabbable"
+  - disabled "Grabbable" vs "xr_rig"
+  - enabled "ground" vs "network_player"
+  - disabled "Hands" vs "NoHandCollide"
+  - disabled "network_player" vs "Default"
+ 
