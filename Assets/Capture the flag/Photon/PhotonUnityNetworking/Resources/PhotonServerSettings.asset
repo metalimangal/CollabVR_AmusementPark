@@ -62,6 +62,21 @@ MonoBehaviour:
   - SetTeam1
   - InvokeGrabEvent
   - EnableGravity
+  - InitializeSelectedAvatarModel
+  - RPC_ActivateKeySlot
+  - RPC_ActivateTileSlot
+  - RPC_DestroyObject
+  - RPC_DisableWaitingSign
+  - RPC_OpenChest
+  - RPC_OpenDoor
+  - RPC_OpenDoorInstantly
+  - RPC_SetColor
+  - RPC_SetNumber
+  - RPC_SetNumberColor
+  - RPC_SwitchLight
+  - RPC_UpdateTimer
+  - StartNetworkGrabbing
+  - StopNetworkGrabbing
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
