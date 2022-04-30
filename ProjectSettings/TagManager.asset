@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - GameSceneManager
+  - timer
+  - PlayerEyes
+  - Tile_Book
+  - NonCharKeyboard
+  - fire
+  - Balloon
+  - Water
+  - ExplodingBox
   layers:
   - Default
   - TransparentFX
@@ -16,13 +25,13 @@ TagManager:
   - Teleport
   - Interactable
   - Player
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Grabbable
+  - Hands
+  - NoHandCollide
+  - ground
+  - network_player
+  - xr_rig
+  - Keyboard
   - 
   - 
   - 
