@@ -21860,7 +21860,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22168,7 +22168,7 @@ PrefabInstance:
         type: 3}
       propertyPath: GenericVRPlayerPrefab
       value: 
-      objectReference: {fileID: 1043260829233376897, guid: 9a2265e538e53524e8090892e80ad267,
+      objectReference: {fileID: 5013982795585414870, guid: 3d9fabc5f666f7247b2d59b3a3125b7d,
         type: 3}
     - target: {fileID: 8082286859363980394, guid: 149c14686815fe54fab9c9b5be0e8442,
         type: 3}
@@ -31583,7 +31583,7 @@ Transform:
   - {fileID: 5396275167295886041}
   - {fileID: 7291492328293282073}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1746024346446063568
 GameObject:
@@ -34858,7 +34858,7 @@ Transform:
   m_Children:
   - {fileID: 4467180590079663137}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: -105.544, y: 0, z: 0}
 --- !u!1 &3497946362683505134
 GameObject:
