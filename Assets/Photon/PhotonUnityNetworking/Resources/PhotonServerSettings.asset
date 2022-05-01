@@ -59,6 +59,14 @@ MonoBehaviour:
   - RPC_DestroyObject
   - RPC_DisableWaitingSign
   - RPC_OpenDoorInstantly
+  - SetFound
+  - SyncDecide
+  - SyncInfo
+  - SyncTime
+  - SyncVoteClassmate
+  - SyncVoteDetective
+  - SyncVoteGirlFriend
+  - SyncVoteMother
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
