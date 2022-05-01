@@ -130,7 +130,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                         PhotonNetwork.LoadLevel(""); //Load escape room 2 
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_HORROR_HOUSE:
-                        PhotonNetwork.LoadLevel(""); //Load Horror House
+                        PhotonNetwork.LoadLevel("Sc_HorrorHouse"); //Load Horror House
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_SOCIAL_SPACE:
                         PhotonNetwork.LoadLevel("SocialSpace/Scenes/SocialSpace"); //Load Social Space
