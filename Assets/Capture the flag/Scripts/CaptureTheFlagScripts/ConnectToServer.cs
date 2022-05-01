@@ -23,6 +23,20 @@ public class ConnectToServer : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            CF_GameManager.Instance.UpdateGameState(GameState.Pregame);
+
+        }
+        if (playerProps.ContainsKey("Team"))
+        {
+            playerProps["Team"] = "NONE";
+        }
+        else
+        {
+            playerProps.Add("Team", "NONE");
+        }
+        PhotonNetwork.SetPlayerCustomProperties(playerProps);
     }
 
     public override void OnJoinedRoom()
