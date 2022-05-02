@@ -67,6 +67,18 @@ MonoBehaviour:
   - SyncVoteDetective
   - SyncVoteGirlFriend
   - SyncVoteMother
+  - ChangeColor
+  - ChangeName
+  - ChangeTeam
+  - EnableGravity
+  - InvokeGrabEvent
+  - PunUpdateGameState
+  - Reload
+  - RPCSetOwner
+  - RPCTakeDamage
+  - SetScoreText
+  - SetTeam
+  - Shoot
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

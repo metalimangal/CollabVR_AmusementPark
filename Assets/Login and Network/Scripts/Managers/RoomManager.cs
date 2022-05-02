@@ -121,7 +121,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
                 switch ((string)mapType)
                 {
                     case CollabVRConstants.MAP_TYPE_VALUE_CAPTURE_THE_FLAG:
-                        PhotonNetwork.LoadLevel(""); //Load capture the flag
+                        PhotonNetwork.LoadLevel("Capture the flag/Scenes/CaptureTheFlag"); //Load capture the flag
                         break;
                     case CollabVRConstants.MAP_TYPE_VALUE_ESCAPE_ROOM1:
                         PhotonNetwork.LoadLevel("EscapeRoom01/EscapeRoom01Scenes/DisjointScenes/ER01_Room01"); //Load escape room 1 // ADDED BY Syed Tanzim Mubarrat
